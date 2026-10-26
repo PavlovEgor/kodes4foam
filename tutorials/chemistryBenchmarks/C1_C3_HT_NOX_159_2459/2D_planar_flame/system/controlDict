@@ -1,0 +1,61 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.0005;
+
+deltaT          1e-07;
+
+writeControl    runTime;
+
+writeInterval   0.0001;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  10;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   8;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           0.3;
+
+maxDeltaT       2e-06;
+
+// Which chemistry model this run uses is one file, written by ./setChemistry.
+// It carries the `libs` entry the model needs -- nothing for the stock model,
+// libkodesChemistryModel.so for the GPU one -- so a variant switch never
+// edits controlDict itself, and a run can never end up with the library loaded
+// but the model unselected, or the other way round.
+#include "chemistryLibs"
+
+// ************************************************************************* //

@@ -11,3 +11,12 @@ src/kodesChemistryModel/build/
 # Editor backups
 *~
 *.bak
+
+# What running a tutorial leaves behind
+tutorials/**/0/
+tutorials/**/[0-9]*.[0-9]*/
+tutorials/**/processor*/
+tutorials/**/polyMesh/
+tutorials/**/dynamicCode/
+tutorials/**/log.*
+tutorials/**/*.foam

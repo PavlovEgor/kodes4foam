@@ -1,0 +1,42 @@
+{
+  "_comment": [
+    "HYLON dual-swirl H2/air coaxial injector, Flame A, reconstructed. The",
+    "published mesh is an external dataset the tutorial only links to, and",
+    "the case README gives no dimensions at all -- it points at Aniello et",
+    "al., Combustion and Flame 249 (2023) 112595 for the rig. So this is a",
+    "reconstruction of the right kind of burner, not of that one.",
+    "",
+    "The injector internals are not resolved. The domain starts at the",
+    "injector exit plane, which is split into two concentric inlet patches:",
+    "a central hydrogen jet and the annulus of swirled air around it. That",
+    "sidesteps the one thing this block topology cannot express, the lip",
+    "separating the two streams inside the injector, and it is how such a",
+    "case is normally set up when the injector internals are not the object",
+    "of study.",
+    "",
+    "Dimensions are representative of a laboratory coaxial hydrogen swirl",
+    "injector: 6 mm fuel bore, 20 mm air annulus outer diameter, discharging",
+    "into a 100 mm confinement. They are stated assumptions, not measurements."
+  ],
+
+  "scale": 1,
+
+  "rings": [0.003, 0.010, 0.050],
+  "coreFraction": 0.5,
+  "nCore": 10,
+  "nAzimuthal": 10,
+  "nRadial": [4, 10, 16],
+
+  "segments": [
+    {
+      "_comment": "confinement chamber; z = 0 is the injector exit plane",
+      "z0": 0.0, "z1": 0.150, "nz": 120, "rings": 3,
+      "inlet": {"0": "fuelInlet", "1": "fuelInlet", "2": "airInlet"},
+      "radialGrading": {"3": 4}
+    }
+  ],
+
+  "outletPatch": "outlet",
+  "wallPatch": "walls",
+  "stepPatch": "backplane"
+}

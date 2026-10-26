@@ -1,0 +1,53 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The flame is started, not ignited: the first 4 mm of the channel is filled
+// with the equilibrium products of the incoming mixture at their adiabatic
+// flame temperature, so a front exists at x = 4 mm from the first step and
+// relaxes onto its own structure within a few tenths of a millisecond. Setting
+// hot *reactants* instead would light the same flame through a pressure pulse
+// that takes longer to leave the domain than the flame takes to form.
+//
+// The inlet velocity is the laminar flame speed of this mixture, so the front
+// stays put instead of running out of one end of the channel.
+
+defaultFieldValues
+(
+    volScalarFieldValue T 320
+    volScalarFieldValue H2 0.01446221408
+    volScalarFieldValue O2 0.2295446063
+    volScalarFieldValue N2 0.7559931796
+    volScalarFieldValue H2O 0
+);
+
+regions
+(
+    boxToCell
+    {
+        box (-1e-3 -1 -1) (4e-3 1 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1660
+            volScalarFieldValue H2 0
+            volScalarFieldValue O2 0.1147720726
+            volScalarFieldValue N2 0.7559916611
+            volScalarFieldValue H2O 0.1292362663
+        );
+    }
+);
+
+// ************************************************************************* //

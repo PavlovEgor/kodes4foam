@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/gas";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Ignition. The upstream case used the Foundation-only 'heatSource' fvModel
+// with a squarePulse scale; the ESI equivalent is a semi-implicit source on
+// the enthalpy equation, whose fv::option base already takes timeStart and
+// duration, so the pulse needs no scale function of its own.
+//
+// The cell set is the sphere written by system/gas/topoSetDict, sitting just
+// outside the nozzle lip where the jet first meets air.
+ignition
+{
+    type            scalarSemiImplicitSource;
+
+    timeStart       0.001;
+    duration        1e-04;
+
+    selectionMode   cellSet;
+    cellSet         ignitionCells;
+
+    // 'specific' makes the value below a source per unit volume, so it does
+    // not have to be rescaled when the mesh density kN changes.
+    volumeMode      specific;
+
+    sources
+    {
+        h           (1e10 0);   // [kg/m/s^3] explicit, implicit
+    }
+}
+
+// ************************************************************************* //

@@ -1,0 +1,32 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      combustionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Partially stirred reactor: the chemistry is integrated in every cell exactly
+// as in the laminar model, and the source term is then scaled by the fraction
+// of the cell that is reacting. The integrator workload -- what these cases
+// measure -- is therefore the same as laminar's, while the closure stays
+// defensible for a RAS flame.
+combustionModel  PaSR;
+
+active           true;
+
+PaSRCoeffs
+{
+    Cmix            0.5;
+}
+
+// ************************************************************************* //

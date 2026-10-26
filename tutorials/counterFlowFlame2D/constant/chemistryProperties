@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      chemistryProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+chemistryType
+{
+    solver            ode;
+    method            standard;
+    // method            kodesChemistryModel;
+}
+
+chemistry       on;
+
+initialChemicalTimeStep 1e-7;
+
+odeCoeffs
+{
+    solver          seulex;
+    absTol          1e-12;
+    relTol          1e-1;
+}
+
+kodesSetting
+{
+    // Opens libkodes_grimech.so, the mechanism of constant/mechanism.cuh
+    mechanism grimech;
+
+    // Which method integrates a cell: seulex | euler.
+    // The name is looked up in the KODES method table when the case starts,
+    // so switching it needs no recompilation. euler is there to check the
+    // machinery, not to run a stiff mechanism with.
+    integrationMethod seulex;
+
+    // How much of the device one run may take: best | half.
+    // To size it by hand instead, give both of
+    //     concurrentSystems 8192;   // cells integrated at the same time
+    //     batchSize      1000000;   // cells per host->device transfer
+    deviceShare best;
+
+    // Group each batch before integrating it, so the lanes of a warp get
+    // cells that need a similar number of steps
+    balanceBatches true;
+
+    // What to group by: temperature | rhsNorm | stiffness | none.
+    // rhsNorm and stiffness measure how fast the cell is moving instead of
+    // guessing it from the temperature, at one extra derivatives() per cell
+    // per step.
+    balancerKey temperature;
+}
+// ************************************************************************* //

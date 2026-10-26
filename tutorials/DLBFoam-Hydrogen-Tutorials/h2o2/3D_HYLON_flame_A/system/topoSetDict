@@ -1,0 +1,35 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The ignition kernel: an annulus straddling the fuel/air shear layer a
+// couple of jet diameters above the injector exit, where the mixture first
+// reaches a flammable composition.
+actions
+(
+    {
+        name    ignitionCells;
+        type    cellSet;
+        action  new;
+        source  cylinderAnnulusToCell;
+        point1  (0 0 0.004);
+        point2  (0 0 0.014);
+        outerRadius 0.008;
+        innerRadius 0.003;
+    }
+);
+
+// ************************************************************************* //

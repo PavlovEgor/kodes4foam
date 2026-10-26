@@ -1,0 +1,52 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// A hot pocket of equilibrium products filling the chamber from just above the
+// injector, so the fuel and air streams meet something hot enough to light
+// them before they have convected out. Products at their adiabatic temperature
+// rather than hot reactants: no pressure pulse, and nothing to burn until the
+// streams have actually mixed.
+//
+// z < 0.005 m is left cold so the flame has to establish its own base rather
+// than starting anchored to the injector face.
+
+defaultFieldValues
+(
+    volScalarFieldValue T 320
+    volScalarFieldValue H2 0
+    volScalarFieldValue O2 0.2329130446
+    volScalarFieldValue N2 0.7670869554
+    volScalarFieldValue H2O 0
+);
+
+regions
+(
+    boxToCell
+    {
+        box (-1 -1 0.005) (1 1 0.050);
+        fieldValues
+        (
+            volScalarFieldValue T 1800
+            volScalarFieldValue H2 0
+            volScalarFieldValue O2 0.1147720726
+            volScalarFieldValue N2 0.7559916611
+            volScalarFieldValue H2O 0.1292362663
+        );
+    }
+);
+
+// ************************************************************************* //

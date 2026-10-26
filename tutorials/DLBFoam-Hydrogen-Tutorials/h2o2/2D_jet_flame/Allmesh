@@ -1,0 +1,17 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# blockMesh writes one mesh holding both cell zones, 'gas' and 'nozzle';
+# splitMeshRegions cuts it into the two regions chtMultiRegionFoam expects and
+# creates the coupled gas_to_nozzle / nozzle_to_gas patches between them.
+runApplication blockMesh
+
+runApplication splitMeshRegions -cellZonesOnly -overwrite
+
+# The ignition cell set, a sphere just outside the nozzle lip, named by
+# constant/gas/fvOptions
+runApplication topoSet -region gas
+
+#------------------------------------------------------------------------------

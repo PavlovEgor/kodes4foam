@@ -1,0 +1,87 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/gas";
+    object      chemistryProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+chemistryType
+{
+    solver            ode;
+
+    // kodesChemistryModel integrates the cells on the GPU; standard is the
+    // stock OpenFOAM model, kept here as the reference the GPU run is
+    // compared against. Switching between them changes nothing else in the
+    // case: both read the same mechanism through the same species table.
+    method            kodesChemistryModel;
+    // method            standard;
+}
+
+chemistry       on;
+
+initialChemicalTimeStep 1e-7;
+
+// Read by both models: kodesChemistryModel passes absTol, relTol and
+// maxSteps on to its KODES integrator, and takes only 'solver' from
+// kodesSetting's integrationMethod instead.
+odeCoeffs
+{
+    // Rosenbrock34 rather than seulex, and only because of the reference
+    // path: 'standard' with seulex dies inside the very first chemistry
+    // solve on this mechanism, either on a floating-point trap in
+    // ReversibleReaction::kr or, with trapping off, on a singular Jacobian
+    // in the LU decomposition. Rosenbrock34 gets through it.
+    // kodesChemistryModel does not read this entry -- it takes its method
+    // from kodesSetting's integrationMethod below -- so the GPU path is
+    // seulex either way.
+    solver          Rosenbrock34;
+    absTol          1e-12;
+    relTol          1e-4;
+}
+
+kodesSetting
+{
+    // Opens libkodes_<mechanism>.so, built by ../Allwmake. Its species
+    // are mapped by name onto this case's species table when the case
+    // starts, so a library built for another mechanism stops the run
+    // there, naming the specie it lacks.
+    mechanism C1_C3_HT_NOX_159_2459;
+
+    // Which method integrates a cell: seulex | euler.
+    integrationMethod seulex;
+
+    // How much of the device one run may take: best | half.
+    deviceShare best;
+
+    // Group each batch before integrating it, so the lanes of a warp get
+    // cells that need a similar number of steps
+    balanceBatches true;
+
+    // What to group by: temperature | rhsNorm | stiffness | none.
+    balancerKey temperature;
+
+    // Bytes of call stack per device thread, or 0 to leave the driver's own
+    // value alone. Leave it at 0 unless a run is actually dying for want of
+    // stack: the driver already sizes the stack from the frames the compiler
+    // recorded, and an override is reserved for every thread the device could
+    // hold resident -- not for the ones the run launches -- so it comes
+    // straight off the batch. 128 KiB here once left a 40000 cell case with
+    // 8 blocks x 64 threads.
+    //
+    // 'cuobjdump -res-usage <the built library>' prints the frame ptxas
+    // computed for solveKernel; that plus room for the indirect part is the
+    // number to use if one is needed at all.
+    deviceStackSize 0;
+}
+
+// ************************************************************************* //

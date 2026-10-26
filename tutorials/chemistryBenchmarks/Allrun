@@ -1,0 +1,31 @@
+#!/bin/sh
+cd "${0%/*}" || exit 1                              # Run from this directory
+#------------------------------------------------------------------------------
+#
+# Run the `standard` variant of every case of every mechanism, in series.
+#
+# This is the reference sweep: the CPU chemistry model, which needs no GPU and
+# no extra library. It is not quick -- see the cost table in README.md; the
+# 159-specie mechanism alone is most of a day on one core.
+#
+# To sweep the GPU variants instead, pass their names:
+#
+#     ./Allrun kodes-none kodes-temperature kodes-rhsNorm kodes-stiffness
+#
+#------------------------------------------------------------------------------
+
+VARIANTS=${*:-standard}
+
+for mech in h2o2 grimech C1_C3_HT_NOX_159_2459
+do
+    for case in 2D_planar_flame 2D_jet_flame                 3D_nonPremixed_burner 3D_premixed_burner
+    do
+        for variant in $VARIANTS
+        do
+            echo "=== $mech/$case  [$variant]"
+            ( cd "$mech/$case" && ./Allrun "$variant" ) ||                 echo "    *** failed: $mech/$case [$variant]"
+        done
+    done
+done
+
+#------------------------------------------------------------------------------

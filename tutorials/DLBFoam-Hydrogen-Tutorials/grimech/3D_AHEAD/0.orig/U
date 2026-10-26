@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The injector is not resolved -- see ../../geometry/AHEAD.json. The whole of
+// it is represented here: a swirled, premixed stream entering the bottom of
+// the mixing tube.
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type            swirlFlowRateInletVelocity;
+        origin          (0 0 0);
+        axis            (0 0 1);
+        flowRate        constant 0.036317;
+        rpm             constant 31455;
+        value           uniform (0 0 40);
+    }
+
+    outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+
+    "(walls|backplane)"
+    {
+        type            noSlip;
+    }
+
+}
+
+// ************************************************************************* //

@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// 301 K rather than 300: several species of every mechanism here have their
+// JANAF fit starting at exactly 300 K, and the enthalpy inversion undershoots
+// that by round-off, which OpenFOAM clamps but warns about, once per cell per
+// iteration. One Kelvin of headroom keeps the log readable and is well inside
+// the uncertainty on "room temperature". Walls are adiabatic.
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 301;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 301;
+    }
+
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 301;
+        value           uniform 301;
+    }
+
+    "(walls|backplane)"
+    {
+        type            zeroGradient;
+    }
+
+}
+
+// ************************************************************************* //

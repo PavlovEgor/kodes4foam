@@ -1,3 +1,9 @@
 [submodule "external/KODES"]
 	path = external/KODES
 	url = https://github.com/PavlovEgor/KODES.git
+[submodule "external/pyJac"]
+	path = external/pyJac
+	url = https://github.com/PavlovEgor/pyJac.git
+[submodule "external/Kinetic-Mechanisms"]
+	path = external/Kinetic-Mechanisms
+	url = https://github.com/CRECKMODELING/Kinetic-Mechanisms.git

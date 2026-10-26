@@ -1,0 +1,28 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      chemistryLibs;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// kodesChemistryModel lives in this library, and nothing pulls it in unless
+// it is named here: without it the run stops at
+//     Unknown chemistryModel type kodesChemistryModel
+//
+// It is one library for every mechanism. The mechanism is a KODES library of
+// its own, libkodes_<mechanism>.so, which the model opens by the name in
+// chemistryProperties' kodesSetting; build both with ../Allwmake.
+
+libs            ( "libkodesChemistryModel.so" );
+
+// ************************************************************************* //

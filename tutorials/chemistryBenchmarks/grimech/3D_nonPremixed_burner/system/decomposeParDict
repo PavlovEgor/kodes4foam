@@ -1,0 +1,36 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Not used by the serial runs these cases ship configured for -- it is here so
+// that `decomposePar && mpirun -np 8 reactingFoam -parallel` needs no edit.
+//
+// 39,936 cells.
+
+numberOfSubdomains 8;
+
+method          scotch;
+
+// scotch needs no geometric input. If it is unavailable, hierarchical over the
+// same domain is the fallback:
+//
+// method          hierarchical;
+// coeffs
+// {
+//     n           (2 2 2);
+// }
+
+// ************************************************************************* //

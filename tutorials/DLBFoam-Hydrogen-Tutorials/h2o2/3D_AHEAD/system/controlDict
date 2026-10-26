@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+// Ignition is at 2 ms and lasts 2 ms; a flow-through of the 150 mm chamber at
+// 40 m/s is under 4 ms. 0.05 s is a few dozen flow-throughs, enough for the
+// flame to settle. Cut this right down for a throughput measurement.
+endTime         0.05;
+
+deltaT          1e-7;
+
+writeControl    adjustableRunTime;
+
+writeInterval   0.005;
+
+purgeWrite      2;
+
+writeFormat     binary;
+
+writePrecision  8;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   9;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           0.4;
+
+maxDeltaT       1e-5;
+
+// kodesChemistryModel, one library for every mechanism. The mechanism is a
+// KODES library of its own, libkodes_<mechanism>.so, which the model opens
+// itself by the name in kodesSetting. See ../Allwmake.
+libs            ( libkodesChemistryModel.so );
+
+// ************************************************************************* //

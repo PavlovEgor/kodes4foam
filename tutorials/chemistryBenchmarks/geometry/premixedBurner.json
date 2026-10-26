@@ -1,0 +1,60 @@
+{
+  "_comment": [
+    "3D premixed hydrogen burner: a mixing tube discharging through a",
+    "sudden expansion into a confinement chamber. The step at z = 0 is what",
+    "anchors the flame -- the recirculation behind it feeds hot products",
+    "back into the incoming premixed stream.",
+    "",
+    "The 34 mm mixing tube is the dimension the AHEAD case README states;",
+    "the chamber follows its sampleDict, whose lines run to +-50 mm and",
+    "whose highest station is 90 mm. The injector internals -- the swirl",
+    "slits, the dilution holes, the 16 fuel ports -- are not resolved: by",
+    "the tube exit the stream is premixed, and that exit condition is what",
+    "the inlet patch imposes.",
+    "",
+    "About 40 000 cells, as all four cases of this set are: the GPU this",
+    "is benchmarked on carries of order 10 000 threads at once, so a",
+    "smaller mesh would leave most of a batch idle and time the launch",
+    "overhead rather than the integrator.",
+    "utilities/cylindricalBurnerBlockMesh.py --refine scales the counts",
+    "all at once."
+  ],
+  "scale": 1,
+  "rings": [
+    0.017,
+    0.05
+  ],
+  "coreFraction": 0.5,
+  "nCore": 9,
+  "nAzimuthal": 9,
+  "nRadial": [
+    5,
+    9
+  ],
+  "segments": [
+    {
+      "_comment": "mixing tube, 34 mm across, discharging at z = 0",
+      "z0": -0.03,
+      "z1": 0.0,
+      "nz": 14,
+      "rings": 1,
+      "inlet": {
+        "0": "inlet",
+        "1": "inlet"
+      }
+    },
+    {
+      "_comment": "combustion chamber; the dump plane at z = 0 is the step",
+      "z0": 0.0,
+      "z1": 0.12,
+      "nz": 62,
+      "rings": 2,
+      "radialGrading": {
+        "2": 3
+      }
+    }
+  ],
+  "outletPatch": "outlet",
+  "wallPatch": "walls",
+  "stepPatch": "backplane"
+}

@@ -1,0 +1,53 @@
+{
+  "_comment": [
+    "3D non-premixed hydrogen burner: a coaxial injector discharging into a",
+    "confinement chamber. Central fuel bore, annular air stream, backplane",
+    "wall out to the chamber wall.",
+    "",
+    "Dimensions are representative of a laboratory coaxial hydrogen",
+    "injector -- 6 mm fuel bore, 20 mm air annulus, 100 mm confinement --",
+    "of the kind the HYLON rig is. They are stated assumptions, not",
+    "measurements of any particular burner.",
+    "",
+    "About 40 000 cells, as all four cases of this set are: the GPU this",
+    "is benchmarked on carries of order 10 000 threads at once, so a",
+    "smaller mesh would leave most of a batch idle and time the launch",
+    "overhead rather than the integrator.",
+    "utilities/cylindricalBurnerBlockMesh.py --refine scales the counts",
+    "all at once."
+  ],
+  "scale": 1,
+  "rings": [
+    0.003,
+    0.01,
+    0.05
+  ],
+  "coreFraction": 0.5,
+  "nCore": 8,
+  "nAzimuthal": 8,
+  "nRadial": [
+    4,
+    7,
+    11
+  ],
+  "segments": [
+    {
+      "_comment": "confinement chamber; z = 0 is the injector exit plane",
+      "z0": 0.0,
+      "z1": 0.12,
+      "nz": 52,
+      "rings": 3,
+      "inlet": {
+        "0": "fuelInlet",
+        "1": "fuelInlet",
+        "2": "airInlet"
+      },
+      "radialGrading": {
+        "3": 4
+      }
+    }
+  ],
+  "outletPatch": "outlet",
+  "wallPatch": "walls",
+  "stepPatch": "backplane"
+}

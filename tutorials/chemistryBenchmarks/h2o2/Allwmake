@@ -1,0 +1,25 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+#------------------------------------------------------------------------------
+#
+# Build kodesChemistryModel and libkodes_h2o2, the KODES library for this
+# set's mechanism.
+#
+# The model is one library for every mechanism; the mechanism is a KODES
+# library of its own, which the model opens by the name in kodesSetting when a
+# case starts. pyJac writes the mechanism as CUDA source and the KODES kernels
+# call into it, so that library is built per mechanism, with nvcc - see
+# src/kodesChemistryModel/Allwmake, which this calls.
+#
+#------------------------------------------------------------------------------
+
+MECHANISM=h2o2
+
+REPO=$(cd ../../.. && pwd)
+
+"$REPO/src/kodesChemistryModel/Allwmake" "$MECHANISM" || exit
+
+echo
+echo "Each case's chemistrySetups/kodes-*/chemistryProperties names it with 'mechanism $MECHANISM;'."
+
+#------------------------------------------------------------------------------

@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/nozzle";
+    object      thermophysicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Stainless steel AISI/SAE 304, the nozzle pipe.
+//
+// The upstream case tabulated kappa(T) over 250-900 K (Bogaard 1985) and
+// Cv(T) over 200-1000 K (Mills 2002) with tabulatedSolid/eIcoTabulated.
+// Constant values are used instead: over the range the nozzle actually
+// reaches, kappa runs 14 to 24 W/(m K) and Cp 510 to 640 J/(kg K), so a
+// constant pair is a few tens of percent at worst on a wall whose job here is
+// to conduct heat away from the flame base rather than to be predicted itself.
+thermoType
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+mixture
+{
+    specie
+    {
+        //  Fe          Cr        Ni
+        // (68*55.845 + 18.5*52 + 9.25*58.7) / ((68+18.5+9.25))
+        molWeight       55.4;
+    }
+
+    transport
+    {
+        kappa           17;     // [W/(m K)],  mid-range of the tabulation
+    }
+
+    thermodynamics
+    {
+        Hf              0;
+        Cp              550;    // [J/(kg K)], mid-range of the tabulation
+    }
+
+    equationOfState
+    {
+        rho             8000;   // [kg/m^3]
+    }
+}
+
+// ************************************************************************* //

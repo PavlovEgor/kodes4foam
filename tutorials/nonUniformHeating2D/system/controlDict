@@ -1,0 +1,69 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     reactingFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1e-3;
+
+deltaT          1e-6;
+
+writeControl    adjustable;
+
+writeInterval   1e-4;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+// U == 0 everywhere, so Co == 0 and the time step is governed solely by
+// maxDeltaT: the run is effectively at a fixed deltaT of 1e-6 s.
+adjustTimeStep  yes;
+
+maxCo           0.4;
+
+maxDeltaT       1e-6;
+
+libs ( libkodesChemistryModel.so );
+
+functions
+{
+    minMaxT
+    {
+        type            fieldMinMax;
+        libs            ( fieldFunctionObjects );
+        writeControl    timeStep;
+        writeInterval   10;
+        fields          ( T p );
+    }
+}
+
+// ************************************************************************* //
