@@ -1,0 +1,8 @@
+kodesSpecieMap.C
+
+makeKodesChemistryModelTypes.C
+makeKodesChemistrySolverTypes.C
+
+/* One library for every mechanism: KODES and the mechanism are a separate
+   libkodes_<mechanism>.so, opened when a case starts - see Allwmake */
+LIB = $(FOAM_USER_LIBBIN)/libkodesChemistryModel

@@ -1,0 +1,13 @@
+# wmake output
+lnInclude
+Make/linux*/
+*.o
+*.dep
+*.so
+
+# The KODES libraries src/kodesChemistryModel/Allwmake builds with CMake
+src/kodesChemistryModel/build/
+
+# Editor backups
+*~
+*.bak

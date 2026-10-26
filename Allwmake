@@ -1,0 +1,23 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+#------------------------------------------------------------------------------
+#
+# Build kodesChemistryModel and the KODES libraries it opens, into
+# $FOAM_USER_LIBBIN.
+#
+#     ./Allwmake                  every mechanism in
+#                                 src/kodesChemistryModel/pyJacSource/
+#     ./Allwmake grimech h2o2     only those
+#
+# See src/kodesChemistryModel/Allwmake.
+#
+#------------------------------------------------------------------------------
+
+[ -f external/KODES/CMakeLists.txt ] || {
+    echo "$0: external/KODES is empty, run 'git submodule update --init'" >&2
+    exit 1
+}
+
+src/kodesChemistryModel/Allwmake "$@"
+
+#------------------------------------------------------------------------------
