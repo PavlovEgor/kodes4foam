@@ -58,8 +58,8 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::openLibrary
             << "' in kodesSetting" << nl
             << "    " << errorMsg.c_str() << nl
             << "    Build it from the mechanism's pyJac output with"
-            << " kodes4foam's Allwmake, which installs it into"
-            << " $FOAM_USER_LIBBIN." << nl
+            << " kodes4foam's Allwmake, which installs it next to"
+            << " libkodesChemistryModel." << nl
             << exit(FatalError);
     }
 

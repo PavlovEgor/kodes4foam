@@ -9,7 +9,8 @@ cd "${0%/*}" || exit                                # Run from this directory
 # library of its own, which the model opens by the name in kodesSetting when a
 # case starts. pyJac writes the mechanism as CUDA source and the KODES kernels
 # call into it, so that library is built per mechanism, with nvcc - see
-# src/kodesChemistryModel/Allwmake, which this calls.
+# src/kodesChemistryModel/Allwmake. This calls the top-level Allwmake for this
+# one mechanism; the usual Allwmake options (-prefix=, -j, -k, ...) pass on.
 #
 #------------------------------------------------------------------------------
 
@@ -17,7 +18,7 @@ MECHANISM=C1_C3_HT_NOX_159_2459
 
 REPO=$(cd ../../.. && pwd)
 
-"$REPO/src/kodesChemistryModel/Allwmake" "$MECHANISM" || exit
+KODES_MECHANISMS="$MECHANISM" "$REPO/Allwmake" "$@" || exit
 
 echo
 echo "Each case names it with 'mechanism $MECHANISM;' in kodesSetting."

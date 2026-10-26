@@ -45,7 +45,8 @@ Usage
     kodesSetting
     {
         // Opens libkodes_<mechanism>.so, from LD_LIBRARY_PATH - which has
-        // $FOAM_USER_LIBBIN on it, where Allwmake installs them
+        // the OpenFOAM library directories on it, Allwmake installs them
+        // next to this model
         mechanism       grimech;
 
         // Which method integrates a cell: seulex | euler

@@ -1,23 +1,41 @@
 #!/bin/sh
-cd "${0%/*}" || exit                                # Run from this directory
+cd "${0%/*}" || exit                            # Run from this directory
+targetType=libso
+. "${WM_PROJECT_DIR:?}"/wmake/scripts/AllwmakeParseArguments
 #------------------------------------------------------------------------------
+# Build into FOAM_USER_{APPBIN,LIBBIN} unless otherwise specified with
+# -prefix or FOAM_MODULE_{APPBIN,LIBBIN} env variables
 #
-# Build kodesChemistryModel and the KODES libraries it opens, into
-# $FOAM_USER_LIBBIN.
-#
-#     ./Allwmake                  every mechanism in
-#                                 src/kodesChemistryModel/pyJacSource/
-#     ./Allwmake grimech h2o2     only those
-#
-# See src/kodesChemistryModel/Allwmake.
-#
+# The KODES libraries go to the same place as the model. Which mechanisms get
+# one is KODES_MECHANISMS (names in src/kodesChemistryModel/pyJacSource/,
+# default all of them), the compute capability they are built for NVARCH
+# (default 120).
 #------------------------------------------------------------------------------
+moduleName="kodes4foam"
 
-[ -f external/KODES/CMakeLists.txt ] || {
-    echo "$0: external/KODES is empty, run 'git submodule update --init'" >&2
-    exit 1
-}
+case "$FOAM_MODULE_PREFIX" in
+(false | none)
+    echo "Compilation of $moduleName is disabled (prefix=${FOAM_MODULE_PREFIX})"
+    exit 0
+esac
 
-src/kodesChemistryModel/Allwmake "$@"
+echo "========================================"
+date "+%Y-%m-%d %H:%M:%S %z" 2>/dev/null || echo "date is unknown"
+echo "Starting compile of $moduleName with ${WM_PROJECT_DIR##*/}"
+echo "  $WM_COMPILER $WM_COMPILER_TYPE compiler"
+echo "  ${WM_OPTIONS}, with ${WM_MPLIB} ${FOAM_MPI}"
+echo "  prefix = ${FOAM_MODULE_PREFIX:-default (user)}"
+echo
+
+src/Allwmake $targetType $*
+
+# Some summary information
+echo
+date "+%Y-%m-%d %H:%M:%S %z" 2>/dev/null || echo "date is unknown"
+echo "========================================"
+echo "  Finished compile of $moduleName with ${WM_PROJECT_DIR##*/}"
+echo "  $WM_COMPILER $WM_COMPILER_TYPE compiler"
+echo "  ${WM_OPTIONS}, with ${WM_MPLIB} ${FOAM_MPI}"
+echo
 
 #------------------------------------------------------------------------------

@@ -3,6 +3,13 @@
    libkodes_<mechanism>.so, opened with dlopen() when a case starts. */
 KODES_SRC = ../../external/KODES/src
 
+sinclude $(GENERAL_RULES)/module-path-user
+
+/* Failsafe - default to user location */
+ifeq (,$(strip $(FOAM_MODULE_LIBBIN)))
+    FOAM_MODULE_LIBBIN = $(FOAM_USER_LIBBIN)
+endif
+
 EXE_INC = \
     -I$(KODES_SRC)/Library \
     -I$(LIB_SRC)/finiteVolume/lnInclude \

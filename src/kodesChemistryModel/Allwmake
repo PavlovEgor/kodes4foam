@@ -1,70 +1,118 @@
 #!/bin/sh
-cd "${0%/*}" || exit                                # Run from this directory
+cd "${0%/*}" || exit                            # Run from this directory
+targetType=libso
+. "${WM_PROJECT_DIR:?}"/wmake/scripts/AllwmakeParseArguments
+. "${WM_PROJECT_DIR:?}"/wmake/scripts/have_cmake
 #------------------------------------------------------------------------------
 #
-# Build kodesChemistryModel and the KODES libraries it opens.
+# kodesChemistryModel, and the KODES libraries it opens.
 #
-#     ./Allwmake                  the model, and libkodes_<mechanism>.so for
-#                                 every mechanism in pyJacSource/
-#     ./Allwmake grimech h2o2     the model, and only those mechanisms
+# The model is plain OpenFOAM C++, one library for every mechanism: it opens
+# libkodes_<mechanism>.so when a case starts, by the name in kodesSetting.
 #
-# The model is plain OpenFOAM C++ and wmake builds it alone, once, for every
-# mechanism: it opens libkodes_<mechanism>.so when a case starts, by the name
-# in kodesSetting.
-#
-# The KODES libraries need CMake and nvcc. There is one per mechanism because
+# The KODES libraries need CMake and nvcc. There is one per mechanism, because
 # pyJac writes the mechanism as CUDA source and the KODES kernels call into it
 # through device-only virtuals, so the two have to share one device link. They
 # are built from pyJacSource/<mechanism>/out in place, with the KODES of the
-# external/KODES submodule.
+# external/KODES submodule, and installed next to the model, so that whatever
+# finds the one finds the other. Without nvcc they are skipped and the model
+# is built alone.
 #
-# Both end up in $FOAM_USER_LIBBIN. NVARCH (default 120, an RTX 50xx) is the
-# compute capability the libraries are built for.
+#     KODES_MECHANISMS    names in pyJacSource/, default all of them
+#     NVARCH              compute capability, default 120 (an RTX 50xx)
+#     CUDACXX             the nvcc to use, if it is not on the PATH
 #
 #------------------------------------------------------------------------------
 
-wmake libso || exit
+wmake $targetType
 
-if [ "$#" -eq 0 ]
-then
-    for dir in pyJacSource/*/
-    do
-        [ -f "$dir/out/mechanism.cuh" ] && set -- "$@" "$(basename "$dir")"
-    done
-fi
+# Where wmake just put the model - see GENERAL_RULES/module-path-user
+libDir="$FOAM_MODULE_LIBBIN"
+[ -n "$libDir" ] || libDir="${FOAM_MODULE_PREFIX:+$FOAM_MODULE_PREFIX/lib}"
+[ -n "$libDir" ] || libDir="$FOAM_USER_LIBBIN"
 
-MECHANISMS=""
-
-for mechanism in "$@"
+# CUDACXX first, as CMake itself would, then the PATH, then where the CUDA
+# toolkit installs itself
+unset NVCC_EXE
+for candidate in \
+    "$CUDACXX" \
+    "$(command -v nvcc 2>/dev/null)" \
+    "${CUDA_HOME:+$CUDA_HOME/bin/nvcc}" \
+    /usr/local/cuda/bin/nvcc
 do
-    [ -f "pyJacSource/$mechanism/out/mechanism.cuh" ] || {
-        echo "$0: no pyJac output in pyJacSource/$mechanism/out" >&2
-        echo "    generate it with 'python -m pyjac -l cuda -b pyJacSource/$mechanism/out'" >&2
-        exit 1
-    }
-
-    MECHANISMS="$MECHANISMS${MECHANISMS:+;}$PWD/pyJacSource/$mechanism"
+    if [ -n "$candidate" ] && [ -x "$candidate" ]
+    then
+        NVCC_EXE="$candidate"
+        break
+    fi
 done
 
-[ -n "$MECHANISMS" ] || {
-    echo "$0: no mechanism to build a KODES library for" >&2
+if ! have_cmake || [ -z "$NVCC_EXE" ]
+then
+    /bin/cat<<INFORMATION 1>&2
+==> Skipping the KODES libraries: they need cmake and nvcc
+    cmake = ${CMAKE_EXE:-false}
+    nvcc  = ${NVCC_EXE:-false} (set CUDACXX if it is not on the PATH)
+
+    The model was built, but a case using it stops at start-up until
+    libkodes_<mechanism>.so is in $libDir
+==
+INFORMATION
+    exit 0
+fi
+
+[ -f ../../external/KODES/CMakeLists.txt ] || {
+    echo "$0: external/KODES is empty, run 'git submodule update --init'" 1>&2
     exit 1
 }
 
-BUILD=build/kodes
+if [ -z "$KODES_MECHANISMS" ]
+then
+    for dir in pyJacSource/*/
+    do
+        [ -f "$dir/out/mechanism.cuh" ] && \
+            KODES_MECHANISMS="$KODES_MECHANISMS $(basename "$dir")"
+    done
+fi
 
-cmake -S ../../external/KODES -B "$BUILD" \
-    -DKODES_MECHANISMS="$MECHANISMS" \
-    -DKODES_LIBRARY_DIR="$FOAM_USER_LIBBIN" \
-    -DCMAKE_CUDA_ARCHITECTURES="${NVARCH:-120}" || exit
+mechanisms=""
 
-cmake --build "$BUILD" -j "${WM_NCOMPPROCS:-4}" || exit
+for mechanism in $KODES_MECHANISMS
+do
+    [ -f "pyJacSource/$mechanism/out/mechanism.cuh" ] || {
+        echo "$0: no pyJac output in pyJacSource/$mechanism/out" 1>&2
+        echo "    generate it with 'python -m pyjac -l cuda -b pyJacSource/$mechanism/out'" 1>&2
+        exit 1
+    }
 
-cmake --install "$BUILD" || exit
+    mechanisms="$mechanisms${mechanisms:+;}$PWD/pyJacSource/$mechanism"
+done
 
-echo
-echo "Built into \$FOAM_USER_LIBBIN: libkodesChemistryModel, which a case names in"
-echo "its libs entry, and libkodes_<mechanism> for: $*"
-echo "A case picks one of those with 'mechanism' in kodesSetting."
+[ -n "$mechanisms" ] || {
+    echo "$0: no mechanism to build a KODES library for" 1>&2
+    exit 1
+}
+
+echo "cmake(KODES) $libDir :$KODES_MECHANISMS"
+
+# Beside wmake's objects, so that wclean takes it too
+buildDir="Make/${WM_OPTIONS:-build}/kodes"
+
+"$CMAKE_EXE" -S ../../external/KODES -B "$buildDir" \
+    -DKODES_MECHANISMS="$mechanisms" \
+    -DKODES_LIBRARY_DIR="$libDir" \
+    -DCMAKE_CUDA_COMPILER="$NVCC_EXE" \
+    -DCMAKE_CUDA_ARCHITECTURES="${NVARCH:-120}"
+
+"$CMAKE_EXE" --build "$buildDir" -j "${WM_NCOMPPROCS:-4}"
+
+"$CMAKE_EXE" --install "$buildDir"
+
+/bin/cat<<INFORMATION 1>&2
+==> A case selects one of these with 'mechanism <name>;' in kodesSetting,
+    and needs $libDir on LD_LIBRARY_PATH - for
+    \$FOAM_USER_LIBBIN, \$FOAM_SITE_LIBBIN and \$FOAM_LIBBIN it already is
+==
+INFORMATION
 
 #------------------------------------------------------------------------------

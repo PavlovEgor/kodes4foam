@@ -42,11 +42,11 @@ source that the KODES kernels call into. The model opens it with `dlopen()` when
 case starts, by the name `mechanism` gives in `kodesSetting`, so moving a case to
 another mechanism needs no build.
 
-Each set's `Allwmake` calls `src/kodesChemistryModel/Allwmake <mechanism>`, which builds
-the model and that mechanism's library from
-`src/kodesChemistryModel/pyJacSource/<mechanism>/out` in place; with no argument it
-builds all three. Building one set no longer overwrites anything another set needs, so
-they can be built in any order.
+Each set's `Allwmake` runs the repository's top-level `Allwmake` with
+`KODES_MECHANISMS=<mechanism>`, which builds the model and that mechanism's library from
+`src/kodesChemistryModel/pyJacSource/<mechanism>/out` in place; the top-level `Allwmake`
+alone builds all three. Building one set does not overwrite anything another set needs,
+so they can be built in any order.
 
 ## Running a set
 

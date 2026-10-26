@@ -11,33 +11,65 @@ another mechanism is a dictionary edit, not a rebuild.
 
 ## Layout
 
+Laid out like an OpenFOAM plugin or module (see `plugins/README.md` of an OpenFOAM
+release), so it builds on its own or from inside `$WM_PROJECT_DIR/plugins/`:
+
 ```
-external/KODES/                 the KODES submodule, 0.23.1
-src/kodesChemistryModel/
-  kodesChemistryModel.{C,H}     the model
-  kodesSpecieMap.{C,H}          KODES/pyJac <-> OpenFOAM specie ordering
-  makeKodesChemistry*Types.*    runtime selection for psi/rhoReactionThermo
-  pyJacSource/<mechanism>/out/  pyJac's CUDA output, one directory per mechanism
-  Allwmake                      builds the model and the KODES libraries
-Allwmake                        the same, from the top
+Allwmake, Allwclean             the plugin entry points
+src/
+  Allwmake, Allwclean
+  kodesChemistryModel/
+    Allwmake, Allwclean         the model, then the KODES libraries
+    kodesChemistryModel.{C,H}   the model
+    kodesSpecieMap.{C,H}        KODES/pyJac <-> OpenFOAM specie ordering
+    makeKodesChemistry*Types.*  runtime selection for psi/rhoReactionThermo
+    pyJacSource/<m>/out/        pyJac's CUDA output, one directory per mechanism
+tutorials/                      cases for the three mechanisms
+utilities/                      mesh generation and mechanism conversion/checking
+external/
+  KODES/                        the KODES submodule, 0.23.1
+  pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
 ```
 
 ## Building
 
-Needs OpenFOAM v2412 sourced; for the KODES libraries also CMake ≥ 3.18 and nvcc.
+Needs OpenFOAM v2412 or later sourced; for the KODES libraries also CMake ≥ 3.18 and
+nvcc. Without nvcc the model is still built and the KODES libraries are skipped with a
+note saying so.
 
 ```bash
 git submodule update --init external/KODES
 
-./Allwmake                      # the model + libkodes_<m>.so for every pyJacSource/<m>
-./Allwmake grimech              # the model + libkodes_grimech.so only
+./Allwmake                              # the model + libkodes_<m>.so for every pyJacSource/<m>
+KODES_MECHANISMS=grimech ./Allwmake     # the model + libkodes_grimech.so only
+./Allwclean
 ```
 
-Everything goes to `$FOAM_USER_LIBBIN`. `NVARCH` sets the compute capability the
-KODES libraries are built for (default `120`, an RTX 50xx):
-`NVARCH=80 ./Allwmake` for an A100.
+The usual `Allwmake` options apply (`-j`, `-k`, `-log`), and `-prefix=` decides where
+the libraries go, the model and the KODES libraries alike:
 
-The model alone builds with `wmake libso src/kodesChemistryModel` and needs no CUDA.
+| Command | Install location |
+|---|---|
+| `./Allwmake` | `$FOAM_USER_LIBBIN` |
+| `./Allwmake -prefix=group` | `$FOAM_SITE_LIBBIN` |
+| `./Allwmake -prefix=openfoam` | `$FOAM_LIBBIN` |
+| `./Allwmake -prefix=/some/pathname` | `/some/pathname/lib` |
+
+The KODES libraries always go next to the model, so a case that finds the one finds the
+other. Two variables steer them: `NVARCH` is the compute capability they are built for
+(default `120`, an RTX 50xx; `NVARCH=80` for an A100), and `CUDACXX` the nvcc to use if
+it is not on the `PATH` or in `/usr/local/cuda`.
+
+### As an OpenFOAM plugin
+
+```bash
+cd $WM_PROJECT_DIR/plugins
+git clone --recursive <this repository> kodes4foam
+./Allwmake                              # builds every plugin, into $FOAM_LIBBIN
+```
+
+Built from `plugins/Allwmake` it goes to the project locations, like every plugin;
+built on its own, to the user ones.
 
 ## Using it in a case
 
@@ -86,12 +118,12 @@ a library built for another mechanism stops the run there, naming the specie it 
 ## Adding a mechanism
 
 Generate pyJac's CUDA output into `src/kodesChemistryModel/pyJacSource/<name>/out`
-(`python -m pyjac -l cuda ... -b <that directory>`) and run `./Allwmake <name>`. Cases
-then select it with `mechanism <name>;`.
+(`python -m pyjac -l cuda ... -b <that directory>`) and run
+`KODES_MECHANISMS=<name> ./Allwmake`. Cases then select it with `mechanism <name>;`.
 
 Mind the names: KODES's own `data/mechanisms/h2o2` (9 species) and `pyJacSource/h2o2`
-here (10, with N2) both build `libkodes_h2o2.so`. Installing KODES's default build into
-`$FOAM_USER_LIBBIN` would replace this one.
+here (10, with N2) both build `libkodes_h2o2.so`. Installing KODES's default build next to
+the model would replace this one.
 
 ## License
 
