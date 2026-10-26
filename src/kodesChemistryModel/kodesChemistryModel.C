@@ -33,6 +33,8 @@ License
 #include "extrapolatedCalculatedFvPatchFields.H"
 #include "OSspecific.H"
 
+#include <algorithm>
+#include <cstdint>
 #include <limits>
 
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
@@ -163,8 +165,8 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::newSolver
     if (nCells > std::numeric_limits<int>::max())
     {
         FatalErrorInFunction
-            << nCells << " cells are more than KODES can count, decompose"
-            << " the case" << nl
+            << nCells << " cells are more than KODES can count in one"
+            << " ensemble; decompose the case with 'gatherCells false'" << nl
             << exit(FatalError);
     }
 
@@ -233,6 +235,161 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::newSolver
 }
 
 
+template<class ReactionThermo, class ThermoType>
+Foam::label
+Foam::kodesChemistryModel<ReactionThermo, ThermoType>::nComponents() const
+{
+    return library_.systemSize() + library_.parameterSize();
+}
+
+
+template<class ReactionThermo, class ThermoType>
+void Foam::kodesChemistryModel<ReactionThermo, ThermoType>::pointInto
+(
+    List<double>& ensemble,
+    const label nSystems
+)
+{
+    // The layout KODES's HostResources takes: one array per component, as
+    // long as the ensemble, here end to end in one buffer
+    forAll(statePointers_, i)
+    {
+        statePointers_[i] = ensemble.data() + i*nSystems;
+    }
+
+    forAll(parameterPointers_, i)
+    {
+        parameterPointers_[i] =
+            ensemble.data() + (statePointers_.size() + i)*nSystems;
+    }
+}
+
+
+template<class ReactionThermo, class ThermoType>
+void Foam::kodesChemistryModel<ReactionThermo, ThermoType>::packLocal()
+{
+    const scalarField& T = this->thermo().T();
+    const scalarField& p = this->thermo().p();
+    const label nCells = T.size();
+    const label nState = library_.systemSize();
+
+    // Component 0 is the temperature, which is also the key the batch is
+    // sorted by, the rest are the mass fractions in KODES ordering. The
+    // pressure, the one parameter, follows the state.
+    forAll(T, celli)
+    {
+        local_[celli] = T[celli];
+        local_[nState*nCells + celli] = p[celli];
+    }
+
+    for (label i = 1; i < nState; ++i)
+    {
+        const scalarField& Yi = this->Y_[specieMap_.kodesToFoam(i)];
+        double* yi = local_.data() + i*nCells;
+
+        forAll(Yi, celli)
+        {
+            yi[celli] = Yi[celli];
+        }
+    }
+}
+
+
+template<class ReactionThermo, class ThermoType>
+void Foam::kodesChemistryModel<ReactionThermo, ThermoType>::unpackLocal
+(
+    const scalar deltaT
+)
+{
+    tmp<volScalarField> trho(this->thermo().rho());
+    const scalarField& rho = trho();
+    const scalarField& T = this->thermo().T();
+    const label nCells = T.size();
+    const label nState = library_.systemSize();
+
+    const label inertIndex = specieMap_.inertIndex();
+
+    forAll(rho, celli)
+    {
+        if (T[celli] > this->Treact_)
+        {
+            scalar Ysum = 0;
+
+            for (label i = 1; i < nState; ++i)
+            {
+                const label si = specieMap_.kodesToFoam(i);
+                const scalar Yi = local_[i*nCells + celli];
+
+                Ysum += Yi;
+                this->RR_[si][celli] = rho[celli]*(Yi - this->Y_[si][celli])/deltaT;
+            }
+
+            this->RR_[inertIndex][celli] =
+                rho[celli]*((1 - Ysum) - this->Y_[inertIndex][celli])/deltaT;
+        }
+        else
+        {
+            for (label i = 0; i < this->nSpecie_; ++i)
+            {
+                this->RR_[i][celli] = 0;
+            }
+        }
+    }
+}
+
+
+// The master holds each rank's cells as that rank packed them - all of its
+// first component, then all of its second - one rank after the other. KODES
+// wants every cell's first component together, then every cell's second; the
+// two orders differ only in which index runs fastest across the ranks.
+template<class ReactionThermo, class ThermoType>
+void Foam::kodesChemistryModel<ReactionThermo, ThermoType>::
+receivedToEnsemble()
+{
+    const label nComp = nComponents();
+    const label nTotal = gathered_.totalSize()/nComp;
+
+    for (const label proci : gathered_.allProcs())
+    {
+        const label start = gathered_.localStart(proci);
+        const label nCells = gathered_.localSize(proci)/nComp;
+        const label firstCell = start/nComp;
+
+        for (label i = 0; i < nComp; ++i)
+        {
+            const double* from = received_.cdata() + start + i*nCells;
+            double* to = ensemble_.data() + i*nTotal + firstCell;
+
+            std::copy(from, from + nCells, to);
+        }
+    }
+}
+
+
+template<class ReactionThermo, class ThermoType>
+void Foam::kodesChemistryModel<ReactionThermo, ThermoType>::
+ensembleToReceived()
+{
+    const label nComp = nComponents();
+    const label nTotal = gathered_.totalSize()/nComp;
+
+    for (const label proci : gathered_.allProcs())
+    {
+        const label start = gathered_.localStart(proci);
+        const label nCells = gathered_.localSize(proci)/nComp;
+        const label firstCell = start/nComp;
+
+        for (label i = 0; i < nComp; ++i)
+        {
+            const double* from = ensemble_.cdata() + i*nTotal + firstCell;
+            double* to = received_.data() + start + i*nCells;
+
+            std::copy(from, from + nCells, to);
+        }
+    }
+}
+
+
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class ReactionThermo, class ThermoType>
@@ -256,21 +413,18 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::kodesChemistryModel
         kodesSpecies(library_),
         thermo.composition().species()
     ),
-    state_(library_.systemSize()),
-    pressure_(),
+    gather_
+    (
+        UPstream::parRun()
+     && settingsDict_.getOrDefault<bool>("gatherCells", true)
+    ),
+    local_(),
+    gathered_(),
+    received_(),
+    ensemble_(),
     statePointers_(library_.systemSize()),
     parameterPointers_(library_.parameterSize()),
-    solver_
-    (
-        newSolver
-        (
-            library_,
-            settingsDict_,
-            this->subDict("odeCoeffs"),
-            this->thermo().T().size(),
-            this->Treact_
-        )
-    )
+    solver_()
 {
     if (settingsDict_.found("kodesMechanism"))
     {
@@ -282,47 +436,101 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::kodesChemistryModel
     }
 
     const label nCells = this->thermo().T().size();
+    const label nComp = nComponents();
 
-    forAll(state_, i)
+    // Every buffer here is one List, indexed by label: the whole ensemble
+    // times its components has to fit in one
+    const int64_t nSystems =
+        gather_ ? returnReduce(int64_t(nCells), sumOp<int64_t>()) : nCells;
+
+    if (nSystems*nComp > int64_t(labelMax))
     {
-        state_[i].resize(nCells);
-        statePointers_[i] = state_[i].data();
+        FatalErrorInFunction
+            << nSystems << " cells of " << nComp << " components each are"
+            << " more values than one list of this build can hold" << nl
+            << "    Decompose the case"
+            << (gather_ ? " with 'gatherCells false'" : "")
+            << ", or build OpenFOAM with 64-bit labels." << nl
+            << exit(FatalError);
     }
 
-    // The pressure is the only parameter of a pyJac system
-    pressure_.resize(nCells);
-    parameterPointers_[0] = pressure_.data();
+    local_.resize(nCells*nComp);
 
-    solver_->setDeltaT
-    (
-        this->template getOrDefault<scalar>("initialChemicalTimeStep", 1e-7)
-    );
+    if (gather_)
+    {
+        // Every rank learns every rank's share; only the master needs them
+        gathered_.reset(nCells*nComp);
 
-    Info<< "\n========================================" << nl
-        << "  kodesChemistryModel: CUSTOM MODEL LOADED!" << nl
-        << "  Using custom chemistry model by user" << nl
-        << "  Number of species = " << this->nSpecie_ << nl
-        << "  Number of reactions = " << this->nReaction_ << nl
-        << "  Thermophysical type: " << ThermoType::typeName() << nl
-        << "  Time: " << this->mesh().time().timeName() << nl
-        << "  Mechanism: libkodes_" << library_.mechanism() << ".so, KODES "
-        << library_.version() << nl
-        << "  Eliminated specie = "
-        << this->thermo().composition().species()[specieMap_.inertIndex()]
-        << " (FOAM index " << specieMap_.inertIndex() << ')' << nl
-        << "  Integration method = " << solver_->method() << nl
-        << "  Concurrent systems = " << solver_->concurrentSystems()
-        << " (" << solver_->blocks() << " blocks x "
-        << solver_->threads() << " threads)" << nl
-        << "  Batch = " << solver_->batchSize() << " cells, "
-        << solver_->numOfBatches()
-        << " batch(es) per step of " << nCells << " cells" << nl
-        << "  Batch balancing = "
-        << (word(solver_->balancer()) == "none" ? "off" : solver_->balancer())
-        << nl
-        << "  Device stack = " << label(solver_->deviceStack())
-        << " B per thread" << nl
-        << "========================================\n" << endl;
+        if (UPstream::master())
+        {
+            received_.resize(gathered_.totalSize());
+            ensemble_.resize(gathered_.totalSize());
+
+            pointInto(ensemble_, label(nSystems));
+        }
+    }
+    else
+    {
+        pointInto(local_, nCells);
+    }
+
+    if (!gather_ || UPstream::master())
+    {
+        solver_.reset
+        (
+            newSolver
+            (
+                library_,
+                settingsDict_,
+                this->subDict("odeCoeffs"),
+                label(nSystems),
+                this->Treact_
+            )
+        );
+
+        solver_->setDeltaT
+        (
+            this->template getOrDefault<scalar>("initialChemicalTimeStep", 1e-7)
+        );
+    }
+
+    // Info writes on the master only, which in a gathered run is the one rank
+    // with a solver to ask
+    if (solver_)
+    {
+        Info<< "\n========================================" << nl
+            << "  kodesChemistryModel: CUSTOM MODEL LOADED!" << nl
+            << "  Using custom chemistry model by user" << nl
+            << "  Number of species = " << this->nSpecie_ << nl
+            << "  Number of reactions = " << this->nReaction_ << nl
+            << "  Thermophysical type: " << ThermoType::typeName() << nl
+            << "  Time: " << this->mesh().time().timeName() << nl
+            << "  Mechanism: libkodes_" << library_.mechanism() << ".so, KODES "
+            << library_.version() << nl
+            << "  Eliminated specie = "
+            << this->thermo().composition().species()[specieMap_.inertIndex()]
+            << " (FOAM index " << specieMap_.inertIndex() << ')' << nl
+            << "  Integration method = " << solver_->method() << nl
+            << "  Ensemble = " << label(nSystems) << " cells"
+            << (
+                   gather_
+                 ? string(", gathered from all " + Foam::name(UPstream::nProcs())
+                        + " ranks")
+                 : string(UPstream::parRun() ? " on each rank" : "")
+               ).c_str()
+            << nl
+            << "  Concurrent systems = " << solver_->concurrentSystems()
+            << " (" << solver_->blocks() << " blocks x "
+            << solver_->threads() << " threads)" << nl
+            << "  Batch = " << solver_->batchSize() << " cells, "
+            << solver_->numOfBatches() << " batch(es) per step" << nl
+            << "  Batch balancing = "
+            << (word(solver_->balancer()) == "none" ? "off" : solver_->balancer())
+            << nl
+            << "  Device stack = " << label(solver_->deviceStack())
+            << " B per thread" << nl
+            << "========================================\n" << endl;
+    }
 
     if (kodesSpecieMap::debug)
     {
@@ -353,64 +561,36 @@ Foam::scalar Foam::kodesChemistryModel<ReactionThermo, ThermoType>::solve
         return GREAT;
     }
 
-    const scalarField& T = this->thermo().T();
-    const scalarField& p = this->thermo().p();
+    packLocal();
 
-    // Component 0 is the temperature, which is also the key the batch is
-    // sorted by, the rest are the mass fractions in KODES ordering
-    forAll(T, celli)
+    if (gather_)
     {
-        state_[0][celli] = T[celli];
-        pressure_[celli] = p[celli];
+        // MPI_Gatherv: one message per rank, the master's own share copied
+        gathered_.mpiGather(local_, received_);
+
+        if (UPstream::master())
+        {
+            receivedToEnsemble();
+
+            solver_->solve
+            (
+                deltaT, statePointers_.cdata(), parameterPointers_.cdata()
+            );
+
+            ensembleToReceived();
+        }
+
+        gathered_.scatter(received_, local_);
+    }
+    else
+    {
+        solver_->solve
+        (
+            deltaT, statePointers_.cdata(), parameterPointers_.cdata()
+        );
     }
 
-    for (label i = 1; i < state_.size(); ++i)
-    {
-        const scalarField& Yi = this->Y_[specieMap_.kodesToFoam(i)];
-        List<double>& yi = state_[i];
-
-        forAll(Yi, celli)
-        {
-            yi[celli] = Yi[celli];
-        }
-    }
-
-    solver_->solve
-    (
-        deltaT, statePointers_.cdata(), parameterPointers_.cdata()
-    );
-
-    tmp<volScalarField> trho(this->thermo().rho());
-    const scalarField& rho = trho();
-
-    const label inertIndex = specieMap_.inertIndex();
-
-    forAll(rho, celli)
-    {
-        if (T[celli] > this->Treact_)
-        {
-            scalar Ysum = 0;
-
-            for (label i = 1; i < state_.size(); ++i)
-            {
-                const label si = specieMap_.kodesToFoam(i);
-                const scalar Yi = state_[i][celli];
-
-                Ysum += Yi;
-                this->RR_[si][celli] = rho[celli]*(Yi - this->Y_[si][celli])/deltaT;
-            }
-
-            this->RR_[inertIndex][celli] =
-                rho[celli]*((1 - Ysum) - this->Y_[inertIndex][celli])/deltaT;
-        }
-        else
-        {
-            for (label i = 0; i < this->nSpecie_; ++i)
-            {
-                this->RR_[i][celli] = 0;
-            }
-        }
-    }
+    unpackLocal(deltaT);
 
     return GREAT;
 }

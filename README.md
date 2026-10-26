@@ -107,6 +107,7 @@ kodesSetting
     deviceShare       best;         // best | half
     balanceBatches    true;
     balancerKey       temperature;  // temperature | rhsNorm | stiffness | none
+    gatherCells       true;         // parallel runs: one ensemble on the master
 }
 ```
 
@@ -114,6 +115,23 @@ The full list of `kodesSetting` entries is in the header of
 [kodesChemistryModel.H](src/kodesChemistryModel/kodesChemistryModel.H). The species of
 the library are matched by name against the case's species table when the case starts;
 a library built for another mechanism stops the run there, naming the specie it lacks.
+
+## Parallel runs
+
+With `gatherCells true` (the default) every rank packs its cells, the master gathers
+them with one `MPI_Gatherv`, integrates all of them as one KODES ensemble and scatters
+the result back. Only the master opens the GPU.
+
+That is what one GPU shared by several ranks wants: one context instead of one per
+rank taking turns on the device, the device's memory planned once instead of each rank
+taking a share of what the previous ones left, the whole mesh balanced together, and
+no rank waiting on another's chemistry. It also makes the chemistry independent of the
+decomposition, since which cells share a block no longer depends on which rank holds
+them. The price is the state of every cell travelling to the master and back on every
+chemistry step, about `(species + 1) x 8` bytes per cell each way.
+
+`gatherCells false` integrates each rank's cells on its own, each rank opening the GPU
+it sees - right when every rank has a GPU of its own (`CUDA_VISIBLE_DEVICES` per rank).
 
 ## Adding a mechanism
 

@@ -74,11 +74,26 @@ Usage
         //   stiffness   - temperature first, rhsNorm inside each band
         // 'none' is the same as balanceBatches false.
         balancerKey     temperature;
+
+        // In a parallel run: send the cells of every rank to the master,
+        // integrate them there as one ensemble on one GPU, and send them
+        // back. false integrates each rank's cells on its own, every rank
+        // opening the GPU for itself.
+        gatherCells     true;
     }
     \endverbatim
     Tolerances and the step limit are read from odeCoeffs, the initial trial
     step from initialChemicalTimeStep, and cells at or below Treact are left
     alone as in the standard model.
+
+    Gathering is the default because a run normally has one GPU: ranks that
+    each open it queue their kernels on it one context at a time, each plans
+    its share of the device's memory from what the others left free, and
+    each balances only its own cells. Gathered, the device is planned and
+    filled once, the balancer orders the cells of the whole mesh together -
+    which also makes the chemistry independent of the decomposition - and
+    no rank waits on another's chemistry. The price is moving the state of
+    every cell to the master and back on every step.
 
     An unknown method or balancer name fails at construction with the list of
     the ones the library was built with. The species are mapped by name onto
@@ -96,6 +111,7 @@ SourceFiles
 #include "StandardChemistryModel.H"
 
 #include "kodesSpecieMap.H"
+#include "globalIndex.H"
 
 // The one KODES header: plain C++, no CUDA in it
 #include "library_api.h"
@@ -126,23 +142,49 @@ class kodesChemistryModel
     //- Translation between the KODES/pyJac and OpenFOAM specie orderings
     kodesSpecieMap specieMap_;
 
-    //- What goes to the device and comes back integrated, one list per
-    //  component of the KODES state: the temperature, then the mass
-    //  fractions in KODES order. The fields still hold the state the step
-    //  started from, which is what the reaction rates are taken against.
-    List<List<double>> state_;
+    //- Whether this run gathers the cells of every rank onto the master
+    bool gather_;
 
-    //- The pressure, the one parameter of a pyJac system. A copy, since KODES
-    //  copies the parameters back along with the state.
-    List<double> pressure_;
+    //- This rank's cells, as a KODES ensemble of their own: component by
+    //  component, the temperature, the mass fractions in KODES order and
+    //  then the pressure, each as long as the rank has cells. What goes to
+    //  the device - or to the master - and comes back integrated, while the
+    //  fields still hold the state the step started from, which is what the
+    //  reaction rates are taken against.
+    List<double> local_;
 
-    //- What solve() is handed: one pointer per state component and parameter
+    //- Where every rank's local_ starts in what the master gathers
+    globalIndex gathered_;
+
+    //- On the master of a gathered run, everything it was sent, in rank
+    //  order, and the same values reordered into one ensemble of every cell
+    List<double> received_;
+    List<double> ensemble_;
+
+    //- What solve() is handed: one pointer per state component and
+    //  parameter, into local_, or into ensemble_ when gathering
     List<double*> statePointers_;
     List<double*> parameterPointers_;
 
     //- Plans the run when it is made, then owns the method, the balancer,
-    //  the mechanism and their device buffers until it is deleted
+    //  the mechanism and their device buffers until it is deleted. Null on
+    //  every rank but the master of a gathered run.
     std::unique_ptr<kodes::Solver> solver_;
+
+    //- Components of one cell in local_: the state and the parameters
+    label nComponents() const;
+
+    //- Point statePointers_/parameterPointers_ at an ensemble of nSystems
+    void pointInto(List<double>& ensemble, const label nSystems);
+
+    //- Copy the fields into local_ - and back out, as reaction rates
+    void packLocal();
+    void unpackLocal(const scalar deltaT);
+
+    //- Move between what the ranks sent, in rank order, and the ensemble
+    //  KODES integrates. Master of a gathered run only.
+    void receivedToEnsemble();
+    void ensembleToReceived();
 
     //- Open libkodes_<mechanism>.so, check it speaks the interface this
     //  model was built against, and hand back its mechanism
