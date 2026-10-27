@@ -48,10 +48,11 @@ adjustTimeStep  yes;
 
 maxCo           0.4;
 
-// Required by chemFoam (0-D chemistry test utility, see kodesODESolver/)
-// alongside adjustTimeStep above; unused by reactingKodesFoam itself.
 maxDeltaT       1;
 
-libs ( libkodesChemistryModel.so );
+// libkodesChemistryModel.so for method kodesChemistryModel, nothing for the
+// standard model; kodesCase.py keeps this in step with chemistryProperties.
+
+libs ();
 
 // ************************************************************************* //

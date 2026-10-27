@@ -1,0 +1,26 @@
+#!/bin/sh
+cd "${0%/*}" || exit 1                              # Run from this directory
+#------------------------------------------------------------------------------
+#
+#     ./Allrun                              # as the case is set up now
+#     ./Allrun grimech                      # grimech, the current variant
+#     ./Allrun grimech kodes-temperature
+#     ./Allrun h2o2 standard --np 4         # decomposePar, mpirun -np 4
+#
+# Mechanisms: one per 0.<mechanism> here. Variants: standard, kodes-none,
+# kodes-temperature, kodes-rhsNorm, kodes-stiffness; the kodes-* ones need a
+# CUDA device and the libraries the top-level Allwmake builds.
+#
+# Setting the case up and running it is utilities/kodesCase.py, on foamlib,
+# from the repository's .venv (see the top-level README) or $KODES4FOAM_PYTHON.
+# The solver log is log.<solver>.<mechanism>.<variant>, so the timings of
+# every run survive; the fields are those of the last run.
+#
+#------------------------------------------------------------------------------
+
+python=${KODES4FOAM_PYTHON:-../../.venv/bin/python}
+[ -x "$python" ] || python=python3
+
+exec "$python" ../../utilities/kodesCase.py run . "$@"
+
+#------------------------------------------------------------------------------

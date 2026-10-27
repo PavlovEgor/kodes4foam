@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      thermophysicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            hePsiThermo;
+    mixture         reactingMixture;
+    transport       sutherland;
+    thermo          janaf;
+    energy          sensibleEnthalpy;
+    equationOfState perfectGas;
+    specie          specie;
+}
+
+// The specie recovered from sum(Y) = 1, and the one pyJac eliminates from the
+// state vector. The two have to be the same specie.
+inertSpecie     N2;
+
+// constant/<mechanism> is a symlink to tutorials/mechanisms/<mechanism>, one
+// per 0.<mechanism> the case has. kodesCase.py points these two entries at the
+// one a run uses, together with kodesSetting's mechanism and the 0 directory.
+chemistryReader foamChemistryReader;
+
+foamChemistryFile "<constant>/h2o2/reactions";
+
+foamChemistryThermoFile "<constant>/h2o2/thermo.compressibleGas";
+
+// ************************************************************************* //

@@ -1,11 +1,10 @@
 #!/bin/sh
-cd "${0%/*}" || exit                                # Run from this directory
+cd "${0%/*}" || exit 1                              # Run from this directory
 . ${WM_PROJECT_DIR:?}/bin/tools/CleanFunctions      # Tutorial clean functions
 #------------------------------------------------------------------------------
 
+# Time directories, mesh and logs, and 0/, which a run copies from
+# 0.<mechanism>; the 0.<mechanism> directories themselves stay
 cleanCase0
-
-rm -rf dynamicCode
-rm -f *.foam
 
 #------------------------------------------------------------------------------

@@ -15,5 +15,14 @@ tutorials/**/[0-9]*.[0-9]*/
 tutorials/**/processor*/
 tutorials/**/polyMesh/
 tutorials/**/dynamicCode/
+tutorials/**/postProcessing/
 tutorials/**/log.*
 tutorials/**/*.foam
+
+# Python: the repository's virtual environment, and what the notebooks leave
+/.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# utilities/parametricStudy.ipynb's foamlib clones
+/runs/

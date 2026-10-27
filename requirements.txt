@@ -1,0 +1,14 @@
+# Python side of kodes4foam: setting up, running and post-processing the
+# tutorials (utilities/kodesCase.py, utilities/parametricStudy.ipynb) and
+# converting mechanisms (utilities/chemkinToFoam.py).
+#
+#     python3 -m venv .venv
+#     .venv/bin/pip install -r requirements.txt
+
+foamlib>=1.6
+numpy
+pandas
+matplotlib
+jupyterlab
+ipykernel
+cantera

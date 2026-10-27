@@ -1,0 +1,35 @@
+#!/bin/sh
+cd "${0%/*}" || exit 1                              # Run from this directory
+#------------------------------------------------------------------------------
+#
+# Run every case with every mechanism it has, in series.
+#
+#     ./Allrun                                  # the standard variant
+#     ./Allrun kodes-none kodes-temperature     # these variants instead
+#
+# The standard sweep needs no GPU but is not quick -- the 159-specie
+# mechanism alone is most of a day on one core; see README.md.
+# utilities/parametricStudy.ipynb runs the same sweep on copies of the cases
+# and tabulates it.
+#
+#------------------------------------------------------------------------------
+
+VARIANTS=${*:-standard}
+
+for case in */Allrun
+do
+    case=${case%/Allrun}
+    for zero in "$case"/0.*/
+    do
+        mechanism=${zero#"$case"/0.}
+        mechanism=${mechanism%/}
+        for variant in $VARIANTS
+        do
+            echo "=== $case  [$mechanism $variant]"
+            "$case"/Allrun "$mechanism" "$variant" \
+             || echo "    *** failed: $case [$mechanism $variant]"
+        done
+    done
+done
+
+#------------------------------------------------------------------------------

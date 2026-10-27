@@ -1,5 +1,44 @@
 # OpenFOAM Chemistry Model Utilities
 
+The Python ones run from the repository's `.venv`:
+`python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`.
+
+## kodesCase.py
+
+Sets a tutorial case up for one mechanism and one chemistry variant and runs it, with
+[foamlib](https://github.com/gerlero/foamlib). Every case's `./Allrun` is
+`kodesCase.py run . "$@"`.
+
+A case has a `0.<mechanism>` and a `constant/<mechanism>` symlink for each mechanism it
+can run with. Setting it up copies `0.<mechanism>` to `0`, points
+`foamChemistryFile`/`foamChemistryThermoFile` at `constant/<mechanism>`, sets
+`chemistryType/method` and `kodesSetting` (`mechanism`, `balanceBatches`, `balancerKey`),
+and `libs` in `controlDict` — see [../tutorials/README.md](../tutorials/README.md).
+
+```bash
+./kodesCase.py list  <case>                         # mechanisms, variants, current set-up
+./kodesCase.py setup <case> <mechanism> <variant>   # set up only
+./kodesCase.py run   <case> [mechanism] [variant] [--np N]
+./kodesCase.py log   <log>...                       # steps, wall clock, per-step cost, errors
+```
+
+Variants: `standard`, `kodes-none`, `kodes-temperature`, `kodes-rhsNorm`,
+`kodes-stiffness`. The same functions are a module — `mechanisms`, `configure`, `clone`,
+`run`, `read_log`, `compare` — which is how the notebook below drives the cases. `clone`
+is foamlib's, plus re-pointing the `constant/<mechanism>` symlinks, which are relative to
+the tutorial and would reach nothing from a clone elsewhere.
+
+## parametricStudy.ipynb
+
+One case over the grid of mechanisms × `standard`/`kodes` × the four KODES balancers.
+Each point is a `kodesCase.clone` in `runs/<case>/<mechanism>.<variant>` (ignored by
+git), run with `kodesCase.run`; the notebook then tabulates the logs, compares each kodes
+run's fields with the standard run of the same mechanism, and plots cost per step,
+speed-up over `standard` and what balancing gains over `kodes-none`. Points that already
+finished are skipped, so re-running after adding a mechanism or a balancer only runs the
+new points. The case, the grid and `controlDict` overrides (a shorter `endTime` for a
+first pass) are set in its parameters cell.
+
 ## chemkinToFoam.py
 
 Converts a CHEMKIN-III mechanism (kinetics + thermo + transport) to OpenFOAM format by
@@ -59,7 +98,7 @@ source /usr/lib/openfoam/openfoam2412/etc/bashrc
   external/Kinetic-Mechanisms/Gas-Phase/CoreMechanism_C0-C4/Soot-NOx/C1_C3_HT_NOX_159_2459/kinetics.CHEMKIN.CKI \
   external/Kinetic-Mechanisms/Gas-Phase/CoreMechanism_C0-C4/Soot-NOx/C1_C3_HT_NOX_159_2459/thermo.CHEMKIN.CKT \
   external/Kinetic-Mechanisms/Gas-Phase/CoreMechanism_C0-C4/Soot-NOx/C1_C3_HT_NOX_159_2459/TOT2003.TRAN \
-  tutorials/DLBFoam-Hydrogen-Tutorials/mech/thermo/
+  tutorials/mechanisms/C1_C3_HT_NOX_159_2459/
 ```
 
 ## checkKodesMechanism.py
@@ -91,11 +130,11 @@ round-off down, so a mismatch is reported as a warning rather than a failure.
 ### Example
 
 ```bash
-T=tutorials/DLBFoam-Hydrogen-Tutorials
+T=tutorials
 for m in h2o2 grimech C1_C3_HT_NOX_159_2459; do
   ./utilities/checkKodesMechanism.py \
-    $T/$m/mech/mechanism.cuh \
-    $T/$m/mech/thermo/reactions \
-    --thermophysical-properties $T/$m/2D_planar_flame/constant/thermophysicalProperties
+    $T/mechanisms/$m/mechanism.cuh \
+    $T/mechanisms/$m/reactions \
+    --thermophysical-properties $T/2D_planar_flame/constant/thermophysicalProperties
 done
 ```

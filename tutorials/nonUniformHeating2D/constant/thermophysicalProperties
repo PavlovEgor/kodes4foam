@@ -25,13 +25,15 @@ thermoType
     specie          specie;
 }
 
-inertSpecie N2;
+inertSpecie     N2;
 
+// constant/<mechanism> is a symlink to tutorials/mechanisms/<mechanism>, one
+// per 0.<mechanism> the case has. kodesCase.py points these two entries at the
+// one a run uses, together with kodesSetting's mechanism and the 0 directory.
 chemistryReader foamChemistryReader;
-foamChemistryFile "<constant>/reactionsGRI";
-foamChemistryThermoFile "<constant>/thermo.compressibleGasGRI";
 
-// foamChemistryFile "<constant>/mech/thermo/reactions";
-// foamChemistryThermoFile "<constant>/mech/thermo/thermo.compressibleGas";
+foamChemistryFile "<constant>/h2o2/reactions";
+
+foamChemistryThermoFile "<constant>/h2o2/thermo.compressibleGas";
 
 // ************************************************************************* //

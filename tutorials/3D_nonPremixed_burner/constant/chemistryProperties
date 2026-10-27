@@ -1,0 +1,77 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      chemistryProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Which model integrates the chemistry, and with which mechanism and
+// balancer, is set by utilities/kodesCase.py (./Allrun calls it):
+//
+//     method standard             the chemistry model OpenFOAM ships, on the CPU
+//     method kodesChemistryModel  KODES on the GPU, configured by kodesSetting
+//
+// Both read the same odeCoeffs, so a standard and a kodes run of one case
+// differ in the integrator and nothing else.
+
+chemistryType
+{
+    solver          ode;
+    method standard;
+}
+
+chemistry       on;
+
+initialChemicalTimeStep 1e-7;
+
+// kodesChemistryModel passes absTol, relTol and maxSteps on to its own
+// integrator and takes the method name from kodesSetting instead.
+odeCoeffs
+{
+    solver          seulex;
+    absTol          1e-12;
+    relTol          1e-3;
+}
+
+kodesSetting
+{
+    // Opens libkodes_<mechanism>.so. Kept equal to the mechanism
+    // thermophysicalProperties reads by kodesCase.py: the species of the
+    // library are mapped by name onto the case's species table at start-up,
+    // so a library built for another mechanism stops the run there.
+    mechanism h2o2;
+
+    // seulex | euler. Resolved against the KODES method table at start-up.
+    integrationMethod seulex;
+
+    // best | half. To size the run by hand give both concurrentSystems and
+    // batchSize instead.
+    deviceShare     best;
+
+    // Group each batch before integrating it, so the lanes of a warp get cells
+    // needing a similar number of steps.
+    balanceBatches  true;
+
+    // temperature | rhsNorm | stiffness | none
+    balancerKey temperature;
+
+    // Bytes of call stack per device thread. KODES reaches pyJac's
+    // eval_jacob() through a virtual call, which is where the compiler stops
+    // adding up frames and the driver falls back to its 1 KiB default -- too
+    // little for the larger mechanisms. The overrun surfaces as a CUDA
+    // "invalid program counter" from the first cudaMemcpy after the solve
+    // kernel, not from the kernel itself.
+    deviceStackSize 8192;
+}
+
+// ************************************************************************* //

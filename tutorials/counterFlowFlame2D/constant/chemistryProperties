@@ -10,21 +10,32 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
+    location    "constant";
     object      chemistryProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+// Which model integrates the chemistry, and with which mechanism and
+// balancer, is set by utilities/kodesCase.py (./Allrun calls it):
+//
+//     method standard             the chemistry model OpenFOAM ships, on the CPU
+//     method kodesChemistryModel  KODES on the GPU, configured by kodesSetting
+//
+// Both read the same odeCoeffs, so a standard and a kodes run of one case
+// differ in the integrator and nothing else.
+
 chemistryType
 {
-    solver            ode;
-    method            standard;
-    // method            kodesChemistryModel;
+    solver          ode;
+    method standard;
 }
 
 chemistry       on;
 
 initialChemicalTimeStep 1e-7;
 
+// kodesChemistryModel passes absTol, relTol and maxSteps on to its own
+// integrator and takes the method name from kodesSetting instead.
 odeCoeffs
 {
     solver          seulex;
@@ -34,29 +45,33 @@ odeCoeffs
 
 kodesSetting
 {
-    // Opens libkodes_grimech.so, the mechanism of constant/mechanism.cuh
+    // Opens libkodes_<mechanism>.so. Kept equal to the mechanism
+    // thermophysicalProperties reads by kodesCase.py: the species of the
+    // library are mapped by name onto the case's species table at start-up,
+    // so a library built for another mechanism stops the run there.
     mechanism grimech;
 
-    // Which method integrates a cell: seulex | euler.
-    // The name is looked up in the KODES method table when the case starts,
-    // so switching it needs no recompilation. euler is there to check the
-    // machinery, not to run a stiff mechanism with.
+    // seulex | euler. Resolved against the KODES method table at start-up.
     integrationMethod seulex;
 
-    // How much of the device one run may take: best | half.
-    // To size it by hand instead, give both of
-    //     concurrentSystems 8192;   // cells integrated at the same time
-    //     batchSize      1000000;   // cells per host->device transfer
-    deviceShare best;
+    // best | half. To size the run by hand give both concurrentSystems and
+    // batchSize instead.
+    deviceShare     best;
 
-    // Group each batch before integrating it, so the lanes of a warp get
-    // cells that need a similar number of steps
-    balanceBatches true;
+    // Group each batch before integrating it, so the lanes of a warp get cells
+    // needing a similar number of steps.
+    balanceBatches  true;
 
-    // What to group by: temperature | rhsNorm | stiffness | none.
-    // rhsNorm and stiffness measure how fast the cell is moving instead of
-    // guessing it from the temperature, at one extra derivatives() per cell
-    // per step.
+    // temperature | rhsNorm | stiffness | none
     balancerKey temperature;
+
+    // Bytes of call stack per device thread. KODES reaches pyJac's
+    // eval_jacob() through a virtual call, which is where the compiler stops
+    // adding up frames and the driver falls back to its 1 KiB default -- too
+    // little for the larger mechanisms. The overrun surfaces as a CUDA
+    // "invalid program counter" from the first cudaMemcpy after the solve
+    // kernel, not from the kernel itself.
+    deviceStackSize 8192;
 }
+
 // ************************************************************************* //

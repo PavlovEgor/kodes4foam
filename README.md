@@ -24,8 +24,14 @@ src/
     kodesSpecieMap.{C,H}        KODES/pyJac <-> OpenFOAM specie ordering
     makeKodesChemistry*Types.*  runtime selection for psi/rhoReactionThermo
     pyJacSource/<m>/out/        pyJac's CUDA output, one directory per mechanism
-tutorials/                      cases for the three mechanisms
-utilities/                      mesh generation and mechanism conversion/checking
+tutorials/
+  mechanisms/<m>/               the three mechanisms, shared by every case
+  <case>/0.<m>/                 one case each, initial conditions per mechanism
+utilities/
+  kodesCase.py                  set a case up for a mechanism and variant, run it (foamlib)
+  parametricStudy.ipynb         mechanisms x standard/kodes x balancers, on one case
+  ...                           mesh generation and mechanism conversion/checking
+requirements.txt                the Python side, for .venv
 external/
   KODES/                        the KODES submodule, 0.23.1
   pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
@@ -70,6 +76,22 @@ git clone --recursive <this repository> kodes4foam
 
 Built from `plugins/Allwmake` it goes to the project locations, like every plugin;
 built on its own, to the user ones.
+
+### The Python side
+
+The tutorials are set up and run with [foamlib](https://github.com/gerlero/foamlib), from
+a virtual environment in the repository:
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+tutorials/2D_planar_flame/Allrun grimech kodes-temperature   # mechanism, chemistry variant
+
+.venv/bin/jupyter lab utilities/parametricStudy.ipynb
+```
+
+[tutorials/README.md](tutorials/README.md) has the cases, mechanisms and variants.
 
 ## Using it in a case
 
@@ -138,6 +160,11 @@ it sees - right when every rank has a GPU of its own (`CUDA_VISIBLE_DEVICES` per
 Generate pyJac's CUDA output into `src/kodesChemistryModel/pyJacSource/<name>/out`
 (`python -m pyjac -l cuda ... -b <that directory>`) and run
 `KODES_MECHANISMS=<name> ./Allwmake`. Cases then select it with `mechanism <name>;`.
+
+For the tutorials, put its OpenFOAM `reactions` and `thermo.compressibleGas` in
+`tutorials/mechanisms/<name>/` (`utilities/chemkinToFoam.py` writes both), and give a case
+a `0.<name>` and a `constant/<name> -> ../../mechanisms/<name>` symlink; `./Allrun <name>`
+and the parametric study pick it up from there.
 
 Mind the names: KODES's own `data/mechanisms/h2o2` (9 species) and `pyJacSource/h2o2`
 here (10, with N2) both build `libkodes_h2o2.so`. Installing KODES's default build next to
