@@ -32,6 +32,8 @@ Usage:
 """
 
 import argparse
+import math
+import os
 import re
 import shutil
 import sys
@@ -188,11 +190,65 @@ def reset(case):
     shutil.rmtree(case.path / "constant" / "polyMesh", ignore_errors=True)
 
 
+def decompose_for(case, nprocs):
+    """
+    Point decomposeParDict at nprocs subdomains. scotch takes any number, but
+    simple and hierarchical need their n (nx ny nz) to multiply out to it: the
+    prime factors of nprocs are spread over the directions the case already
+    splits, onto the one with the fewest pieces so far, largest factor first.
+    """
+    case = _case(case)
+    decompose = case.decompose_par_dict
+
+    with decompose:
+        _set(decompose, "numberOfSubdomains", nprocs)
+
+        for key in ("coeffs", f"{decompose.get('method')}Coeffs"):
+            coeffs = decompose.get(key)
+            if coeffs is None or "n" not in coeffs:
+                continue
+            n = [int(x) for x in coeffs["n"]]
+            if math.prod(n) == nprocs:
+                continue
+
+            split = [i for i, x in enumerate(n) if x > 1] or [0]
+            new = [1, 1, 1]
+            for factor in _prime_factors(nprocs):
+                new[min(split, key=lambda i: new[i])] *= factor
+            coeffs["n"] = new
+
+
+def _prime_factors(n):
+    factors, p = [], 2
+    while p * p <= n:
+        while n % p == 0:
+            factors.append(p)
+            n //= p
+        p += 1
+    if n > 1:
+        factors.append(n)
+    return sorted(factors, reverse=True)
+
+
+def _written_times(path):
+    """The time directories after 0 in path."""
+    times = []
+    for p in path.iterdir() if path.is_dir() else ():
+        try:
+            if p.is_dir() and float(p.name) > 0:
+                times.append(p)
+        except ValueError:
+            pass
+    return times
+
+
 def run(case, mechanism=None, variant=None, *, nprocs=1, check=True):
     """
     Set the case up and run it: blockMesh, setFields if the case has a
-    setFieldsDict, then the solver, in parallel on nprocs ranks if nprocs > 1. A
-    mechanism or variant left out is the one the case is set up for now.
+    setFieldsDict, then the solver, in parallel on nprocs ranks if nprocs > 1 -
+    decomposed for that many (see decompose_for()) and reconstructed afterwards,
+    so the fields are where a serial run leaves them. A mechanism or variant
+    left out is the one the case is set up for now.
 
     Returns the path of the solver's log.
     """
@@ -200,6 +256,14 @@ def run(case, mechanism=None, variant=None, *, nprocs=1, check=True):
     now = current(case)
     mechanism = mechanism or now[0]
     variant = variant or now[1]
+
+    if nprocs > 1:
+        # Open MPI hands out one rank per physical core unless told otherwise,
+        # which on a machine with hardware threads refuses nprocs it could run
+        cpus = os.cpu_count() or 1
+        if nprocs > cpus:
+            raise ValueError(f"--np {nprocs} is more than the {cpus} CPUs here")
+        os.environ.setdefault("OMPI_MCA_rmaps_base_oversubscribe", "1")
 
     reset(case)
     configure(case, mechanism, variant)
@@ -212,11 +276,15 @@ def run(case, mechanism=None, variant=None, *, nprocs=1, check=True):
     log.unlink(missing_ok=True)
 
     if nprocs > 1:
-        case.decompose_par_dict["numberOfSubdomains"] = nprocs
+        decompose_for(case, nprocs)
         case.decompose_par(check=check)
         case.run(
             [case.application], parallel=True, cpus=nprocs, check=check, log=log.name
         )
+        # reconstructPar fails when there is nothing after 0 to reconstruct -
+        # a run shorter than writeInterval, or one that stopped early
+        if _written_times(case.path / "processor0"):
+            case.reconstruct_par(check=check)
     else:
         case.run([case.application], parallel=False, check=check, log=log.name)
 

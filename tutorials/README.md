@@ -70,7 +70,7 @@ cd 2D_planar_flame
 ./Allrun                                # as the case is set up now (h2o2, standard)
 ./Allrun grimech                        # another mechanism, the same variant
 ./Allrun grimech kodes                  # another mechanism and variant
-./Allrun h2o2 standard --np 4           # decomposePar, then 4 MPI ranks
+./Allrun h2o2 standard --np 4           # decomposePar, 4 MPI ranks, reconstructPar
 ./Allclean
 ```
 

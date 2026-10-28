@@ -5,7 +5,7 @@ cd "${0%/*}" || exit 1                              # Run from this directory
 #     ./Allrun                              # as the case is set up now
 #     ./Allrun grimech                      # grimech, the current variant
 #     ./Allrun grimech kodes
-#     ./Allrun h2o2 standard --np 4         # decomposePar, mpirun -np 4
+#     ./Allrun h2o2 standard --np 4         # decomposePar, mpirun -np 4, reconstructPar
 #
 # Mechanisms: one per 0.<mechanism> here. Variants: standard, kodes; kodes
 # needs a CUDA device and the libraries the top-level Allwmake builds.
