@@ -9,8 +9,8 @@ boundaries are cyclic, there are no gradients anywhere. Convection and diffusion
 contribute nothing and each cell integrates exactly the same chemistry — a
 constant-volume homogeneous reactor replicated over the whole mesh. That makes it the
 quickest check that a mechanism and a chemistry model run at all, and a benchmark where
-all of the cost is chemistry. It is also the one case where batch balancing has nothing
-to work with: every cell needs the same number of steps.
+all of the cost is chemistry. It is also the one case where every GPU thread has the same
+work: every cell needs the same number of steps.
 
 ## Setup
 

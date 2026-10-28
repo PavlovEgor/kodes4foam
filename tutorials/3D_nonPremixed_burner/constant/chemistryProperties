@@ -15,8 +15,8 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Which model integrates the chemistry, and with which mechanism and
-// balancer, is set by utilities/kodesCase.py (./Allrun calls it):
+// Which model integrates the chemistry, and with which mechanism, is set by
+// utilities/kodesCase.py (./Allrun calls it):
 //
 //     method standard             the chemistry model OpenFOAM ships, on the CPU
 //     method kodesChemistryModel  KODES on the GPU, configured by kodesSetting
@@ -57,13 +57,6 @@ kodesSetting
     // best | half. To size the run by hand give both concurrentSystems and
     // batchSize instead.
     deviceShare     best;
-
-    // Group each batch before integrating it, so the lanes of a warp get cells
-    // needing a similar number of steps.
-    balanceBatches  true;
-
-    // temperature | rhsNorm | stiffness | none
-    balancerKey temperature;
 
     // Bytes of call stack per device thread. KODES reaches pyJac's
     // eval_jacob() through a virtual call, which is where the compiler stops

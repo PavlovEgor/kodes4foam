@@ -5,7 +5,8 @@ cd "${0%/*}" || exit 1                              # Run from this directory
 # Run every case with every mechanism it has, in series.
 #
 #     ./Allrun                                  # the standard variant
-#     ./Allrun kodes-none kodes-temperature     # these variants instead
+#     ./Allrun kodes                            # the kodes variant instead
+#     ./Allrun standard kodes                   # both
 #
 # The standard sweep needs no GPU but is not quick -- the 159-specie
 # mechanism alone is most of a day on one core; see README.md.

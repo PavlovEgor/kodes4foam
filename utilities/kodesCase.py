@@ -19,9 +19,7 @@ cannot disagree:
 The chemistry variants are
 
     standard            the chemistry model OpenFOAM ships, on the CPU
-    kodes-none          kodesChemistryModel, no batch balancing
-    kodes-<key>         kodesChemistryModel, balancerKey <key>, one of
-                        temperature | rhsNorm | stiffness
+    kodes               kodesChemistryModel, KODES on the GPU
 
 Every case's ./Allrun is `kodesCase.py run <case> "$@"`. The functions are
 also the API utilities/parametricStudy.ipynb drives the cases with.
@@ -44,8 +42,7 @@ from foamlib import CalledProcessError, FoamCase
 
 TUTORIALS = Path(__file__).resolve().parent.parent / "tutorials"
 
-BALANCERS = ("temperature", "rhsNorm", "stiffness")
-VARIANTS = ("standard", "kodes-none", *(f"kodes-{key}" for key in BALANCERS))
+VARIANTS = ("standard", "kodes")
 
 KODES_LIBRARY = "libkodesChemistryModel.so"
 
@@ -67,13 +64,11 @@ def mechanisms(case):
 
 
 def parse_variant(variant):
-    """(method, balanceBatches, balancerKey) for a variant name."""
+    """chemistryType/method for a variant name."""
     if variant == "standard":
-        return "standard", None, None
-    if variant == "kodes-none":
-        return "kodesChemistryModel", False, "none"
-    if variant in VARIANTS:
-        return "kodesChemistryModel", True, variant[len("kodes-"):]
+        return "standard"
+    if variant == "kodes":
+        return "kodesChemistryModel"
     raise ValueError(
         f"unknown variant {variant!r}; one of: {', '.join(VARIANTS)}"
     )
@@ -86,10 +81,8 @@ def current(case):
 
     if chemistry["chemistryType"]["method"] == "standard":
         variant = "standard"
-    elif not kodes.get("balanceBatches", True) or kodes.get("balancerKey") == "none":
-        variant = "kodes-none"
     else:
-        variant = f"kodes-{kodes.get('balancerKey', 'temperature')}"
+        variant = "kodes"
 
     return kodes["mechanism"], variant
 
@@ -97,7 +90,7 @@ def current(case):
 def configure(case, mechanism, variant):
     """Set the case up for one mechanism and one variant."""
     case = _case(case)
-    method, balance, key = parse_variant(variant)
+    method = parse_variant(variant)
 
     available = mechanisms(case)
     if mechanism not in available:
@@ -129,9 +122,6 @@ def configure(case, mechanism, variant):
         # standard run, so the next switch to kodes cannot pick up a stale one
         kodes = chemistry["kodesSetting"]
         _set(kodes, "mechanism", mechanism)
-        if balance is not None:
-            _set(kodes, "balanceBatches", balance)
-            _set(kodes, "balancerKey", key)
 
     _set(
         case.control_dict, "libs", [] if method == "standard" else [KODES_LIBRARY]

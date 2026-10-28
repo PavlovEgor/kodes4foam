@@ -118,11 +118,9 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::kodesSpecies
 }
 
 
-// Both names are handed straight to KODES, which fails with the list of the
-// ones it was built with if it does not know one. Nothing here has to be kept
-// in step with the library's tables any more - it used to be an enum, four
-// switches and two member templates, all of which had to gain a case whenever
-// KODES gained a balancer.
+// The name is handed straight to KODES, which fails with the list of the
+// ones it was built with if it does not know it. Nothing here has to be kept
+// in step with the library's tables.
 template<class ReactionThermo, class ThermoType>
 Foam::word
 Foam::kodesChemistryModel<ReactionThermo, ThermoType>::methodName
@@ -131,22 +129,6 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::methodName
 )
 {
     return dict.getOrDefault<word>("integrationMethod", "seulex");
-}
-
-
-template<class ReactionThermo, class ThermoType>
-Foam::word
-Foam::kodesChemistryModel<ReactionThermo, ThermoType>::balancerName
-(
-    const dictionary& dict
-)
-{
-    if (!dict.getOrDefault<bool>("balanceBatches", true))
-    {
-        return "none";
-    }
-
-    return dict.getOrDefault<word>("balancerKey", "temperature");
 }
 
 
@@ -173,13 +155,11 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::newSolver
     // The settings below point into these, so they have to outlive the
     // newSolver() call - which is all the solver needs them for
     const word method(methodName(dict));
-    const word balancer(balancerName(dict));
     const word deviceShare(dict.getOrDefault<word>("deviceShare", "best"));
 
     kodes::SolverSettings settings;
 
     settings.method = method.c_str();
-    settings.balancer = balancer.c_str();
     settings.deviceShare = deviceShare.c_str();
 
     settings.threadsPerBlock =
@@ -435,6 +415,18 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::kodesChemistryModel
             << nl << endl;
     }
 
+    for (const word key : {"balanceBatches", "balancerKey"})
+    {
+        if (settingsDict_.found(key))
+        {
+            WarningInFunction
+                << "'" << key << "' in " << settingsDict_.name()
+                << " is not read: KODES " << library_.version()
+                << " integrates every cell on its own and has no balancer."
+                << nl << endl;
+        }
+    }
+
     const label nCells = this->thermo().T().size();
     const label nComp = nComponents();
 
@@ -524,9 +516,6 @@ Foam::kodesChemistryModel<ReactionThermo, ThermoType>::kodesChemistryModel
             << solver_->threads() << " threads)" << nl
             << "  Batch = " << solver_->batchSize() << " cells, "
             << solver_->numOfBatches() << " batch(es) per step" << nl
-            << "  Batch balancing = "
-            << (word(solver_->balancer()) == "none" ? "off" : solver_->balancer())
-            << nl
             << "  Device stack = " << label(solver_->deviceStack())
             << " B per thread" << nl
             << "========================================\n" << endl;

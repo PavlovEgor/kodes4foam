@@ -2,9 +2,8 @@
 
 Six `reactingFoam` cases, each runnable with every mechanism it has initial conditions
 for and with either chemistry model. The point is to be able to time
-[`kodesChemistryModel`](../src/kodesChemistryModel) — the GPU chemistry model and each of
-its batch balancers — against the chemistry model OpenFOAM ships, on the same flame, the
-same mesh and the same tolerances, so that a difference in wall clock is a difference in
+[`kodesChemistryModel`](../src/kodesChemistryModel), the GPU chemistry model, against the
+chemistry model OpenFOAM ships, on the same flame, the same mesh and the same tolerances, so that a difference in wall clock is a difference in
 the integrator and nothing else.
 
 ## Layout
@@ -56,12 +55,11 @@ switch deciding how often to call it.
 The four flames are about 40 000 cells on purpose. `kodesChemistryModel` integrates one
 cell per thread, and the device this is benchmarked on carries of order 10 000 threads at
 once: a mesh below that leaves most of a batch idle, so the run times launch overhead and
-memory traffic rather than the integrator, and a balancer has almost nothing to reorder.
-Forty thousand is a few times the device width — enough that a batch is full, that the
-spread of per-cell step counts a balancer exists to exploit is actually present within
-it, and that the three balancers can be told apart. `nonUniformHeating2D` is the
-opposite: every cell is the same reactor, so there is nothing to balance, and it is the
-quickest check that a mechanism and a model run at all.
+memory traffic rather than the integrator. Forty thousand is a few times the device
+width — enough that a batch is full and that the spread of per-cell step counts a real
+flame has is present within it. `nonUniformHeating2D` is the opposite: every cell is the
+same reactor, so every thread has the same work, and it is the quickest check that a
+mechanism and a model run at all.
 
 ## Running a case
 
@@ -71,21 +69,17 @@ cd 2D_planar_flame
 
 ./Allrun                                # as the case is set up now (h2o2, standard)
 ./Allrun grimech                        # another mechanism, the same variant
-./Allrun grimech kodes-temperature      # another mechanism and variant
+./Allrun grimech kodes                  # another mechanism and variant
 ./Allrun h2o2 standard --np 4           # decomposePar, then 4 MPI ranks
 ./Allclean
 ```
 
-| Variant | `chemistryType/method` | `kodesSetting` | Needs |
-|---|---|---|---|
-| `standard` | `standard` | — | nothing; this is the reference |
-| `kodes-none` | `kodesChemistryModel` | `balanceBatches false` | CUDA device + libraries |
-| `kodes-temperature` | `kodesChemistryModel` | `balancerKey temperature` | CUDA device + libraries |
-| `kodes-rhsNorm` | `kodesChemistryModel` | `balancerKey rhsNorm` | CUDA device + libraries |
-| `kodes-stiffness` | `kodesChemistryModel` | `balancerKey stiffness` | CUDA device + libraries |
+| Variant | `chemistryType/method` | Needs |
+|---|---|---|
+| `standard` | `standard` | nothing; this is the reference |
+| `kodes` | `kodesChemistryModel` | CUDA device + libraries |
 
-`kodes-none` is the measurement the three balanced runs are compared against: it is what
-the GPU port is worth before any load balancing. The libraries are
+The libraries are
 `libkodesChemistryModel.so` and `libkodes_<mechanism>.so`, both built by the top-level
 `./Allwmake`.
 
@@ -98,7 +92,7 @@ cannot disagree:
 |---|---|
 | `0/` | a copy of `0.<mechanism>` |
 | `constant/thermophysicalProperties` | `foamChemistryFile` and `foamChemistryThermoFile` under `<constant>/<mechanism>/` |
-| `constant/chemistryProperties` | `chemistryType/method`; `kodesSetting/mechanism`, `balanceBatches`, `balancerKey` |
+| `constant/chemistryProperties` | `chemistryType/method`; `kodesSetting/mechanism` |
 | `system/controlDict` | `libs (libkodesChemistryModel.so)` for kodes, `libs ()` for standard |
 
 `kodesCase.py setup <case> <mechanism> <variant>` makes just those edits, without
@@ -111,18 +105,17 @@ runs survive side by side; the fields do not — they are those of the last run.
 without the first, the first fatal error, and the `kodesChemistryModel` banner.
 
 From this directory, `./Allrun` runs the `standard` variant of every case with every
-mechanism it has, `./Allrun kodes-none kodes-temperature` those variants instead, and
+mechanism it has, `./Allrun kodes` the kodes variant instead, and
 `./Allclean` cleans every case.
 
 ## Parametric study
 
 [utilities/parametricStudy.ipynb](../utilities/parametricStudy.ipynb) runs one case over
-the whole grid — mechanisms × `standard`/`kodes` × the four balancers — each point on its
-own foamlib clone in `runs/<case>/<mechanism>.<variant>`, so the tutorial stays as it is
-and every point keeps its fields. It tabulates the logs, compares each kodes run's fields
-with the standard run of the same mechanism, and plots cost per step, speed-up over
-`standard` and what balancing is worth over `kodes-none`. Points that already finished
-are not rerun.
+the whole grid — mechanisms × `standard`/`kodes` — each point on its own foamlib clone in
+`runs/<case>/<mechanism>.<variant>`, so the tutorial stays as it is and every point keeps
+its fields. It tabulates the logs, compares each kodes run's fields with the standard run
+of the same mechanism, and plots cost per step and speed-up over `standard`. Points that
+already finished are not rerun.
 
 ## What a run costs
 

@@ -63,18 +63,6 @@ Usage
 
         // threadsPerBlock 256;
 
-        // Group each batch before integrating it, so the lanes of a warp
-        // get cells that need a similar number of steps
-        balanceBatches  true;
-
-        // What to group by: temperature | rhsNorm | stiffness | none
-        //   temperature - component 0 of the state, free to read
-        //   rhsNorm     - how fast the cell is moving, one extra
-        //                 derivatives() per cell per step
-        //   stiffness   - temperature first, rhsNorm inside each band
-        // 'none' is the same as balanceBatches false.
-        balancerKey     temperature;
-
         // In a parallel run: send the cells of every rank to the master,
         // integrate them there as one ensemble on one GPU, and send them
         // back. false integrates each rank's cells on its own, every rank
@@ -87,16 +75,18 @@ Usage
     alone as in the standard model.
 
     Gathering is the default because a run normally has one GPU: ranks that
-    each open it queue their kernels on it one context at a time, each plans
-    its share of the device's memory from what the others left free, and
-    each balances only its own cells. Gathered, the device is planned and
-    filled once, the balancer orders the cells of the whole mesh together -
-    which also makes the chemistry independent of the decomposition - and
-    no rank waits on another's chemistry. The price is moving the state of
-    every cell to the master and back on every step.
+    each open it queue their kernels on it one context at a time, and each
+    plans its share of the device's memory from what the others left free.
+    Gathered, the device is planned and filled once, and no rank waits on
+    another's chemistry. The price is moving the state of every cell to the
+    master and back on every step.
 
-    An unknown method or balancer name fails at construction with the list of
-    the ones the library was built with. The species are mapped by name onto
+    KODES 1.x integrates every cell on its own GPU thread and has no batch
+    balancer; balanceBatches and balancerKey, read by the model for KODES
+    0.20-0.23, are ignored with a warning.
+
+    An unknown method name fails at construction with the list of the ones
+    the library was built with. The species are mapped by name onto
     the ones the library reports, so a library built for a different
     mechanism fails there too, naming the specie it could not find.
 
@@ -166,8 +156,8 @@ class kodesChemistryModel
     List<double*> statePointers_;
     List<double*> parameterPointers_;
 
-    //- Plans the run when it is made, then owns the method, the balancer,
-    //  the mechanism and their device buffers until it is deleted. Null on
+    //- Plans the run when it is made, then owns the method, the mechanism
+    //  and their device buffers until it is deleted. Null on
     //  every rank but the master of a gathered run.
     std::unique_ptr<kodes::Solver> solver_;
 
@@ -196,10 +186,6 @@ class kodesChemistryModel
     //- Which method integrates a cell. Unset means seulex, which is what the
     //  model did before there was anything else to pick.
     static word methodName(const dictionary& dict);
-
-    //- What the batch is grouped by, or "none". 'balanceBatches false' is the
-    //  same thing said the other way round, and still wins if it is set.
-    static word balancerName(const dictionary& dict);
 
     //- Make the solver: plan the run against the free memory of the device,
     //  which has to happen before anything else is allocated there, and

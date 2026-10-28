@@ -29,11 +29,11 @@ tutorials/
   <case>/0.<m>/                 one case each, initial conditions per mechanism
 utilities/
   kodesCase.py                  set a case up for a mechanism and variant, run it (foamlib)
-  parametricStudy.ipynb         mechanisms x standard/kodes x balancers, on one case
+  parametricStudy.ipynb         mechanisms x standard/kodes, on one case
   ...                           mesh generation and mechanism conversion/checking
 requirements.txt                the Python side, for .venv
 external/
-  KODES/                        the KODES submodule, 0.23.1
+  KODES/                        the KODES submodule, 1.0.1 (branch 1.0.0)
   pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
 ```
 
@@ -127,8 +127,6 @@ kodesSetting
     mechanism         grimech;      // opens libkodes_grimech.so
     integrationMethod seulex;       // seulex | euler
     deviceShare       best;         // best | half
-    balanceBatches    true;
-    balancerKey       temperature;  // temperature | rhsNorm | stiffness | none
     gatherCells       true;         // parallel runs: one ensemble on the master
 }
 ```
@@ -146,10 +144,8 @@ the result back. Only the master opens the GPU.
 
 That is what one GPU shared by several ranks wants: one context instead of one per
 rank taking turns on the device, the device's memory planned once instead of each rank
-taking a share of what the previous ones left, the whole mesh balanced together, and
-no rank waiting on another's chemistry. It also makes the chemistry independent of the
-decomposition, since which cells share a block no longer depends on which rank holds
-them. The price is the state of every cell travelling to the master and back on every
+taking a share of what the previous ones left, and no rank waiting on another's
+chemistry. The price is the state of every cell travelling to the master and back on every
 chemistry step, about `(species + 1) x 8` bytes per cell each way.
 
 `gatherCells false` integrates each rank's cells on its own, each rank opening the GPU
