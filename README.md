@@ -33,7 +33,7 @@ utilities/
   ...                           mesh generation and mechanism conversion/checking
 requirements.txt                the Python side, for .venv
 external/
-  KODES/                        the KODES submodule, 1.0.1 (branch 1.0.0)
+  KODES/                        the KODES submodule, 1.0.1 (branch kodes-v1)
   pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
 ```
 
