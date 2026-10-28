@@ -36,11 +36,14 @@ import math
 import os
 import re
 import shutil
+import subprocess
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
 from foamlib import CalledProcessError, FoamCase
+from rich.progress import Progress
 
 TUTORIALS = Path(__file__).resolve().parent.parent / "tutorials"
 
@@ -278,17 +281,65 @@ def run(case, mechanism=None, variant=None, *, nprocs=1, check=True):
     if nprocs > 1:
         decompose_for(case, nprocs)
         case.decompose_par(check=check)
-        case.run(
-            [case.application], parallel=True, cpus=nprocs, check=check, log=log.name
-        )
+        _run_solver(case, log, nprocs, check)
         # reconstructPar fails when there is nothing after 0 to reconstruct -
         # a run shorter than writeInterval, or one that stopped early
         if _written_times(case.path / "processor0"):
             case.reconstruct_par(check=check)
     else:
-        case.run([case.application], parallel=False, check=check, log=log.name)
+        _run_solver(case, log, 1, check)
 
     return log
+
+
+def _run_solver(case, log, nprocs, check):
+    """
+    Run the case's solver with its output going straight into log.
+
+    Not case.run(): foamlib passes the output through Python and writes it with
+    an 8 KiB buffer, so the log stays empty for the first few steps - minutes
+    with a big mechanism - and a run that hangs at start-up shows nothing at
+    all. The progress bar is foamlib's, read back from the log.
+    """
+    cmd = [case.application]
+    if nprocs > 1:
+        cmd = ["mpiexec", "-n", str(nprocs), *cmd, "-parallel"]
+
+    control = case.control_dict
+    end = control.get("endTime") if control.get("stopAt") == "endTime" else None
+    end = end if isinstance(end, (int, float)) else None
+
+    with open(log, "w") as out, open(log) as follow, Progress() as progress:
+        task = progress.add_task(
+            f"({case.name}) Running {case.application}, log in {log.name}...",
+            total=end,
+        )
+        # OpenFOAM takes the case directory from $PWD where it is set
+        process = subprocess.Popen(
+            cmd,
+            cwd=case.path,
+            env={**os.environ, "PWD": str(case.path)},
+            stdout=out,
+            stderr=subprocess.STDOUT,
+        )
+
+        pending = ""
+        while True:
+            done = process.poll() is not None
+            pending += follow.read()
+            *lines, pending = pending.split("\n")
+            for line in lines:
+                if line.startswith("Time = "):
+                    try:
+                        progress.update(task, completed=float(line.split()[2]))
+                    except (ValueError, IndexError):
+                        pass
+            if done:
+                break
+            time.sleep(0.5)
+
+    if check and process.returncode != 0:
+        raise CalledProcessError(process.returncode, cmd)
 
 
 _TIME = re.compile(r"^Time = (\S+)$")
