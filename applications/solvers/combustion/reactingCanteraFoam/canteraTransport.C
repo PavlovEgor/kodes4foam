@@ -234,6 +234,12 @@ Foam::canteraTransport::canteraTransport(rhoReactionThermo& thermo)
         }
     }
 
+    phiDc_.setOriented();
+    forAll(phiD_, i)
+    {
+        phiD_[i].setOriented();
+    }
+
     correct();
 }
 
@@ -576,6 +582,11 @@ void Foam::canteraTransport::correctFluxes()
                 dimensionedScalar(dimMass/dimTime, Zero)
             )
         );
+    }
+
+    forAll(J, k)
+    {
+        J[k].setOriented();
     }
 
     if (diffusion_ == diffusionType::multicomponent)

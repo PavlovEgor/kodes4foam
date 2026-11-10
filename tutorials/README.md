@@ -1,6 +1,6 @@
 # Tutorials
 
-Six `reactingFoam` cases and one `reactingCanteraFoam` case, each runnable with every mechanism it has initial conditions
+Six `reactingFoam` cases and two `reactingCanteraFoam` cases, each runnable with every mechanism it has initial conditions
 for and with either chemistry model. The point is to be able to time
 [`kodesChemistryModel`](../src/kodesChemistryModel), the GPU chemistry model, against the
 chemistry model OpenFOAM ships, on the same flame, the same mesh and the same tolerances, so that a difference in wall clock is a difference in
@@ -43,11 +43,15 @@ Each mechanism's README says where it comes from and how to regenerate it.
 | [3D_premixed_burner](3D_premixed_burner/) | premixed H2/air, phi = 0.6, through a sudden expansion | 39 924 | RAS k-epsilon | `PaSR` | all three |
 | [nonUniformHeating2D](nonUniformHeating2D/) | homogeneous H2/air autoignition, periodic box | 16 384 | laminar | `laminar` | all three |
 | [counterFlowFlame2D](counterFlowFlame2D/) | CH4/air counterflow diffusion flame | 32 768 | laminar | `laminar` | grimech, C1_C3 |
+| [1D_premixed_flame](1D_premixed_flame/) | freely propagating stoichiometric H2/air flame, against Cantera | 600 | laminar | `laminar` | h2o2, grimech |
 | [2D_flat_burner](2D_flat_burner/) | oscillating rich CH4/air flame on a flat porous burner with N2 co-flow | 30 275 | laminar | `laminar` | grimech |
 
 `counterFlowFlame2D` burns methane, which h2o2 does not have, so it has no `0.h2o2`. In the
 hydrogen cases the carbon species of the larger mechanisms start at zero, through
 `Ydefault`, and stay there.
+
+`1D_premixed_flame` checks the molecular transport of `reactingCanteraFoam` against
+Cantera, by the laminar flame speed ([its README](1D_premixed_flame/README.md)).
 
 `2D_flat_burner` is the odd one out: a real experiment, the flat burner of the Lebedev
 Physical Institute, run with `reactingCanteraFoam` for the molecular transport, radiation

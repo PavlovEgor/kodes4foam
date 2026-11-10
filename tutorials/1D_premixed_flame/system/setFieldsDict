@@ -1,0 +1,46 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Equilibrium products of the mixture (phi = 1, 320 K, 1 atm) downstream of
+// x = 4 mm, moving at the speed the flame will give them
+
+defaultFieldValues
+(
+);
+
+regions
+(
+    boxToCell
+    {
+        box (0.004 -1 -1) (1 1 1);
+
+        fieldValues
+        (
+            volVectorFieldValue U (16.5 0 0)
+            volScalarFieldValue T 2397.9
+            volScalarFieldValue H2 0.001253
+            volScalarFieldValue O2 0.007647
+            volScalarFieldValue N2 0.745124
+            volScalarFieldValue H2O 0.240140
+            volScalarFieldValue H 0.000080
+            volScalarFieldValue O 0.000430
+            volScalarFieldValue OH 0.005325
+        );
+    }
+);
+
+// ************************************************************************* //

@@ -39,6 +39,16 @@ the paper the case follows has 0.025), the radii and heights are options too.
 ./flatBurnerBlockMesh.py --dx 0.05 ../tutorials/2D_flat_burner/system/blockMeshDict
 ```
 
+## flameSpeed.py
+
+The laminar flame speed of [1D_premixed_flame](../tutorials/1D_premixed_flame) from the
+motion of its front, next to Cantera's for the same mixture, mechanism and transport
+model.
+
+```bash
+./flameSpeed.py ../tutorials/1D_premixed_flame [--from TIME] [--no-reference]
+```
+
 ## parametricStudy.ipynb
 
 One case over the grid of mechanisms × `standard`/`kodes` × the four KODES balancers.
