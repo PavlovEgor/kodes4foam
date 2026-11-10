@@ -15,8 +15,8 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// utilities/flatBurnerBlockMesh.py --dx 0.025: 267930 cells,
-// 390 along the axis by 687 across
+// utilities/flatBurnerBlockMesh.py --dx 0.05: 86688 cells,
+// 252 along the axis by 344 across
 
 scale   0.001;
 
@@ -59,16 +59,16 @@ vertices
 
 blocks
 (
-    hex (0 11 12 1 0 11 13 2) (240 299 1) simpleGrading (1 1 1)
-    hex (1 12 14 3 2 13 15 4) (240 64 1) simpleGrading (1 1 1)
-    hex (3 14 16 5 4 15 17 6) (240 119 1) simpleGrading (1 1 1)
-    hex (5 16 18 7 6 17 19 8) (240 64 1) simpleGrading (1 1 1)
-    hex (7 18 20 9 8 19 21 10) (240 141 1) simpleGrading (1 5 1)
-    hex (11 22 23 12 11 22 24 13) (150 299 1) simpleGrading (345.118 1 1)
-    hex (12 23 25 14 13 24 26 15) (150 64 1) simpleGrading (345.118 1 1)
-    hex (14 25 27 16 15 26 28 17) (150 119 1) simpleGrading (345.118 1 1)
-    hex (16 27 29 18 17 28 30 19) (150 64 1) simpleGrading (345.118 1 1)
-    hex (18 29 31 20 19 30 32 21) (150 141 1) simpleGrading (345.118 5 1)
+    hex (0 11 12 1 0 11 13 2) (120 150 1) simpleGrading (1 1 1)
+    hex (1 12 14 3 2 13 15 4) (120 32 1) simpleGrading (1 1 1)
+    hex (3 14 16 5 4 15 17 6) (120 59 1) simpleGrading (1 1 1)
+    hex (5 16 18 7 6 17 19 8) (120 32 1) simpleGrading (1 1 1)
+    hex (7 18 20 9 8 19 21 10) (120 71 1) simpleGrading (1 5 1)
+    hex (11 22 23 12 11 22 24 13) (132 150 1) simpleGrading (170.36 1 1)
+    hex (12 23 25 14 13 24 26 15) (132 32 1) simpleGrading (170.36 1 1)
+    hex (14 25 27 16 15 26 28 17) (132 59 1) simpleGrading (170.36 1 1)
+    hex (16 27 29 18 17 28 30 19) (132 32 1) simpleGrading (170.36 1 1)
+    hex (18 29 31 20 19 30 32 21) (132 71 1) simpleGrading (170.36 5 1)
 );
 
 edges

@@ -52,15 +52,18 @@ kept at 20 C by a thermostat, so its surface and the gases leaving it are at 293
 | Buoyancy | yes, g = 9.81 m/s2 against x | yes |
 | Species on `mainInlet` | `burnerSpecieFlux`: convection + diffusion = M Y0 | the same (its Eq. 2) |
 | Velocity on `mainInlet` | `massFluxInletVelocity`: u = M/rho | the same (its Eq. 3) |
-| Cells in the flame zone | 0.025 mm, 267 930 cells | 0.025 mm |
+| Cells in the flame zone | 0.05 mm, 86 688 cells | 0.025 mm |
 | Schemes | second order, `backward` | fourth order in space, second in time |
 | Time step | Co < 0.3, at most 1 us | Co < 0.2 |
 
-The mesh has the paper's resolution, 0.025 mm: the thermal thickness of this flame is
-0.56 mm, 22 cells across it. A coarse mesh for tests, 0.1 mm and 30 275 cells:
+The mesh is the one difference that matters: the thermal thickness of this flame is
+0.56 mm, so 0.05 mm puts 11 cells across it where the paper has 22. The paper's
+resolution, 267 930 cells, is three times as many cells and half the time step; a coarse
+mesh for tests, 0.1 mm and 30 275 cells:
 
 ```bash
-../../utilities/flatBurnerBlockMesh.py --dx 0.1 system/blockMeshDict
+../../utilities/flatBurnerBlockMesh.py --dx 0.025 system/blockMeshDict    # the paper's
+../../utilities/flatBurnerBlockMesh.py --dx 0.1 system/blockMeshDict      # for tests
 ```
 
 The time step is held to 1 us. With 10 us the pressure waves are not resolved and on
