@@ -33,34 +33,16 @@ defaultFieldValues
 
 regions
 (
-    // Fresh mixture on the plug
+    // Fresh mixture on the plug, up to the igniter of system/fvOptions and past it
     boxToCell
     {
-        box (-1 -1 -1) (0.0005 0.00748 1);
+        box (-1 -1 -1) (0.006 0.00748 1);
 
         fieldValues
         (
             volScalarFieldValue CH4 0.0629
             volScalarFieldValue O2 0.2183
             volScalarFieldValue N2 0.7188
-        );
-    }
-
-    // Products above it
-    boxToCell
-    {
-        box (0.0005 -1 -1) (0.006 0.00748 1);
-
-        fieldValues
-        (
-            volScalarFieldValue T 2171
-            volScalarFieldValue CH4 0
-            volScalarFieldValue O2 0.0001
-            volScalarFieldValue N2 0.7193
-            volScalarFieldValue H2O 0.1279
-            volScalarFieldValue CO2 0.1134
-            volScalarFieldValue CO 0.0376
-            volScalarFieldValue H2 0.0014
         );
     }
 );

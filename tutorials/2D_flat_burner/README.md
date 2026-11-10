@@ -79,7 +79,9 @@ burner plane beyond the outer rim is open, as its Fig. 2 draws it.
 ./Allrun grimech standard --np 4
 ```
 
-The flame is started from a 5.5 mm slab of equilibrium products above the plug. `endTime`
+The flame is lit by the `ignition` constraint of `system/fvOptions`: the fresh mixture
+that `setFieldsDict` puts on the plug is brought to 2000 K 1 to 2 mm above it in 0.5 ms and held
+there until 3 ms, and the flame runs down to the burner from there. `endTime`
 is 50 ms, three to four periods of the oscillation the paper finds at 69 Hz;
 `postProcessing/flame/0/volFieldValue.dat` has max(T) and max(OH) of every step, which is
 where the period shows. With the standard chemistry model that is days on one core: the
