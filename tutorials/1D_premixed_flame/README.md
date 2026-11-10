@@ -11,7 +11,7 @@ the pressure fixed there the duct is an acoustic resonator the flame drives, and
 front moves with a pressure wave of several kPa instead of at the flame speed.
 
 ```bash
-./Allrun                                        # h2o2; 4 minutes on one core
+./Allrun                                        # h2o2; 6 minutes on one core
 ../../utilities/flameSpeed.py .                 # flame speed, and Cantera's
 ```
 
