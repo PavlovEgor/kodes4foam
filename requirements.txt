@@ -12,3 +12,6 @@ matplotlib
 jupyterlab
 ipykernel
 cantera
+
+# Builds the external/cantera submodule for reactingCanteraFoam
+scons
