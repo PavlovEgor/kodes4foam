@@ -34,6 +34,8 @@ chemistry       on;
 
 initialChemicalTimeStep 1e-7;
 
+Treact          300;    // cells at or below are not integrated: the fresh mixture and the air
+
 // kodesChemistryModel passes absTol, relTol and maxSteps on to its own
 // integrator and takes the method name from kodesSetting instead.
 odeCoeffs
