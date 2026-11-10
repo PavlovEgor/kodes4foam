@@ -28,6 +28,7 @@ echo "  prefix = ${FOAM_MODULE_PREFIX:-default (user)}"
 echo
 
 src/Allwmake $targetType $*
+applications/Allwmake $*
 
 # Some summary information
 echo

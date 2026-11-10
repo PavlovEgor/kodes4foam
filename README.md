@@ -24,6 +24,11 @@ src/
     kodesSpecieMap.{C,H}        KODES/pyJac <-> OpenFOAM specie ordering
     makeKodesChemistry*Types.*  runtime selection for psi/rhoReactionThermo
     pyJacSource/<m>/out/        pyJac's CUDA output, one directory per mechanism
+  boundaryConditions/           massFluxInletVelocity, burnerSpecieFlux
+  radiationModels/              opticallyThin
+applications/
+  solvers/combustion/
+    reactingCanteraFoam/        laminar flames with detailed transport from Cantera
 tutorials/
   mechanisms/<m>/               the three mechanisms, shared by every case
   <case>/0.<m>/                 one case each, initial conditions per mechanism
@@ -34,7 +39,9 @@ utilities/
 requirements.txt                the Python side, for .venv
 external/
   KODES/                        the KODES submodule, 1.0.1 (branch kodes-v1)
+  cantera/                      the Cantera submodule, 3.2.0, for reactingCanteraFoam
   pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
+doc/                            papers the cases and the solver follow
 ```
 
 ## Building
@@ -60,6 +67,19 @@ the libraries go, the model and the KODES libraries alike:
 | `./Allwmake -prefix=group` | `$FOAM_SITE_LIBBIN` |
 | `./Allwmake -prefix=openfoam` | `$FOAM_LIBBIN` |
 | `./Allwmake -prefix=/some/pathname` | `/some/pathname/lib` |
+
+`reactingCanteraFoam` needs the Cantera submodule and SCons to build it with:
+
+```bash
+git submodule update --init external/cantera
+.venv/bin/pip install -r requirements.txt     # SCons, among the rest
+```
+
+The first `./Allwmake` then builds Cantera as a static library inside
+`external/cantera` (a quarter of an hour on two cores, `WM_NCOMPPROCS` sets how many) and
+links it into the solver, so a case needs nothing of Cantera at run time but the mechanism
+file. `CANTERA_DIR=<prefix>` uses an installed Cantera instead. Without SCons the solver
+is skipped with a note saying so.
 
 The KODES libraries always go next to the model, so a case that finds the one finds the
 other. Two variables steer them: `NVARCH` is the compute capability they are built for
@@ -135,6 +155,46 @@ The full list of `kodesSetting` entries is in the header of
 [kodesChemistryModel.H](src/kodesChemistryModel/kodesChemistryModel.H). The species of
 the library are matched by name against the case's species table when the case starts;
 a library built for another mechanism stops the run there, naming the specie it lacks.
+
+## reactingCanteraFoam
+
+`rhoReactingBuoyantFoam` with the molecular transport a resolved laminar flame needs,
+which `reactingFoam` does not have - it diffuses every specie and heat at one rate. It
+follows EBIdnsFoam, the solver the flat-burner computations of
+[Li et al. 2025](doc/) were made with:
+
+| | |
+|---|---|
+| Viscosity, conductivity, diffusion coefficients | Cantera, from the mechanism's YAML file |
+| Diffusion | `mixtureAveraged` (Hirschfelder-Curtiss, with the correction flux), `multicomponent` (D_kj, evaluated on the faces) or `unityLewis` |
+| Thermal diffusion | `Soret on`: multicomponent thermal diffusion coefficients |
+| Energy | the enthalpy carried by the diffusive fluxes |
+| Radiation | OpenFOAM's `radiationModel`; `opticallyThin` here is H2O, CO2, CO and CH4 with the TNF Planck mean coefficients |
+| Buoyancy | `p_rgh`, as in `rhoReactingBuoyantFoam` |
+
+Thermodynamics and chemistry stay OpenFOAM's, so it runs with `kodesChemistryModel` like
+`reactingFoam` does. `constant/canteraProperties`:
+
+```
+mechanism       "<constant>/grimech/grimech.yaml";
+diffusion       mixtureAveraged;    // unityLewis | mixtureAveraged | multicomponent
+Soret           on;
+SoretInterval   5;                  // time steps between updates of the coefficients
+```
+
+The Cantera mechanism has to have the species of the case, by name. Thermal diffusion
+costs a 3N x 3N solve per cell, which is why its coefficients can be kept for a few
+steps; `multicomponent` costs an N x N inverse per face on every step and is there to
+check `mixtureAveraged` against, not to run with.
+
+Two boundary conditions come with it, in `libburnerBoundaryConditions.so`:
+
+| | |
+|---|---|
+| `massFluxInletVelocity` | `U = -n massFlux/rho`: an inlet set by its mass flux per area |
+| `burnerSpecieFlux` | Robin condition on the surface of a burner: convection plus diffusion of a specie equals `massFlux*Y0`, so a flame near the surface changes the composition on it and not what enters |
+
+and [tutorials/2D_flat_burner](tutorials/2D_flat_burner) uses all of it.
 
 ## Parallel runs
 
