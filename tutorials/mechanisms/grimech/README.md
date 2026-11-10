@@ -9,6 +9,7 @@ It is also the mechanism of `counterFlowFlame2D`, which burns methane.
 |---|---|
 | `reactions` | `foamChemistryReader`, via a case's `constant/thermophysicalProperties` |
 | `thermo.compressibleGas` | the same, for JANAF and Sutherland coefficients |
+| `grimech.yaml` | `reactingCanteraFoam`, for the transport coefficients; Cantera's `gri30.yaml` as it is |
 | `mechanism.cuh` | symlink to `pyJacSource/grimech/out/mechanism.cuh`, for [checkKodesMechanism.py](../../../utilities/checkKodesMechanism.py) |
 
 ## The mechanism
@@ -25,6 +26,12 @@ first: the same 53 names, no additions, no omissions.
 Every specie gets its own fitted Sutherland pair. (The `thermo.compressibleGasGRI` the
 old `counterFlowFlame2D` carried had OpenFOAM's defaults, `As = 1.67212e-06`,
 `Ts = 170.672`, on all 53 species — no transport data at all.)
+
+`Tlow` of the 13 species that have 300 K in `thermo30.dat` (N2 and AR among them) is 280 K
+in `thermo.compressibleGas`: OpenFOAM clamps the temperature to `Tlow` when it evaluates
+a JANAF fit, so with 300 K nothing can be colder than that, and `2D_flat_burner` is fed at
+293 K. The fits are used 20 K outside their range there, as Cantera and pyJac use them
+anyway. `chemkinToFoam.py` writes 300 again; the edit has to be redone after it.
 
 N2 is the last specie in pyJac's ordering and so the one eliminated from the state
 vector — the same specie `inertSpecie` names.

@@ -49,3 +49,6 @@ python -m pyjac -l cuda -i $P/h2o2_n2.CKI -t $P/h2o2_n2.CKT -ls N2 -b $P/out
 Note that `yaml2ck` writes `REACTIONS CAL/MOLE MOLE`, and pyJac only accepts `MOLES`
 for that unit; the units it defaults to are the same ones, so the keyword is left bare
 in the checked-in `.CKI`.
+
+`h2o2.yaml` is Cantera's file of the same name, the same ten species, for the transport
+coefficients of `reactingCanteraFoam`.
