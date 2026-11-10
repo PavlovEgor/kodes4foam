@@ -52,17 +52,22 @@ kept at 20 C by a thermostat, so its surface and the gases leaving it are at 293
 | Buoyancy | yes, g = 9.81 m/s2 against x | yes |
 | Species on `mainInlet` | `burnerSpecieFlux`: convection + diffusion = M Y0 | the same (its Eq. 2) |
 | Velocity on `mainInlet` | `massFluxInletVelocity`: u = M/rho | the same (its Eq. 3) |
-| Cells in the flame zone | 0.1 mm, 30 275 cells | 0.025 mm |
+| Cells in the flame zone | 0.025 mm, 267 930 cells | 0.025 mm |
 | Schemes | second order, `backward` | fourth order in space, second in time |
-| Time step | Co < 0.3 | Co < 0.2 |
+| Time step | Co < 0.3, at most 1 us | Co < 0.2 |
 
-The mesh is the one difference that matters: the thermal thickness of this flame is
-0.56 mm, so 0.1 mm puts five to six cells across it where the paper has 22. It is what
-the other cases of this directory have, about 30 000 cells; for the paper's resolution
+The mesh has the paper's resolution, 0.025 mm: the thermal thickness of this flame is
+0.56 mm, 22 cells across it. A coarse mesh for tests, 0.1 mm and 30 275 cells:
 
 ```bash
-../../utilities/flatBurnerBlockMesh.py --dx 0.025 system/blockMeshDict     # 480 000 cells
+../../utilities/flatBurnerBlockMesh.py --dx 0.1 system/blockMeshDict
 ```
+
+The time step is held to 1 us. With 10 us the pressure waves are not resolved and on
+a coarse mesh T fell 10 K below that of the inflow on the axis, 100 to 200 mm above the
+burner, by 1.5 ms. `limitTemperature` in `system/fvOptions` keeps T above 285 K, so the
+log is not flooded with warnings from OpenFOAM below the 280 K `Tlow`. Its
+`LimitedCells` in the log should stay at 0.
 
 `burnerSpecieFlux` is on `coflowInlet` as well, which the paper does not say; with a
 fixed value there the species that diffuse to the ring would leave through it.

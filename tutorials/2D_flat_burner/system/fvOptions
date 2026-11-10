@@ -45,4 +45,16 @@ ignition
 }
 
 
+// A guard for the log: below 280 K (the Tlow of thermo.compressibleGas) OpenFOAM
+// warns in every cell and every iteration. T is not expected to go there.
+
+limitT
+{
+    type            limitTemperature;
+    selectionMode   all;
+    min             285;
+    max             2950;
+}
+
+
 // ************************************************************************* //

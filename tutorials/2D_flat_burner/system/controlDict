@@ -50,7 +50,7 @@ adjustTimeStep  yes;
 
 maxCo           0.3;
 
-maxDeltaT       1e-05;
+maxDeltaT       1e-06;          // resolves the pressure waves: with 1e-5 T falls below 280 K on the axis
 
 // The boundary conditions of the burner and the radiation model;
 // utilities/kodesCase.py adds libkodesChemistryModel.so for a kodes run
