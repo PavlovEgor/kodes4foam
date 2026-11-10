@@ -1,0 +1,66 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Mass fluxes, not velocities: what the flow controllers of the experiment set
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0.09 0 0);
+
+boundaryField
+{
+    mainInlet
+    {
+        type            massFluxInletVelocity;
+        massFlux        0.1;        // M [kg/m2/s]
+        value           uniform (0.0887 0 0);
+    }
+    coflowInlet
+    {
+        type            massFluxInletVelocity;
+        massFlux        0.094;      // mN2 [kg/m2/s]; the paper: 0, 0.037, 0.094, 0.22
+        value           uniform (0.0817 0 0);
+    }
+    burnerWall
+    {
+        type            noSlip;
+    }
+    outerZone
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    axis
+    {
+        type            empty;
+    }
+    back
+    {
+        type            wedge;
+    }
+    front
+    {
+        type            wedge;
+    }
+}
+
+// ************************************************************************* //

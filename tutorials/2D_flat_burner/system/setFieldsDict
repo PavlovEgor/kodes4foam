@@ -1,0 +1,68 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The surroundings are air at rest; the flame is started from a slab of
+// equilibrium products of the main jet (phi = 1.15, 293 K, 1 bar) above the
+// porous plug, which the fresh mixture then pushes off the burner.
+
+defaultFieldValues
+(
+    volScalarFieldValue T 293
+    volScalarFieldValue CH4 0
+    volScalarFieldValue O2 0.232
+    volScalarFieldValue N2 0.768
+    volScalarFieldValue H2O 0
+    volScalarFieldValue CO2 0
+    volScalarFieldValue CO 0
+    volScalarFieldValue H2 0
+);
+
+regions
+(
+    // Fresh mixture on the plug
+    boxToCell
+    {
+        box (-1 -1 -1) (0.0005 0.00748 1);
+
+        fieldValues
+        (
+            volScalarFieldValue CH4 0.0629
+            volScalarFieldValue O2 0.2183
+            volScalarFieldValue N2 0.7188
+        );
+    }
+
+    // Products above it
+    boxToCell
+    {
+        box (0.0005 -1 -1) (0.006 0.00748 1);
+
+        fieldValues
+        (
+            volScalarFieldValue T 2171
+            volScalarFieldValue CH4 0
+            volScalarFieldValue O2 0.0001
+            volScalarFieldValue N2 0.7193
+            volScalarFieldValue H2O 0.1279
+            volScalarFieldValue CO2 0.1134
+            volScalarFieldValue CO 0.0376
+            volScalarFieldValue H2 0.0014
+        );
+    }
+);
+
+// ************************************************************************* //

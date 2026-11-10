@@ -1,0 +1,33 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      canteraProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Molecular transport of reactingCanteraFoam; see canteraTransport.H.
+// The mechanism follows the one the case is set up for (utilities/kodesCase.py).
+
+mechanism       "<constant>/grimech/grimech.yaml";
+
+// unityLewis | mixtureAveraged | multicomponent
+diffusion       mixtureAveraged;
+
+// Thermal diffusion
+Soret           on;
+
+// Time steps the thermal diffusion coefficients are kept for: they cost a
+// 3N x 3N solve per cell
+SoretInterval   5;
+
+// ************************************************************************* //

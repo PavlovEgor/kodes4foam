@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The burner is kept at 20 C by a thermostat, and the gases leave it at that
+
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 293;
+
+boundaryField
+{
+    mainInlet
+    {
+        type            fixedValue;
+        value           uniform 293;
+    }
+    coflowInlet
+    {
+        type            fixedValue;
+        value           uniform 293;
+    }
+    burnerWall
+    {
+        type            fixedValue;
+        value           uniform 293;
+    }
+    outerZone
+    {
+        type            inletOutlet;
+        inletValue      uniform 293;
+        value           uniform 293;
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 293;
+        value           uniform 293;
+    }
+    axis
+    {
+        type            empty;
+    }
+    back
+    {
+        type            wedge;
+    }
+    front
+    {
+        type            wedge;
+    }
+}
+
+// ************************************************************************* //

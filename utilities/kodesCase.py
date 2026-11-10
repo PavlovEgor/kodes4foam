@@ -8,13 +8,14 @@ A tutorial case carries every mechanism it can run with,
     0.<mechanism>/          the initial conditions for that mechanism
     constant/<mechanism>    symlink to tutorials/mechanisms/<mechanism>
 
-and setting it up for a run is four edits, always made together so that they
+and setting it up for a run is these edits, always made together so that they
 cannot disagree:
 
     0/                                  a copy of 0.<mechanism>
     constant/thermophysicalProperties   foamChemistry{,Thermo}File -> constant/<mechanism>
     constant/chemistryProperties        chemistryType/method and kodesSetting
     system/controlDict                  libs
+    constant/canteraProperties          mechanism, if the case has one
 
 The chemistry variants are
 
@@ -128,9 +129,26 @@ def configure(case, mechanism, variant):
         kodes = chemistry["kodesSetting"]
         _set(kodes, "mechanism", mechanism)
 
-    _set(
-        case.control_dict, "libs", [] if method == "standard" else [KODES_LIBRARY]
-    )
+    # The libraries a case needs for anything else stay
+    libs = case.control_dict.get("libs") or []
+    libs = [libs] if isinstance(libs, str) else list(libs)
+    libs = [lib for lib in libs if lib != KODES_LIBRARY]
+    if method != "standard":
+        libs.append(KODES_LIBRARY)
+    _set(case.control_dict, "libs", libs)
+
+    # reactingCanteraFoam cases: the transport data of the same mechanism
+    if (case.path / "constant" / "canteraProperties").is_file():
+        if not (case.path / "constant" / mechanism / f"{mechanism}.yaml").is_file():
+            raise FileNotFoundError(
+                f"no Cantera mechanism {mechanism}.yaml in "
+                f"{case.path / 'constant' / mechanism}"
+            )
+        _set(
+            case.file("constant/canteraProperties"),
+            "mechanism",
+            f'"<constant>/{mechanism}/{mechanism}.yaml"',
+        )
 
     return case
 

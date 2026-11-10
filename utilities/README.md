@@ -28,6 +28,17 @@ Variants: `standard`, `kodes-none`, `kodes-temperature`, `kodes-rhsNorm`,
 is foamlib's, plus re-pointing the `constant/<mechanism>` symlinks, which are relative to
 the tutorial and would reach nothing from a clone elsewhere.
 
+## flatBurnerBlockMesh.py
+
+Writes the `blockMeshDict` of [2D_flat_burner](../tutorials/2D_flat_burner): the
+axisymmetric wedge with the porous plug, the two rims, the co-flow ring and the open
+surroundings. `--dx` is the cell size in the flame zone in mm (default 0.1, 30 000 cells;
+the paper the case follows has 0.025), the radii and heights are options too.
+
+```bash
+./flatBurnerBlockMesh.py --dx 0.05 ../tutorials/2D_flat_burner/system/blockMeshDict
+```
+
 ## parametricStudy.ipynb
 
 One case over the grid of mechanisms × `standard`/`kodes` × the four KODES balancers.

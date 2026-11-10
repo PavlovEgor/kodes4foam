@@ -1,6 +1,6 @@
 # Tutorials
 
-Six `reactingFoam` cases, each runnable with every mechanism it has initial conditions
+Six `reactingFoam` cases and one `reactingCanteraFoam` case, each runnable with every mechanism it has initial conditions
 for and with either chemistry model. The point is to be able to time
 [`kodesChemistryModel`](../src/kodesChemistryModel), the GPU chemistry model, against the
 chemistry model OpenFOAM ships, on the same flame, the same mesh and the same tolerances, so that a difference in wall clock is a difference in
@@ -43,10 +43,16 @@ Each mechanism's README says where it comes from and how to regenerate it.
 | [3D_premixed_burner](3D_premixed_burner/) | premixed H2/air, phi = 0.6, through a sudden expansion | 39 924 | RAS k-epsilon | `PaSR` | all three |
 | [nonUniformHeating2D](nonUniformHeating2D/) | homogeneous H2/air autoignition, periodic box | 16 384 | laminar | `laminar` | all three |
 | [counterFlowFlame2D](counterFlowFlame2D/) | CH4/air counterflow diffusion flame | 32 768 | laminar | `laminar` | grimech, C1_C3 |
+| [2D_flat_burner](2D_flat_burner/) | oscillating rich CH4/air flame on a flat porous burner with N2 co-flow | 30 275 | laminar | `laminar` | grimech |
 
 `counterFlowFlame2D` burns methane, which h2o2 does not have, so it has no `0.h2o2`. In the
 hydrogen cases the carbon species of the larger mechanisms start at zero, through
 `Ydefault`, and stay there.
+
+`2D_flat_burner` is the odd one out: a real experiment, the flat burner of the Lebedev
+Physical Institute, run with `reactingCanteraFoam` for the molecular transport, radiation
+and boundary conditions it needs. [Its README](2D_flat_burner/README.md) has the set-up
+and what it is taken from.
 
 Both combustion models integrate the chemistry in every cell every step — `PaSR` only
 scales the source term afterwards — so every case measures the integrator rather than a
@@ -85,7 +91,7 @@ The libraries are
 
 `./Allrun` is [utilities/kodesCase.py](../utilities/kodesCase.py), which uses foamlib
 from the repository's `.venv` (see the top-level README), or from `$KODES4FOAM_PYTHON`.
-Setting a case up for a mechanism and a variant is four edits, made together so they
+Setting a case up for a mechanism and a variant is these edits, made together so they
 cannot disagree:
 
 | What | Becomes |
@@ -93,13 +99,14 @@ cannot disagree:
 | `0/` | a copy of `0.<mechanism>` |
 | `constant/thermophysicalProperties` | `foamChemistryFile` and `foamChemistryThermoFile` under `<constant>/<mechanism>/` |
 | `constant/chemistryProperties` | `chemistryType/method`; `kodesSetting/mechanism` |
-| `system/controlDict` | `libs (libkodesChemistryModel.so)` for kodes, `libs ()` for standard |
+| `system/controlDict` | `libkodesChemistryModel.so` in `libs` for kodes, out of it for standard |
+| `constant/canteraProperties` | `mechanism` under `<constant>/<mechanism>/`, in a `reactingCanteraFoam` case |
 
 `kodesCase.py setup <case> <mechanism> <variant>` makes just those edits, without
 running; `kodesCase.py list <case>` says what a case has and what it is set up for now.
 A run leaves the case set up for what it ran, so `git diff` shows which that was.
 
-The solver log is `log.reactingFoam.<mechanism>.<variant>`, so the timings of different
+The solver log is `log.<solver>.<mechanism>.<variant>`, so the timings of different
 runs survive side by side; the fields do not — they are those of the last run.
 `kodesCase.py log <log>...` summarises logs: steps, wall clock, wall clock per step
 without the first, the first fatal error, and the `kodesChemistryModel` banner.
@@ -156,7 +163,7 @@ rank's GPU — see the top-level README.
 
 ## What these cases are not
 
-**Unity Lewis number.** ESI `reactingFoam` diffuses every specie at the same rate.
+**Unity Lewis number**, in the six `reactingFoam` cases. ESI `reactingFoam` diffuses every specie at the same rate.
 Hydrogen's is roughly three times the mixture's, so the laminar flame speed and the lean
 flammability limit these cases produce are not the right ones, and preferential-diffusion
 effects — the thing hydrogen flames are interesting for — are absent. It does not affect
