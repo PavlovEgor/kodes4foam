@@ -84,9 +84,19 @@ burner plane beyond the outer rim is open, as its Fig. 2 draws it.
 ./Allrun grimech standard --np 4
 ```
 
-The flame is lit by the `ignition` constraint of `system/fvOptions`: the fresh mixture
-that `setFieldsDict` puts on the plug is brought to 2000 K 1 to 2 mm above it in 0.5 ms and held
-there until 3 ms, and the flame runs down to the burner from there. `endTime`
+The case starts from the flame itself. `setFieldsDict` lays the one-dimensional
+burner-stabilised flame Cantera finds for the plug (M, the mixture and 293 K of the plug,
+the same transport, Soret and radiation) over 0 < r < RI: T, 16 species and u = M/rho,
+one layer per point of its grid, the products of its last point up to the outlet. It
+burns at 0.83 mm and peaks at 1774 K. Density and velocity are in step from the first
+step, so no pressure wave starts, and there is no ignition to wait for. The dictionary
+and the species files in `0.grimech` it needs are written by
+
+```bash
+../../utilities/burnerFlameSetFields.py .      # Cantera, ~20 s
+```
+
+which is to be run again when M, the mixture or the mechanism change. `endTime`
 is 50 ms, three to four periods of the oscillation the paper finds at 69 Hz;
 `postProcessing/flame/0/volFieldValue.dat` has max(T) and max(OH) of every step, which is
 where the period shows. With the standard chemistry model that is days on one core: the

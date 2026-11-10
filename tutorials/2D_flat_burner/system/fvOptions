@@ -15,36 +15,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// The igniter: the fresh mixture 1 to 2 mm above the plug is brought to 2000 K
-// in 0.5 ms and held there until 3 ms. The ramp keeps the heating isobaric (the
-// acoustic time of the zone is ~3 us): a jump to 2000 K in one step is a jump in
-// pressure, and the backward scheme and dpdt answer it with T far below 293 K.
-// The flame it lights runs down to the burner, as the burning velocity
-// (~0.4 m/s) is well above the inflow (0.09 m/s), and sits there.
-
-ignition
-{
-    type            fixedTemperatureConstraint;
-    mode            uniform;
-    temperature     table ((0 293) (0.0005 2000));
-
-    timeStart       0;
-    duration        0.003;
-
-    selectionMode   geometric;
-    selection
-    {
-        igniter
-        {
-            action  use;
-            source  box;
-            min     (0.001 -1 -1);
-            max     (0.002 0.006 1);
-        }
-    }
-}
-
-
 // A guard for the log: below 280 K (the Tlow of thermo.compressibleGas) OpenFOAM
 // warns in every cell and every iteration. T is not expected to go there.
 
