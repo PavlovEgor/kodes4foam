@@ -321,7 +321,12 @@ def _run_solver(case, log, nprocs, check):
     """
     cmd = [case.application]
     if nprocs > 1:
-        cmd = ["mpiexec", "-n", str(nprocs), *cmd, "-parallel"]
+        # mpirun, as one runs OpenFOAM by hand: a bare mpiexec is often another
+        # MPI's (MPICH, Intel) earlier on the PATH than the one OpenFOAM is
+        # built against, and the ranks then hang or run as separate serial
+        # jobs. $KODES4FOAM_MPIRUN overrides it
+        mpirun = os.environ.get("KODES4FOAM_MPIRUN", "mpirun").split()
+        cmd = [*mpirun, "-np", str(nprocs), *cmd, "-parallel"]
 
     control = case.control_dict
     end = control.get("endTime") if control.get("stopAt") == "endTime" else None
