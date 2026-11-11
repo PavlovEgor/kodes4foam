@@ -1,0 +1,37 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      radiationProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+radiation       on;
+
+radiationModel  opticallyThin;
+
+// Every step: the model is a cell-wise evaluation
+solverFreq      1;
+
+opticallyThinCoeffs
+{
+    Tambient        293;
+    species         (H2O CO2 CO CH4);
+}
+
+absorptionEmissionModel none;
+
+scatterModel    none;
+
+sootModel       none;
+
+// ************************************************************************* //

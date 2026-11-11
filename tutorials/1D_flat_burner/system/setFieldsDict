@@ -1,0 +1,4987 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Written by utilities/burnerFlameSetFields.py: Cantera 3.2.0 BurnerFlame,
+// M = 0.1 kg/m2/s, CH4:0.0629, O2:0.2183, N2:0.7188, 293.0 K, 190 points, Tmax = 1774 K
+
+defaultFieldValues
+(
+    volScalarFieldValue T 293
+    volScalarFieldValue C2H2 0
+    volScalarFieldValue C2H4 0
+    volScalarFieldValue C2H6 0
+    volScalarFieldValue CH2CO 0
+    volScalarFieldValue CH2O 0
+    volScalarFieldValue CH3 0
+    volScalarFieldValue CH3OH 0
+    volScalarFieldValue CH4 0
+    volScalarFieldValue CO 0
+    volScalarFieldValue CO2 0
+    volScalarFieldValue H 0
+    volScalarFieldValue H2 0
+    volScalarFieldValue H2O 0
+    volScalarFieldValue O 0
+    volScalarFieldValue O2 0.232
+    volScalarFieldValue OH 0
+    volScalarFieldValue N2 0.768
+);
+
+regions
+(
+    boxToCell
+    {
+        box (-1 -1 -1) (3.90625e-06 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 293
+            volVectorFieldValue U (0.0897583 0 0)
+            volScalarFieldValue C2H2 3.34411e-05
+            volScalarFieldValue C2H4 0.000173046
+            volScalarFieldValue C2H6 0.000214679
+            volScalarFieldValue CH2CO 2.70754e-05
+            volScalarFieldValue CH2O 0.000279318
+            volScalarFieldValue CH3 9.48994e-08
+            volScalarFieldValue CH3OH 4.5435e-05
+            volScalarFieldValue CH4 0.0457317
+            volScalarFieldValue CO 0.00957855
+            volScalarFieldValue CO2 0.0122009
+            volScalarFieldValue H 8.22169e-12
+            volScalarFieldValue H2 0.000692861
+            volScalarFieldValue H2O 0.0296448
+            volScalarFieldValue O 5.59488e-10
+            volScalarFieldValue O2 0.183586
+            volScalarFieldValue OH 3.83431e-08
+            volScalarFieldValue N2 0.717792
+        );
+    }
+    boxToCell
+    {
+        box (3.90625e-06 -1 -1) (1.17188e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 307.723
+            volVectorFieldValue U (0.0943051 0 0)
+            volScalarFieldValue C2H2 3.48153e-05
+            volScalarFieldValue C2H4 0.000180394
+            volScalarFieldValue C2H6 0.000224421
+            volScalarFieldValue CH2CO 2.84255e-05
+            volScalarFieldValue CH2O 0.000291674
+            volScalarFieldValue CH3 9.81559e-08
+            volScalarFieldValue CH3OH 4.74717e-05
+            volScalarFieldValue CH4 0.0453379
+            volScalarFieldValue CO 0.00989961
+            volScalarFieldValue CO2 0.0127042
+            volScalarFieldValue H 8.34998e-12
+            volScalarFieldValue H2 0.000708359
+            volScalarFieldValue H2O 0.0305647
+            volScalarFieldValue O 5.74284e-10
+            volScalarFieldValue O2 0.182219
+            volScalarFieldValue OH 3.93592e-08
+            volScalarFieldValue N2 0.717759
+        );
+    }
+    boxToCell
+    {
+        box (1.17188e-05 -1 -1) (2.34375e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 322.325
+            volVectorFieldValue U (0.0988181 0 0)
+            volScalarFieldValue C2H2 3.61894e-05
+            volScalarFieldValue C2H4 0.000187734
+            volScalarFieldValue C2H6 0.000234179
+            volScalarFieldValue CH2CO 2.97759e-05
+            volScalarFieldValue CH2O 0.000303969
+            volScalarFieldValue CH3 1.07415e-07
+            volScalarFieldValue CH3OH 4.95018e-05
+            volScalarFieldValue CH4 0.0449499
+            volScalarFieldValue CO 0.0102195
+            volScalarFieldValue CO2 0.0132056
+            volScalarFieldValue H 1.0561e-11
+            volScalarFieldValue H2 0.000723621
+            volScalarFieldValue H2O 0.0314723
+            volScalarFieldValue O 6.09543e-10
+            volScalarFieldValue O2 0.180857
+            volScalarFieldValue OH 4.07541e-08
+            volScalarFieldValue N2 0.71773
+        );
+    }
+    boxToCell
+    {
+        box (2.34375e-05 -1 -1) (3.90625e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 351.204
+            volVectorFieldValue U (0.107753 0 0)
+            volScalarFieldValue C2H2 3.89436e-05
+            volScalarFieldValue C2H4 0.000202425
+            volScalarFieldValue C2H6 0.000253787
+            volScalarFieldValue CH2CO 3.24834e-05
+            volScalarFieldValue CH2O 0.00032844
+            volScalarFieldValue CH3 1.4263e-07
+            volScalarFieldValue CH3OH 5.35522e-05
+            volScalarFieldValue CH4 0.0441866
+            volScalarFieldValue CO 0.0108573
+            volScalarFieldValue CO2 0.0142058
+            volScalarFieldValue H 1.89604e-11
+            volScalarFieldValue H2 0.000753495
+            volScalarFieldValue H2O 0.0332575
+            volScalarFieldValue O 7.39764e-10
+            volScalarFieldValue O2 0.178142
+            volScalarFieldValue OH 4.53939e-08
+            volScalarFieldValue N2 0.717687
+        );
+    }
+    boxToCell
+    {
+        box (3.90625e-05 -1 -1) (5.46875e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 379.699
+            volVectorFieldValue U (0.11658 0 0)
+            volScalarFieldValue C2H2 4.17131e-05
+            volScalarFieldValue C2H4 0.000217173
+            volScalarFieldValue C2H6 0.000273571
+            volScalarFieldValue CH2CO 3.52071e-05
+            volScalarFieldValue CH2O 0.000352817
+            volScalarFieldValue CH3 2.01022e-07
+            volScalarFieldValue CH3OH 5.76003e-05
+            volScalarFieldValue CH4 0.0434341
+            volScalarFieldValue CO 0.0114941
+            volScalarFieldValue CO2 0.015206
+            volScalarFieldValue H 3.59115e-11
+            volScalarFieldValue H2 0.000782586
+            volScalarFieldValue H2O 0.035011
+            volScalarFieldValue O 9.571e-10
+            volScalarFieldValue O2 0.175434
+            volScalarFieldValue OH 5.29621e-08
+            volScalarFieldValue N2 0.71766
+        );
+    }
+    boxToCell
+    {
+        box (5.46875e-05 -1 -1) (6.64063e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 407.861
+            volVectorFieldValue U (0.125316 0 0)
+            volScalarFieldValue C2H2 4.45054e-05
+            volScalarFieldValue C2H4 0.00023202
+            volScalarFieldValue C2H6 0.000293585
+            volScalarFieldValue CH2CO 3.79548e-05
+            volScalarFieldValue CH2O 0.000377162
+            volScalarFieldValue CH3 2.86383e-07
+            volScalarFieldValue CH3OH 6.16561e-05
+            volScalarFieldValue CH4 0.0426874
+            volScalarFieldValue CO 0.0121317
+            volScalarFieldValue CO2 0.0162096
+            volScalarFieldValue H 6.9196e-11
+            volScalarFieldValue H2 0.000810983
+            volScalarFieldValue H2O 0.0367406
+            volScalarFieldValue O 1.27972e-09
+            volScalarFieldValue O2 0.172728
+            volScalarFieldValue OH 6.35086e-08
+            volScalarFieldValue N2 0.717644
+        );
+    }
+    boxToCell
+    {
+        box (6.64063e-05 -1 -1) (7.42188e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 421.832
+            volVectorFieldValue U (0.129654 0 0)
+            volScalarFieldValue C2H2 4.59118e-05
+            volScalarFieldValue C2H4 0.00023949
+            volScalarFieldValue C2H6 0.00030369
+            volScalarFieldValue CH2CO 3.93396e-05
+            volScalarFieldValue CH2O 0.000389333
+            volScalarFieldValue CH3 3.41476e-07
+            volScalarFieldValue CH3OH 6.36882e-05
+            volScalarFieldValue CH4 0.0423151
+            volScalarFieldValue CO 0.0124512
+            volScalarFieldValue CO2 0.0167134
+            volScalarFieldValue H 9.71239e-11
+            volScalarFieldValue H2 0.000824945
+            volScalarFieldValue H2O 0.0375983
+            volScalarFieldValue O 1.49212e-09
+            volScalarFieldValue O2 0.171374
+            volScalarFieldValue OH 6.99632e-08
+            volScalarFieldValue N2 0.717641
+        );
+    }
+    boxToCell
+    {
+        box (7.42188e-05 -1 -1) (8.20312e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 435.736
+            volVectorFieldValue U (0.133974 0 0)
+            volScalarFieldValue C2H2 4.7326e-05
+            volScalarFieldValue C2H4 0.000246997
+            volScalarFieldValue C2H6 0.000313869
+            volScalarFieldValue CH2CO 4.07331e-05
+            volScalarFieldValue CH2O 0.000401509
+            volScalarFieldValue CH3 4.05788e-07
+            volScalarFieldValue CH3OH 6.57241e-05
+            volScalarFieldValue CH4 0.041943
+            volScalarFieldValue CO 0.0127713
+            volScalarFieldValue CO2 0.0172191
+            volScalarFieldValue H 1.35706e-10
+            volScalarFieldValue H2 0.000838761
+            volScalarFieldValue H2O 0.038452
+            volScalarFieldValue O 1.74364e-09
+            volScalarFieldValue O2 0.170019
+            volScalarFieldValue OH 7.72303e-08
+            volScalarFieldValue N2 0.71764
+        );
+    }
+    boxToCell
+    {
+        box (8.20312e-05 -1 -1) (8.98437e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 449.578
+            volVectorFieldValue U (0.138277 0 0)
+            volScalarFieldValue C2H2 4.87487e-05
+            volScalarFieldValue C2H4 0.000254545
+            volScalarFieldValue C2H6 0.000324127
+            volScalarFieldValue CH2CO 4.21358e-05
+            volScalarFieldValue CH2O 0.000413695
+            volScalarFieldValue CH3 4.80362e-07
+            volScalarFieldValue CH3OH 6.77639e-05
+            volScalarFieldValue CH4 0.0415707
+            volScalarFieldValue CO 0.0130923
+            volScalarFieldValue CO2 0.0177268
+            volScalarFieldValue H 1.88944e-10
+            volScalarFieldValue H2 0.000852439
+            volScalarFieldValue H2O 0.0393024
+            volScalarFieldValue O 2.04042e-09
+            volScalarFieldValue O2 0.168662
+            volScalarFieldValue OH 8.53498e-08
+            volScalarFieldValue N2 0.717642
+        );
+    }
+    boxToCell
+    {
+        box (8.98437e-05 -1 -1) (9.76563e-05 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 463.363
+            volVectorFieldValue U (0.142564 0 0)
+            volScalarFieldValue C2H2 5.01803e-05
+            volScalarFieldValue C2H4 0.000262134
+            volScalarFieldValue C2H6 0.000334465
+            volScalarFieldValue CH2CO 4.35484e-05
+            volScalarFieldValue CH2O 0.000425891
+            volScalarFieldValue CH3 5.66365e-07
+            volScalarFieldValue CH3OH 6.98075e-05
+            volScalarFieldValue CH4 0.0411981
+            volScalarFieldValue CO 0.0134142
+            volScalarFieldValue CO2 0.0182369
+            volScalarFieldValue H 2.62041e-10
+            volScalarFieldValue H2 0.000865986
+            volScalarFieldValue H2O 0.0401499
+            volScalarFieldValue O 2.3898e-09
+            volScalarFieldValue O2 0.167302
+            volScalarFieldValue OH 9.43759e-08
+            volScalarFieldValue N2 0.717646
+        );
+    }
+    boxToCell
+    {
+        box (9.76563e-05 -1 -1) (0.000105469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 477.094
+            volVectorFieldValue U (0.146838 0 0)
+            volScalarFieldValue C2H2 5.16211e-05
+            volScalarFieldValue C2H4 0.000269768
+            volScalarFieldValue C2H6 0.000344889
+            volScalarFieldValue CH2CO 4.49716e-05
+            volScalarFieldValue CH2O 0.000438098
+            volScalarFieldValue CH3 6.65092e-07
+            volScalarFieldValue CH3OH 7.18544e-05
+            volScalarFieldValue CH4 0.0408249
+            volScalarFieldValue CO 0.013737
+            volScalarFieldValue CO2 0.0187494
+            volScalarFieldValue H 3.61771e-10
+            volScalarFieldValue H2 0.000879409
+            volScalarFieldValue H2O 0.0409949
+            volScalarFieldValue O 2.80054e-09
+            volScalarFieldValue O2 0.16594
+            volScalarFieldValue OH 1.04376e-07
+            volScalarFieldValue N2 0.717652
+        );
+    }
+    boxToCell
+    {
+        box (0.000105469 -1 -1) (0.000113281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 490.776
+            volVectorFieldValue U (0.151098 0 0)
+            volScalarFieldValue C2H2 5.30718e-05
+            volScalarFieldValue C2H4 0.000277449
+            volScalarFieldValue C2H6 0.0003554
+            volScalarFieldValue CH2CO 4.6406e-05
+            volScalarFieldValue CH2O 0.000450316
+            volScalarFieldValue CH3 7.77978e-07
+            volScalarFieldValue CH3OH 7.39037e-05
+            volScalarFieldValue CH4 0.0404509
+            volScalarFieldValue CO 0.014061
+            volScalarFieldValue CO2 0.0192646
+            volScalarFieldValue H 4.96874e-10
+            volScalarFieldValue H2 0.000892717
+            volScalarFieldValue H2O 0.041838
+            volScalarFieldValue O 3.28308e-09
+            volScalarFieldValue O2 0.164575
+            volScalarFieldValue OH 1.15432e-07
+            volScalarFieldValue N2 0.71766
+        );
+    }
+    boxToCell
+    {
+        box (0.000113281 -1 -1) (0.000121094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 504.412
+            volVectorFieldValue U (0.155347 0 0)
+            volScalarFieldValue C2H2 5.45325e-05
+            volScalarFieldValue C2H4 0.000285179
+            volScalarFieldValue C2H6 0.000366002
+            volScalarFieldValue CH2CO 4.78522e-05
+            volScalarFieldValue CH2O 0.000462545
+            volScalarFieldValue CH3 9.06607e-07
+            volScalarFieldValue CH3OH 7.59545e-05
+            volScalarFieldValue CH4 0.040076
+            volScalarFieldValue CO 0.0143861
+            volScalarFieldValue CO2 0.0197826
+            volScalarFieldValue H 6.78503e-10
+            volScalarFieldValue H2 0.000905913
+            volScalarFieldValue H2O 0.0426793
+            volScalarFieldValue O 3.84982e-09
+            volScalarFieldValue O2 0.163207
+            volScalarFieldValue OH 1.27638e-07
+            volScalarFieldValue N2 0.71767
+        );
+    }
+    boxToCell
+    {
+        box (0.000121094 -1 -1) (0.000128906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 518.007
+            volVectorFieldValue U (0.159585 0 0)
+            volScalarFieldValue C2H2 5.60037e-05
+            volScalarFieldValue C2H4 0.000292959
+            volScalarFieldValue C2H6 0.000376697
+            volScalarFieldValue CH2CO 4.93109e-05
+            volScalarFieldValue CH2O 0.000474782
+            volScalarFieldValue CH3 1.05272e-06
+            volScalarFieldValue CH3OH 7.80052e-05
+            volScalarFieldValue CH4 0.0396999
+            volScalarFieldValue CO 0.0147125
+            volScalarFieldValue CO2 0.0203036
+            volScalarFieldValue H 9.2071e-10
+            volScalarFieldValue H2 0.000919006
+            volScalarFieldValue H2O 0.0435193
+            volScalarFieldValue O 4.51552e-09
+            volScalarFieldValue O2 0.161834
+            volScalarFieldValue OH 1.411e-07
+            volScalarFieldValue N2 0.717682
+        );
+    }
+    boxToCell
+    {
+        box (0.000128906 -1 -1) (0.000136719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 531.562
+            volVectorFieldValue U (0.163813 0 0)
+            volScalarFieldValue C2H2 5.74856e-05
+            volScalarFieldValue C2H4 0.000300791
+            volScalarFieldValue C2H6 0.000387486
+            volScalarFieldValue CH2CO 5.07826e-05
+            volScalarFieldValue CH2O 0.000487025
+            volScalarFieldValue CH3 1.21823e-06
+            volScalarFieldValue CH3OH 8.00541e-05
+            volScalarFieldValue CH4 0.0393226
+            volScalarFieldValue CO 0.0150402
+            volScalarFieldValue CO2 0.0208277
+            volScalarFieldValue H 1.24095e-09
+            volScalarFieldValue H2 0.000931999
+            volScalarFieldValue H2O 0.0443582
+            volScalarFieldValue O 5.29769e-09
+            volScalarFieldValue O2 0.160458
+            volScalarFieldValue OH 1.55938e-07
+            volScalarFieldValue N2 0.717696
+        );
+    }
+    boxToCell
+    {
+        box (0.000136719 -1 -1) (0.000144531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 545.082
+            volVectorFieldValue U (0.168032 0 0)
+            volScalarFieldValue C2H2 5.89786e-05
+            volScalarFieldValue C2H4 0.000308675
+            volScalarFieldValue C2H6 0.000398372
+            volScalarFieldValue CH2CO 5.22682e-05
+            volScalarFieldValue CH2O 0.000499271
+            volScalarFieldValue CH3 1.40523e-06
+            volScalarFieldValue CH3OH 8.2099e-05
+            volScalarFieldValue CH4 0.038944
+            volScalarFieldValue CO 0.0153693
+            volScalarFieldValue CO2 0.0213551
+            volScalarFieldValue H 1.6606e-09
+            volScalarFieldValue H2 0.000944898
+            volScalarFieldValue H2O 0.0451962
+            volScalarFieldValue O 6.21715e-09
+            volScalarFieldValue O2 0.159078
+            volScalarFieldValue OH 1.72283e-07
+            volScalarFieldValue N2 0.717712
+        );
+    }
+    boxToCell
+    {
+        box (0.000144531 -1 -1) (0.000152344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 558.57
+            volVectorFieldValue U (0.172244 0 0)
+            volScalarFieldValue C2H2 6.04828e-05
+            volScalarFieldValue C2H4 0.000316614
+            volScalarFieldValue C2H6 0.000409357
+            volScalarFieldValue CH2CO 5.37681e-05
+            volScalarFieldValue CH2O 0.000511516
+            volScalarFieldValue CH3 1.61602e-06
+            volScalarFieldValue CH3OH 8.41374e-05
+            volScalarFieldValue CH4 0.0385639
+            volScalarFieldValue CO 0.0156998
+            volScalarFieldValue CO2 0.0218858
+            volScalarFieldValue H 2.20546e-09
+            volScalarFieldValue H2 0.000957708
+            volScalarFieldValue H2O 0.0460337
+            volScalarFieldValue O 7.29858e-09
+            volScalarFieldValue O2 0.157693
+            volScalarFieldValue OH 1.90276e-07
+            volScalarFieldValue N2 0.717728
+        );
+    }
+    boxToCell
+    {
+        box (0.000152344 -1 -1) (0.000160156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 572.027
+            volVectorFieldValue U (0.176448 0 0)
+            volScalarFieldValue C2H2 6.19986e-05
+            volScalarFieldValue C2H4 0.000324607
+            volScalarFieldValue C2H6 0.000420441
+            volScalarFieldValue CH2CO 5.52834e-05
+            volScalarFieldValue CH2O 0.000523756
+            volScalarFieldValue CH3 1.85308e-06
+            volScalarFieldValue CH3OH 8.61664e-05
+            volScalarFieldValue CH4 0.0381822
+            volScalarFieldValue CO 0.0160318
+            volScalarFieldValue CO2 0.02242
+            volScalarFieldValue H 2.90616e-09
+            volScalarFieldValue H2 0.000970432
+            volScalarFieldValue H2O 0.0468708
+            volScalarFieldValue O 8.57122e-09
+            volScalarFieldValue O2 0.156303
+            volScalarFieldValue OH 2.10068e-07
+            volScalarFieldValue N2 0.717747
+        );
+    }
+    boxToCell
+    {
+        box (0.000160156 -1 -1) (0.000167969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 585.456
+            volVectorFieldValue U (0.180645 0 0)
+            volScalarFieldValue C2H2 6.35262e-05
+            volScalarFieldValue C2H4 0.000332655
+            volScalarFieldValue C2H6 0.000431627
+            volScalarFieldValue CH2CO 5.68146e-05
+            volScalarFieldValue CH2O 0.000535985
+            volScalarFieldValue CH3 2.11914e-06
+            volScalarFieldValue CH3OH 8.81828e-05
+            volScalarFieldValue CH4 0.0377989
+            volScalarFieldValue CO 0.0163654
+            volScalarFieldValue CO2 0.0229578
+            volScalarFieldValue H 3.79853e-09
+            volScalarFieldValue H2 0.000983077
+            volScalarFieldValue H2O 0.0477077
+            volScalarFieldValue O 1.00696e-08
+            volScalarFieldValue O2 0.154909
+            volScalarFieldValue OH 2.31815e-07
+            volScalarFieldValue N2 0.717767
+        );
+    }
+    boxToCell
+    {
+        box (0.000167969 -1 -1) (0.000175781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 598.86
+            volVectorFieldValue U (0.184837 0 0)
+            volScalarFieldValue C2H2 6.50658e-05
+            volScalarFieldValue C2H4 0.00034076
+            volScalarFieldValue C2H6 0.000442914
+            volScalarFieldValue CH2CO 5.83627e-05
+            volScalarFieldValue CH2O 0.000548198
+            volScalarFieldValue CH3 2.41714e-06
+            volScalarFieldValue CH3OH 9.01827e-05
+            volScalarFieldValue CH4 0.037414
+            volScalarFieldValue CO 0.0167004
+            volScalarFieldValue CO2 0.0234992
+            volScalarFieldValue H 4.92381e-09
+            volScalarFieldValue H2 0.000995644
+            volScalarFieldValue H2O 0.0485446
+            volScalarFieldValue O 1.18346e-08
+            volScalarFieldValue O2 0.15351
+            volScalarFieldValue OH 2.55682e-07
+            volScalarFieldValue N2 0.717788
+        );
+    }
+    boxToCell
+    {
+        box (0.000175781 -1 -1) (0.000183594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 612.241
+            volVectorFieldValue U (0.189024 0 0)
+            volScalarFieldValue C2H2 6.66177e-05
+            volScalarFieldValue C2H4 0.000348921
+            volScalarFieldValue C2H6 0.000454304
+            volScalarFieldValue CH2CO 5.99287e-05
+            volScalarFieldValue CH2O 0.000560387
+            volScalarFieldValue CH3 2.75026e-06
+            volScalarFieldValue CH3OH 9.21623e-05
+            volScalarFieldValue CH4 0.0370272
+            volScalarFieldValue CO 0.0170371
+            volScalarFieldValue CO2 0.0240443
+            volScalarFieldValue H 6.32865e-09
+            volScalarFieldValue H2 0.00100814
+            volScalarFieldValue H2O 0.0493816
+            volScalarFieldValue O 1.39142e-08
+            volScalarFieldValue O2 0.152105
+            volScalarFieldValue OH 2.81831e-07
+            volScalarFieldValue N2 0.717811
+        );
+    }
+    boxToCell
+    {
+        box (0.000183594 -1 -1) (0.000195313 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 625.601
+            volVectorFieldValue U (0.193206 0 0)
+            volScalarFieldValue C2H2 6.8182e-05
+            volScalarFieldValue C2H4 0.000357139
+            volScalarFieldValue C2H6 0.000465797
+            volScalarFieldValue CH2CO 6.15136e-05
+            volScalarFieldValue CH2O 0.000572544
+            volScalarFieldValue CH3 3.12198e-06
+            volScalarFieldValue CH3OH 9.41169e-05
+            volScalarFieldValue CH4 0.0366387
+            volScalarFieldValue CO 0.0173754
+            volScalarFieldValue CO2 0.0245933
+            volScalarFieldValue H 8.06501e-09
+            volScalarFieldValue H2 0.00102056
+            volScalarFieldValue H2O 0.050219
+            volScalarFieldValue O 1.63645e-08
+            volScalarFieldValue O2 0.150696
+            volScalarFieldValue OH 3.10426e-07
+            volScalarFieldValue N2 0.717835
+        );
+    }
+    boxToCell
+    {
+        box (0.000195313 -1 -1) (0.000207031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 652.265
+            volVectorFieldValue U (0.201558 0 0)
+            volScalarFieldValue C2H2 7.13488e-05
+            volScalarFieldValue C2H4 0.000373749
+            volScalarFieldValue C2H6 0.000489095
+            volScalarFieldValue CH2CO 6.47437e-05
+            volScalarFieldValue CH2O 0.000596744
+            volScalarFieldValue CH3 3.99167e-06
+            volScalarFieldValue CH3OH 9.79392e-05
+            volScalarFieldValue CH4 0.035856
+            volScalarFieldValue CO 0.0180572
+            volScalarFieldValue CO2 0.025703
+            volScalarFieldValue H 1.26983e-08
+            volScalarFieldValue H2 0.00104522
+            volScalarFieldValue H2O 0.0518952
+            volScalarFieldValue O 2.25668e-08
+            volScalarFieldValue O2 0.147859
+            volScalarFieldValue OH 3.75378e-07
+            volScalarFieldValue N2 0.717886
+        );
+    }
+    boxToCell
+    {
+        box (0.000207031 -1 -1) (0.000214844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 665.572
+            volVectorFieldValue U (0.20573 0 0)
+            volScalarFieldValue C2H2 7.29515e-05
+            volScalarFieldValue C2H4 0.000382137
+            volScalarFieldValue C2H6 0.000500894
+            volScalarFieldValue CH2CO 6.6392e-05
+            volScalarFieldValue CH2O 0.000608749
+            volScalarFieldValue CH3 4.5021e-06
+            volScalarFieldValue CH3OH 9.97905e-05
+            volScalarFieldValue CH4 0.0354617
+            volScalarFieldValue CO 0.0184005
+            volScalarFieldValue CO2 0.0262637
+            volScalarFieldValue H 1.57791e-08
+            volScalarFieldValue H2 0.00105745
+            volScalarFieldValue H2O 0.0527342
+            volScalarFieldValue O 2.65635e-08
+            volScalarFieldValue O2 0.146433
+            volScalarFieldValue OH 4.12296e-07
+            volScalarFieldValue N2 0.717913
+        );
+    }
+    boxToCell
+    {
+        box (0.000214844 -1 -1) (0.000222656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 678.865
+            volVectorFieldValue U (0.209899 0 0)
+            volScalarFieldValue C2H2 7.45675e-05
+            volScalarFieldValue C2H4 0.000390582
+            volScalarFieldValue C2H6 0.000512794
+            volScalarFieldValue CH2CO 6.80643e-05
+            volScalarFieldValue CH2O 0.000620678
+            volScalarFieldValue CH3 5.06772e-06
+            volScalarFieldValue CH3OH 0.000101597
+            volScalarFieldValue CH4 0.0350655
+            volScalarFieldValue CO 0.0187457
+            volScalarFieldValue CO2 0.0268285
+            volScalarFieldValue H 1.94353e-08
+            volScalarFieldValue H2 0.00106963
+            volScalarFieldValue H2O 0.0535739
+            volScalarFieldValue O 3.12578e-08
+            volScalarFieldValue O2 0.145001
+            volScalarFieldValue OH 4.52312e-07
+            volScalarFieldValue N2 0.717942
+        );
+    }
+    boxToCell
+    {
+        box (0.000222656 -1 -1) (0.000230469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 692.146
+            volVectorFieldValue U (0.214066 0 0)
+            volScalarFieldValue C2H2 7.61969e-05
+            volScalarFieldValue C2H4 0.000399084
+            volScalarFieldValue C2H6 0.000524794
+            volScalarFieldValue CH2CO 6.9762e-05
+            volScalarFieldValue CH2O 0.000632519
+            volScalarFieldValue CH3 5.6935e-06
+            volScalarFieldValue CH3OH 0.000103352
+            volScalarFieldValue CH4 0.0346673
+            volScalarFieldValue CO 0.0190925
+            volScalarFieldValue CO2 0.0273975
+            volScalarFieldValue H 2.37353e-08
+            volScalarFieldValue H2 0.00108175
+            volScalarFieldValue H2O 0.0544145
+            volScalarFieldValue O 3.67635e-08
+            volScalarFieldValue O2 0.143563
+            volScalarFieldValue OH 4.95553e-07
+            volScalarFieldValue N2 0.717971
+        );
+    }
+    boxToCell
+    {
+        box (0.000230469 -1 -1) (0.000238281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 705.414
+            volVectorFieldValue U (0.218231 0 0)
+            volScalarFieldValue C2H2 7.78401e-05
+            volScalarFieldValue C2H4 0.000407642
+            volScalarFieldValue C2H6 0.000536893
+            volScalarFieldValue CH2CO 7.14869e-05
+            volScalarFieldValue CH2O 0.000644254
+            volScalarFieldValue CH3 6.38478e-06
+            volScalarFieldValue CH3OH 0.000105052
+            volScalarFieldValue CH4 0.0342671
+            volScalarFieldValue CO 0.0194412
+            volScalarFieldValue CO2 0.0279706
+            volScalarFieldValue H 2.87475e-08
+            volScalarFieldValue H2 0.00109381
+            volScalarFieldValue H2O 0.055256
+            volScalarFieldValue O 4.32087e-08
+            volScalarFieldValue O2 0.14212
+            volScalarFieldValue OH 5.42143e-07
+            volScalarFieldValue N2 0.718002
+        );
+    }
+    boxToCell
+    {
+        box (0.000238281 -1 -1) (0.000246094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 718.673
+            volVectorFieldValue U (0.222395 0 0)
+            volScalarFieldValue C2H2 7.94972e-05
+            volScalarFieldValue C2H4 0.000416256
+            volScalarFieldValue C2H6 0.000549087
+            volScalarFieldValue CH2CO 7.32405e-05
+            volScalarFieldValue CH2O 0.000655867
+            volScalarFieldValue CH3 7.14725e-06
+            volScalarFieldValue CH3OH 0.000106689
+            volScalarFieldValue CH4 0.0338647
+            volScalarFieldValue CO 0.0197917
+            volScalarFieldValue CO2 0.0285479
+            volScalarFieldValue H 3.45397e-08
+            volScalarFieldValue H2 0.00110583
+            volScalarFieldValue H2O 0.0560986
+            volScalarFieldValue O 5.07369e-08
+            volScalarFieldValue O2 0.14067
+            volScalarFieldValue OH 5.92197e-07
+            volScalarFieldValue N2 0.718033
+        );
+    }
+    boxToCell
+    {
+        box (0.000246094 -1 -1) (0.000253906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 731.922
+            volVectorFieldValue U (0.226558 0 0)
+            volScalarFieldValue C2H2 8.11685e-05
+            volScalarFieldValue C2H4 0.000424925
+            volScalarFieldValue C2H6 0.000561373
+            volScalarFieldValue CH2CO 7.50247e-05
+            volScalarFieldValue CH2O 0.000667336
+            volScalarFieldValue CH3 7.98704e-06
+            volScalarFieldValue CH3OH 0.000108261
+            volScalarFieldValue CH4 0.0334604
+            volScalarFieldValue CO 0.020144
+            volScalarFieldValue CO2 0.0291295
+            volScalarFieldValue H 4.11781e-08
+            volScalarFieldValue H2 0.0011178
+            volScalarFieldValue H2O 0.0569422
+            volScalarFieldValue O 5.95072e-08
+            volScalarFieldValue O2 0.139214
+            volScalarFieldValue OH 6.45828e-07
+            volScalarFieldValue N2 0.718065
+        );
+    }
+    boxToCell
+    {
+        box (0.000253906 -1 -1) (0.000261719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 745.163
+            volVectorFieldValue U (0.23072 0 0)
+            volScalarFieldValue C2H2 8.28543e-05
+            volScalarFieldValue C2H4 0.000433647
+            volScalarFieldValue C2H6 0.000573748
+            volScalarFieldValue CH2CO 7.68413e-05
+            volScalarFieldValue CH2O 0.000678642
+            volScalarFieldValue CH3 8.91069e-06
+            volScalarFieldValue CH3OH 0.00010976
+            volScalarFieldValue CH4 0.0330539
+            volScalarFieldValue CO 0.0204981
+            volScalarFieldValue CO2 0.0297155
+            volScalarFieldValue H 4.87269e-08
+            volScalarFieldValue H2 0.00112972
+            volScalarFieldValue H2O 0.057787
+            volScalarFieldValue O 6.96949e-08
+            volScalarFieldValue O2 0.137753
+            volScalarFieldValue OH 7.03149e-07
+            volScalarFieldValue N2 0.718098
+        );
+    }
+    boxToCell
+    {
+        box (0.000261719 -1 -1) (0.000269531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 758.397
+            volVectorFieldValue U (0.234882 0 0)
+            volScalarFieldValue C2H2 8.45547e-05
+            volScalarFieldValue C2H4 0.000442423
+            volScalarFieldValue C2H6 0.000586207
+            volScalarFieldValue CH2CO 7.86923e-05
+            volScalarFieldValue CH2O 0.000689762
+            volScalarFieldValue CH3 9.9252e-06
+            volScalarFieldValue CH3OH 0.000111183
+            volScalarFieldValue CH4 0.0326453
+            volScalarFieldValue CO 0.0208541
+            volScalarFieldValue CO2 0.0303058
+            volScalarFieldValue H 5.72481e-08
+            volScalarFieldValue H2 0.0011416
+            volScalarFieldValue H2O 0.0586329
+            volScalarFieldValue O 8.14914e-08
+            volScalarFieldValue O2 0.136285
+            volScalarFieldValue OH 7.64282e-07
+            volScalarFieldValue N2 0.718132
+        );
+    }
+    boxToCell
+    {
+        box (0.000269531 -1 -1) (0.000277344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 771.624
+            volVectorFieldValue U (0.239043 0 0)
+            volScalarFieldValue C2H2 8.627e-05
+            volScalarFieldValue C2H4 0.000451251
+            volScalarFieldValue C2H6 0.000598745
+            volScalarFieldValue CH2CO 8.05795e-05
+            volScalarFieldValue CH2O 0.00070067
+            volScalarFieldValue CH3 1.10381e-05
+            volScalarFieldValue CH3OH 0.000112525
+            volScalarFieldValue CH4 0.0322345
+            volScalarFieldValue CO 0.0212119
+            volScalarFieldValue CO2 0.0309005
+            volScalarFieldValue H 6.6802e-08
+            volScalarFieldValue H2 0.00115343
+            volScalarFieldValue H2O 0.0594801
+            volScalarFieldValue O 9.51052e-08
+            volScalarFieldValue O2 0.134811
+            volScalarFieldValue OH 8.29362e-07
+            volScalarFieldValue N2 0.718166
+        );
+    }
+    boxToCell
+    {
+        box (0.000277344 -1 -1) (0.000285156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 784.846
+            volVectorFieldValue U (0.243204 0 0)
+            volScalarFieldValue C2H2 8.80006e-05
+            volScalarFieldValue C2H4 0.000460128
+            volScalarFieldValue C2H6 0.000611356
+            volScalarFieldValue CH2CO 8.2505e-05
+            volScalarFieldValue CH2O 0.000711341
+            volScalarFieldValue CH3 1.22573e-05
+            volScalarFieldValue CH3OH 0.000113782
+            volScalarFieldValue CH4 0.0318217
+            volScalarFieldValue CO 0.0215715
+            volScalarFieldValue CO2 0.0314997
+            volScalarFieldValue H 7.74475e-08
+            volScalarFieldValue H2 0.00116523
+            volScalarFieldValue H2O 0.0603285
+            volScalarFieldValue O 1.10761e-07
+            volScalarFieldValue O2 0.133331
+            volScalarFieldValue OH 8.98549e-07
+            volScalarFieldValue N2 0.718202
+        );
+    }
+    boxToCell
+    {
+        box (0.000285156 -1 -1) (0.000292969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 798.063
+            volVectorFieldValue U (0.247366 0 0)
+            volScalarFieldValue C2H2 8.97467e-05
+            volScalarFieldValue C2H4 0.000469055
+            volScalarFieldValue C2H6 0.000624032
+            volScalarFieldValue CH2CO 8.44706e-05
+            volScalarFieldValue CH2O 0.000721749
+            volScalarFieldValue CH3 1.35913e-05
+            volScalarFieldValue CH3OH 0.000114951
+            volScalarFieldValue CH4 0.0314067
+            volScalarFieldValue CO 0.021933
+            volScalarFieldValue CO2 0.0321033
+            volScalarFieldValue H 8.92432e-08
+            volScalarFieldValue H2 0.00117698
+            volScalarFieldValue H2O 0.0611783
+            volScalarFieldValue O 1.28701e-07
+            volScalarFieldValue O2 0.131845
+            volScalarFieldValue OH 9.72037e-07
+            volScalarFieldValue N2 0.718238
+        );
+    }
+    boxToCell
+    {
+        box (0.000292969 -1 -1) (0.000300781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 811.276
+            volVectorFieldValue U (0.251528 0 0)
+            volScalarFieldValue C2H2 9.15087e-05
+            volScalarFieldValue C2H4 0.000478029
+            volScalarFieldValue C2H6 0.000636766
+            volScalarFieldValue CH2CO 8.64784e-05
+            volScalarFieldValue CH2O 0.000731865
+            volScalarFieldValue CH3 1.50494e-05
+            volScalarFieldValue CH3OH 0.000116028
+            volScalarFieldValue CH4 0.0309895
+            volScalarFieldValue CO 0.0222964
+            volScalarFieldValue CO2 0.0327114
+            volScalarFieldValue H 1.02249e-07
+            volScalarFieldValue H2 0.00118869
+            volScalarFieldValue H2O 0.0620294
+            volScalarFieldValue O 1.49185e-07
+            volScalarFieldValue O2 0.130353
+            volScalarFieldValue OH 1.05006e-06
+            volScalarFieldValue N2 0.718274
+        );
+    }
+    boxToCell
+    {
+        box (0.000300781 -1 -1) (0.000308594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 824.485
+            volVectorFieldValue U (0.25569 0 0)
+            volScalarFieldValue C2H2 9.32869e-05
+            volScalarFieldValue C2H4 0.000487048
+            volScalarFieldValue C2H6 0.000649546
+            volScalarFieldValue CH2CO 8.85301e-05
+            volScalarFieldValue CH2O 0.000741662
+            volScalarFieldValue CH3 1.6641e-05
+            volScalarFieldValue CH3OH 0.000117011
+            volScalarFieldValue CH4 0.0305702
+            volScalarFieldValue CO 0.0226616
+            volScalarFieldValue CO2 0.0333241
+            volScalarFieldValue H 1.16527e-07
+            volScalarFieldValue H2 0.00120036
+            volScalarFieldValue H2O 0.0628818
+            volScalarFieldValue O 1.7249e-07
+            volScalarFieldValue O2 0.128855
+            volScalarFieldValue OH 1.13292e-06
+            volScalarFieldValue N2 0.718312
+        );
+    }
+    boxToCell
+    {
+        box (0.000308594 -1 -1) (0.000316406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 837.691
+            volVectorFieldValue U (0.259853 0 0)
+            volScalarFieldValue C2H2 9.50817e-05
+            volScalarFieldValue C2H4 0.000496109
+            volScalarFieldValue C2H6 0.000662362
+            volScalarFieldValue CH2CO 9.06275e-05
+            volScalarFieldValue CH2O 0.000751111
+            volScalarFieldValue CH3 1.83767e-05
+            volScalarFieldValue CH3OH 0.000117899
+            volScalarFieldValue CH4 0.0301488
+            volScalarFieldValue CO 0.0230286
+            volScalarFieldValue CO2 0.0339414
+            volScalarFieldValue H 1.32146e-07
+            volScalarFieldValue H2 0.001212
+            volScalarFieldValue H2O 0.0637357
+            volScalarFieldValue O 1.98913e-07
+            volScalarFieldValue O2 0.12735
+            volScalarFieldValue OH 1.22097e-06
+            volScalarFieldValue N2 0.71835
+        );
+    }
+    boxToCell
+    {
+        box (0.000316406 -1 -1) (0.000324219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 850.894
+            volVectorFieldValue U (0.264017 0 0)
+            volScalarFieldValue C2H2 9.68935e-05
+            volScalarFieldValue C2H4 0.000505211
+            volScalarFieldValue C2H6 0.000675202
+            volScalarFieldValue CH2CO 9.27721e-05
+            volScalarFieldValue CH2O 0.000760185
+            volScalarFieldValue CH3 2.02672e-05
+            volScalarFieldValue CH3OH 0.000118688
+            volScalarFieldValue CH4 0.0297252
+            volScalarFieldValue CO 0.0233976
+            volScalarFieldValue CO2 0.0345632
+            volScalarFieldValue H 1.4918e-07
+            volScalarFieldValue H2 0.00122361
+            volScalarFieldValue H2O 0.0645909
+            volScalarFieldValue O 2.28771e-07
+            volScalarFieldValue O2 0.12584
+            volScalarFieldValue OH 1.31465e-06
+            volScalarFieldValue N2 0.718389
+        );
+    }
+    boxToCell
+    {
+        box (0.000324219 -1 -1) (0.000332031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 864.095
+            volVectorFieldValue U (0.268182 0 0)
+            volScalarFieldValue C2H2 9.87227e-05
+            volScalarFieldValue C2H4 0.00051435
+            volScalarFieldValue C2H6 0.000688051
+            volScalarFieldValue CH2CO 9.49655e-05
+            volScalarFieldValue CH2O 0.000768853
+            volScalarFieldValue CH3 2.23242e-05
+            volScalarFieldValue CH3OH 0.000119378
+            volScalarFieldValue CH4 0.0292995
+            volScalarFieldValue CO 0.0237683
+            volScalarFieldValue CO2 0.0351897
+            volScalarFieldValue H 1.67712e-07
+            volScalarFieldValue H2 0.00123517
+            volScalarFieldValue H2O 0.0654475
+            volScalarFieldValue O 2.62404e-07
+            volScalarFieldValue O2 0.124323
+            volScalarFieldValue OH 1.41447e-06
+            volScalarFieldValue N2 0.718429
+        );
+    }
+    boxToCell
+    {
+        box (0.000332031 -1 -1) (0.000339844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 877.293
+            volVectorFieldValue U (0.272347 0 0)
+            volScalarFieldValue C2H2 0.00010057
+            volScalarFieldValue C2H4 0.000523523
+            volScalarFieldValue C2H6 0.000700892
+            volScalarFieldValue CH2CO 9.72087e-05
+            volScalarFieldValue CH2O 0.00077709
+            volScalarFieldValue CH3 2.456e-05
+            volScalarFieldValue CH3OH 0.000119968
+            volScalarFieldValue CH4 0.0288717
+            volScalarFieldValue CO 0.0241409
+            volScalarFieldValue CO2 0.0358209
+            volScalarFieldValue H 1.87836e-07
+            volScalarFieldValue H2 0.00124671
+            volScalarFieldValue H2O 0.0663056
+            volScalarFieldValue O 3.00176e-07
+            volScalarFieldValue O2 0.1228
+            volScalarFieldValue OH 1.52107e-06
+            volScalarFieldValue N2 0.718469
+        );
+    }
+    boxToCell
+    {
+        box (0.000339844 -1 -1) (0.000347656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 890.49
+            volVectorFieldValue U (0.276514 0 0)
+            volScalarFieldValue C2H2 0.000102435
+            volScalarFieldValue C2H4 0.000532727
+            volScalarFieldValue C2H6 0.000713709
+            volScalarFieldValue CH2CO 9.95028e-05
+            volScalarFieldValue CH2O 0.000784867
+            volScalarFieldValue CH3 2.69876e-05
+            volScalarFieldValue CH3OH 0.000120457
+            volScalarFieldValue CH4 0.0284417
+            volScalarFieldValue CO 0.0245153
+            volScalarFieldValue CO2 0.0364568
+            volScalarFieldValue H 2.09662e-07
+            volScalarFieldValue H2 0.00125821
+            volScalarFieldValue H2O 0.067165
+            volScalarFieldValue O 3.4248e-07
+            volScalarFieldValue O2 0.12127
+            volScalarFieldValue OH 1.63516e-06
+            volScalarFieldValue N2 0.71851
+        );
+    }
+    boxToCell
+    {
+        box (0.000347656 -1 -1) (0.000355469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 903.685
+            volVectorFieldValue U (0.280682 0 0)
+            volScalarFieldValue C2H2 0.00010432
+            volScalarFieldValue C2H4 0.000541958
+            volScalarFieldValue C2H6 0.000726481
+            volScalarFieldValue CH2CO 0.000101848
+            volScalarFieldValue CH2O 0.000792159
+            volScalarFieldValue CH3 2.96207e-05
+            volScalarFieldValue CH3OH 0.000120844
+            volScalarFieldValue CH4 0.0280096
+            volScalarFieldValue CO 0.0248916
+            volScalarFieldValue CO2 0.0370973
+            volScalarFieldValue H 2.33312e-07
+            volScalarFieldValue H2 0.00126967
+            volScalarFieldValue H2O 0.0680259
+            volScalarFieldValue O 3.8974e-07
+            volScalarFieldValue O2 0.119735
+            volScalarFieldValue OH 1.7576e-06
+            volScalarFieldValue N2 0.718551
+        );
+    }
+    boxToCell
+    {
+        box (0.000355469 -1 -1) (0.000367188 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 916.878
+            volVectorFieldValue U (0.28485 0 0)
+            volScalarFieldValue C2H2 0.000106223
+            volScalarFieldValue C2H4 0.000551211
+            volScalarFieldValue C2H6 0.000739184
+            volScalarFieldValue CH2CO 0.000104245
+            volScalarFieldValue CH2O 0.000798939
+            volScalarFieldValue CH3 3.24738e-05
+            volScalarFieldValue CH3OH 0.00012113
+            volScalarFieldValue CH4 0.0275755
+            volScalarFieldValue CO 0.0252696
+            volScalarFieldValue CO2 0.0377426
+            volScalarFieldValue H 2.58929e-07
+            volScalarFieldValue H2 0.00128111
+            volScalarFieldValue H2O 0.0688882
+            volScalarFieldValue O 4.42417e-07
+            volScalarFieldValue O2 0.118194
+            volScalarFieldValue OH 1.88935e-06
+            volScalarFieldValue N2 0.718593
+        );
+    }
+    boxToCell
+    {
+        box (0.000367188 -1 -1) (0.000382813 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 943.259
+            volVectorFieldValue U (0.293191 0 0)
+            volScalarFieldValue C2H2 0.000110092
+            volScalarFieldValue C2H4 0.000569774
+            volScalarFieldValue C2H6 0.000764317
+            volScalarFieldValue CH2CO 0.000109194
+            volScalarFieldValue CH2O 0.000810898
+            volScalarFieldValue CH3 3.88829e-05
+            volScalarFieldValue CH3OH 0.000121397
+            volScalarFieldValue CH4 0.0267009
+            volScalarFieldValue CO 0.026031
+            volScalarFieldValue CO2 0.0390475
+            volScalarFieldValue H 3.16536e-07
+            volScalarFieldValue H2 0.00130388
+            volScalarFieldValue H2O 0.070617
+            volScalarFieldValue O 5.65461e-07
+            volScalarFieldValue O2 0.115092
+            volScalarFieldValue OH 2.18402e-06
+            volScalarFieldValue N2 0.71868
+        );
+    }
+    boxToCell
+    {
+        box (0.000382813 -1 -1) (0.000398438 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 969.631
+            volVectorFieldValue U (0.301534 0 0)
+            volScalarFieldValue C2H2 0.000114046
+            volScalarFieldValue C2H4 0.000588369
+            volScalarFieldValue C2H6 0.000788853
+            volScalarFieldValue CH2CO 0.00011434
+            volScalarFieldValue CH2O 0.000820544
+            volScalarFieldValue CH3 4.63552e-05
+            volScalarFieldValue CH3OH 0.000121263
+            volScalarFieldValue CH4 0.0258184
+            volScalarFieldValue CO 0.0267992
+            volScalarFieldValue CO2 0.0403714
+            volScalarFieldValue H 3.84217e-07
+            volScalarFieldValue H2 0.00132652
+            volScalarFieldValue H2O 0.0723512
+            volScalarFieldValue O 7.16504e-07
+            volScalarFieldValue O2 0.111968
+            volScalarFieldValue OH 2.53086e-06
+            volScalarFieldValue N2 0.718768
+        );
+    }
+    boxToCell
+    {
+        box (0.000398438 -1 -1) (0.000414063 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 995.991
+            volVectorFieldValue U (0.30988 0 0)
+            volScalarFieldValue C2H2 0.000118094
+            volScalarFieldValue C2H4 0.000606946
+            volScalarFieldValue C2H6 0.000812517
+            volScalarFieldValue CH2CO 0.000119674
+            volScalarFieldValue CH2O 0.000827703
+            volScalarFieldValue CH3 5.5031e-05
+            volScalarFieldValue CH3OH 0.00012073
+            volScalarFieldValue CH4 0.024928
+            volScalarFieldValue CO 0.0275741
+            volScalarFieldValue CO2 0.0417145
+            volScalarFieldValue H 4.63992e-07
+            volScalarFieldValue H2 0.00134903
+            volScalarFieldValue H2O 0.0740904
+            volScalarFieldValue O 9.00862e-07
+            volScalarFieldValue O2 0.108819
+            volScalarFieldValue OH 2.94328e-06
+            volScalarFieldValue N2 0.718859
+        );
+    }
+    boxToCell
+    {
+        box (0.000414063 -1 -1) (0.000429688 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1022.33
+            volVectorFieldValue U (0.318226 0 0)
+            volScalarFieldValue C2H2 0.000122243
+            volScalarFieldValue C2H4 0.000625448
+            volScalarFieldValue C2H6 0.000834983
+            volScalarFieldValue CH2CO 0.000125179
+            volScalarFieldValue CH2O 0.000832221
+            volScalarFieldValue CH3 6.50609e-05
+            volScalarFieldValue CH3OH 0.000119804
+            volScalarFieldValue CH4 0.0240302
+            volScalarFieldValue CO 0.0283552
+            volScalarFieldValue CO2 0.0430769
+            volScalarFieldValue H 5.58422e-07
+            volScalarFieldValue H2 0.0013714
+            volScalarFieldValue H2O 0.0758345
+            volScalarFieldValue O 1.12491e-06
+            volScalarFieldValue O2 0.105649
+            volScalarFieldValue OH 3.4379e-06
+            volScalarFieldValue N2 0.718953
+        );
+    }
+    boxToCell
+    {
+        box (0.000429688 -1 -1) (0.000445312 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1048.65
+            volVectorFieldValue U (0.32657 0 0)
+            volScalarFieldValue C2H2 0.000126504
+            volScalarFieldValue C2H4 0.000643806
+            volScalarFieldValue C2H6 0.000855873
+            volScalarFieldValue CH2CO 0.000130835
+            volScalarFieldValue CH2O 0.000833962
+            volScalarFieldValue CH3 7.66045e-05
+            volScalarFieldValue CH3OH 0.000118489
+            volScalarFieldValue CH4 0.0231253
+            volScalarFieldValue CO 0.0291422
+            volScalarFieldValue CO2 0.0444587
+            volScalarFieldValue H 6.70717e-07
+            volScalarFieldValue H2 0.00139363
+            volScalarFieldValue H2O 0.0775828
+            volScalarFieldValue O 1.39629e-06
+            volScalarFieldValue O2 0.102456
+            volScalarFieldValue OH 4.03507e-06
+            volScalarFieldValue N2 0.719049
+        );
+    }
+    boxToCell
+    {
+        box (0.000445312 -1 -1) (0.000460937 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1074.94
+            volVectorFieldValue U (0.33491 0 0)
+            volScalarFieldValue C2H2 0.00013089
+            volScalarFieldValue C2H4 0.000661938
+            volScalarFieldValue C2H6 0.000874751
+            volScalarFieldValue CH2CO 0.000136619
+            volScalarFieldValue CH2O 0.000832808
+            volScalarFieldValue CH3 8.98274e-05
+            volScalarFieldValue CH3OH 0.000116795
+            volScalarFieldValue CH4 0.0222139
+            volScalarFieldValue CO 0.0299345
+            volScalarFieldValue CO2 0.0458599
+            volScalarFieldValue H 8.04846e-07
+            volScalarFieldValue H2 0.0014157
+            volScalarFieldValue H2O 0.0793349
+            volScalarFieldValue O 1.7241e-06
+            volScalarFieldValue O2 0.0992433
+            volScalarFieldValue OH 4.75954e-06
+            volScalarFieldValue N2 0.719147
+        );
+    }
+    boxToCell
+    {
+        box (0.000460937 -1 -1) (0.000472656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1101.18
+            volVectorFieldValue U (0.343241 0 0)
+            volScalarFieldValue C2H2 0.000135417
+            volScalarFieldValue C2H4 0.000679743
+            volScalarFieldValue C2H6 0.000891127
+            volScalarFieldValue CH2CO 0.000142506
+            volScalarFieldValue CH2O 0.000828669
+            volScalarFieldValue CH3 0.000104896
+            volScalarFieldValue CH3OH 0.000114728
+            volScalarFieldValue CH4 0.0212966
+            volScalarFieldValue CO 0.0307317
+            volScalarFieldValue CO2 0.0472806
+            volScalarFieldValue H 9.6566e-07
+            volScalarFieldValue H2 0.0014376
+            volScalarFieldValue H2O 0.0810899
+            volScalarFieldValue O 2.11908e-06
+            volScalarFieldValue O2 0.0960109
+            volScalarFieldValue OH 5.64101e-06
+            volScalarFieldValue N2 0.719247
+        );
+    }
+    boxToCell
+    {
+        box (0.000472656 -1 -1) (0.000480469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1114.28
+            volVectorFieldValue U (0.347401 0 0)
+            volScalarFieldValue C2H2 0.00013774
+            volScalarFieldValue C2H4 0.000688474
+            volScalarFieldValue C2H6 0.000898168
+            volScalarFieldValue CH2CO 0.000145477
+            volScalarFieldValue CH2O 0.000825452
+            volScalarFieldValue CH3 0.000113186
+            volScalarFieldValue CH3OH 0.000113559
+            volScalarFieldValue CH4 0.0208361
+            volScalarFieldValue CO 0.0311317
+            volScalarFieldValue CO2 0.0479982
+            volScalarFieldValue H 1.0583e-06
+            volScalarFieldValue H2 0.00144848
+            volScalarFieldValue H2O 0.0819682
+            volScalarFieldValue O 2.34655e-06
+            volScalarFieldValue O2 0.0943881
+            volScalarFieldValue OH 6.15407e-06
+            volScalarFieldValue N2 0.719298
+        );
+    }
+    boxToCell
+    {
+        box (0.000480469 -1 -1) (0.000488281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1127.36
+            volVectorFieldValue U (0.351557 0 0)
+            volScalarFieldValue C2H2 0.000140105
+            volScalarFieldValue C2H4 0.000697073
+            volScalarFieldValue C2H6 0.00090437
+            volScalarFieldValue CH2CO 0.000148462
+            volScalarFieldValue CH2O 0.000821463
+            volScalarFieldValue CH3 0.000122
+            volScalarFieldValue CH3OH 0.000112301
+            volScalarFieldValue CH4 0.0203743
+            volScalarFieldValue CO 0.0315327
+            volScalarFieldValue CO2 0.0487207
+            volScalarFieldValue H 1.15993e-06
+            volScalarFieldValue H2 0.00145931
+            volScalarFieldValue H2O 0.0828468
+            volScalarFieldValue O 2.59578e-06
+            volScalarFieldValue O2 0.0927611
+            volScalarFieldValue OH 6.72065e-06
+            volScalarFieldValue N2 0.719349
+        );
+    }
+    boxToCell
+    {
+        box (0.000488281 -1 -1) (0.000496094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1140.42
+            volVectorFieldValue U (0.355709 0 0)
+            volScalarFieldValue C2H2 0.000142516
+            volScalarFieldValue C2H4 0.00070552
+            volScalarFieldValue C2H6 0.000909657
+            volScalarFieldValue CH2CO 0.000151457
+            volScalarFieldValue CH2O 0.000816699
+            volScalarFieldValue CH3 0.000131355
+            volScalarFieldValue CH3OH 0.000110955
+            volScalarFieldValue CH4 0.0199115
+            volScalarFieldValue CO 0.0319344
+            volScalarFieldValue CO2 0.0494482
+            volScalarFieldValue H 1.27148e-06
+            volScalarFieldValue H2 0.00147008
+            volScalarFieldValue H2O 0.0837257
+            volScalarFieldValue O 2.86866e-06
+            volScalarFieldValue O2 0.09113
+            volScalarFieldValue OH 7.34646e-06
+            volScalarFieldValue N2 0.7194
+        );
+    }
+    boxToCell
+    {
+        box (0.000496094 -1 -1) (0.000503906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1153.46
+            volVectorFieldValue U (0.359855 0 0)
+            volScalarFieldValue C2H2 0.000144976
+            volScalarFieldValue C2H4 0.000713791
+            volScalarFieldValue C2H6 0.000913953
+            volScalarFieldValue CH2CO 0.000154457
+            volScalarFieldValue CH2O 0.000811162
+            volScalarFieldValue CH3 0.000141268
+            volScalarFieldValue CH3OH 0.000109524
+            volScalarFieldValue CH4 0.0194477
+            volScalarFieldValue CO 0.0323368
+            volScalarFieldValue CO2 0.0501805
+            volScalarFieldValue H 1.39396e-06
+            volScalarFieldValue H2 0.00148079
+            volScalarFieldValue H2O 0.0846046
+            volScalarFieldValue O 3.1672e-06
+            volScalarFieldValue O2 0.0894953
+            volScalarFieldValue OH 8.03768e-06
+            volScalarFieldValue N2 0.719453
+        );
+    }
+    boxToCell
+    {
+        box (0.000503906 -1 -1) (0.000511719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1166.48
+            volVectorFieldValue U (0.363995 0 0)
+            volScalarFieldValue C2H2 0.000147488
+            volScalarFieldValue C2H4 0.000721862
+            volScalarFieldValue C2H6 0.000917181
+            volScalarFieldValue CH2CO 0.000157455
+            volScalarFieldValue CH2O 0.000804854
+            volScalarFieldValue CH3 0.000151754
+            volScalarFieldValue CH3OH 0.000108009
+            volScalarFieldValue CH4 0.0189832
+            volScalarFieldValue CO 0.0327397
+            volScalarFieldValue CO2 0.0509177
+            volScalarFieldValue H 1.52846e-06
+            volScalarFieldValue H2 0.00149145
+            volScalarFieldValue H2O 0.0854835
+            volScalarFieldValue O 3.49353e-06
+            volScalarFieldValue O2 0.087857
+            volScalarFieldValue OH 8.80103e-06
+            volScalarFieldValue N2 0.719505
+        );
+    }
+    boxToCell
+    {
+        box (0.000511719 -1 -1) (0.000519531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1179.47
+            volVectorFieldValue U (0.368127 0 0)
+            volScalarFieldValue C2H2 0.000150056
+            volScalarFieldValue C2H4 0.000729703
+            volScalarFieldValue C2H6 0.000919261
+            volScalarFieldValue CH2CO 0.000160446
+            volScalarFieldValue CH2O 0.000797783
+            volScalarFieldValue CH3 0.000162823
+            volScalarFieldValue CH3OH 0.000106414
+            volScalarFieldValue CH4 0.018518
+            volScalarFieldValue CO 0.0331429
+            volScalarFieldValue CO2 0.0516597
+            volScalarFieldValue H 1.67616e-06
+            volScalarFieldValue H2 0.00150203
+            volScalarFieldValue H2O 0.0863621
+            volScalarFieldValue O 3.8499e-06
+            volScalarFieldValue O2 0.0862157
+            volScalarFieldValue OH 9.64384e-06
+            volScalarFieldValue N2 0.719558
+        );
+    }
+    boxToCell
+    {
+        box (0.000519531 -1 -1) (0.000527344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1192.43
+            volVectorFieldValue U (0.372251 0 0)
+            volScalarFieldValue C2H2 0.000152684
+            volScalarFieldValue C2H4 0.000737284
+            volScalarFieldValue C2H6 0.000920117
+            volScalarFieldValue CH2CO 0.000163422
+            volScalarFieldValue CH2O 0.000789958
+            volScalarFieldValue CH3 0.000174485
+            volScalarFieldValue CH3OH 0.00010474
+            volScalarFieldValue CH4 0.0180524
+            volScalarFieldValue CO 0.0335464
+            volScalarFieldValue CO2 0.0524066
+            volScalarFieldValue H 1.83834e-06
+            volScalarFieldValue H2 0.00151255
+            volScalarFieldValue H2O 0.0872402
+            volScalarFieldValue O 4.23869e-06
+            volScalarFieldValue O2 0.0845716
+            volScalarFieldValue OH 1.0574e-05
+            volScalarFieldValue N2 0.719611
+        );
+    }
+    boxToCell
+    {
+        box (0.000527344 -1 -1) (0.000535156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1205.35
+            volVectorFieldValue U (0.376365 0 0)
+            volScalarFieldValue C2H2 0.000155376
+            volScalarFieldValue C2H4 0.000744569
+            volScalarFieldValue C2H6 0.000919669
+            volScalarFieldValue CH2CO 0.000166374
+            volScalarFieldValue CH2O 0.000781391
+            volScalarFieldValue CH3 0.000186744
+            volScalarFieldValue CH3OH 0.000102991
+            volScalarFieldValue CH4 0.0175865
+            volScalarFieldValue CO 0.0339498
+            volScalarFieldValue CO2 0.0531583
+            volScalarFieldValue H 2.01638e-06
+            volScalarFieldValue H2 0.00152299
+            volScalarFieldValue H2O 0.0881176
+            volScalarFieldValue O 4.66239e-06
+            volScalarFieldValue O2 0.082925
+            volScalarFieldValue OH 1.16002e-05
+            volScalarFieldValue N2 0.719664
+        );
+    }
+    boxToCell
+    {
+        box (0.000535156 -1 -1) (0.000542969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1218.24
+            volVectorFieldValue U (0.380468 0 0)
+            volScalarFieldValue C2H2 0.000158137
+            volScalarFieldValue C2H4 0.00075152
+            volScalarFieldValue C2H6 0.000917845
+            volScalarFieldValue CH2CO 0.000169293
+            volScalarFieldValue CH2O 0.000772099
+            volScalarFieldValue CH3 0.000199603
+            volScalarFieldValue CH3OH 0.000101169
+            volScalarFieldValue CH4 0.0171205
+            volScalarFieldValue CO 0.034353
+            volScalarFieldValue CO2 0.0539147
+            volScalarFieldValue H 2.21175e-06
+            volScalarFieldValue H2 0.00153335
+            volScalarFieldValue H2O 0.0889941
+            volScalarFieldValue O 5.12358e-06
+            volScalarFieldValue O2 0.0812765
+            volScalarFieldValue OH 1.27318e-05
+            volScalarFieldValue N2 0.719718
+        );
+    }
+    boxToCell
+    {
+        box (0.000542969 -1 -1) (0.000550781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1231.08
+            volVectorFieldValue U (0.38456 0 0)
+            volScalarFieldValue C2H2 0.000160972
+            volScalarFieldValue C2H4 0.000758096
+            volScalarFieldValue C2H6 0.000914572
+            volScalarFieldValue CH2CO 0.000172169
+            volScalarFieldValue CH2O 0.000762103
+            volScalarFieldValue CH3 0.000213056
+            volScalarFieldValue CH3OH 9.92791e-05
+            volScalarFieldValue CH4 0.0166546
+            volScalarFieldValue CO 0.0347558
+            volScalarFieldValue CO2 0.0546758
+            volScalarFieldValue H 2.42604e-06
+            volScalarFieldValue H2 0.00154362
+            volScalarFieldValue H2O 0.0898693
+            volScalarFieldValue O 5.62498e-06
+            volScalarFieldValue O2 0.0796264
+            volScalarFieldValue OH 1.39789e-05
+            volScalarFieldValue N2 0.719772
+        );
+    }
+    boxToCell
+    {
+        box (0.000550781 -1 -1) (0.000558594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1243.88
+            volVectorFieldValue U (0.388638 0 0)
+            volScalarFieldValue C2H2 0.000163884
+            volScalarFieldValue C2H4 0.00076425
+            volScalarFieldValue C2H6 0.000909784
+            volScalarFieldValue CH2CO 0.00017499
+            volScalarFieldValue CH2O 0.000751425
+            volScalarFieldValue CH3 0.000227095
+            volScalarFieldValue CH3OH 9.7324e-05
+            volScalarFieldValue CH4 0.0161891
+            volScalarFieldValue CO 0.035158
+            volScalarFieldValue CO2 0.0554416
+            volScalarFieldValue H 2.66095e-06
+            volScalarFieldValue H2 0.00155379
+            volScalarFieldValue H2O 0.0907431
+            volScalarFieldValue O 6.16937e-06
+            volScalarFieldValue O2 0.0779752
+            volScalarFieldValue OH 1.53524e-05
+            volScalarFieldValue N2 0.719826
+        );
+    }
+    boxToCell
+    {
+        box (0.000558594 -1 -1) (0.000566406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1256.63
+            volVectorFieldValue U (0.392701 0 0)
+            volScalarFieldValue C2H2 0.00016688
+            volScalarFieldValue C2H4 0.000769932
+            volScalarFieldValue C2H6 0.00090342
+            volScalarFieldValue CH2CO 0.000177742
+            volScalarFieldValue CH2O 0.000740094
+            volScalarFieldValue CH3 0.000241705
+            volScalarFieldValue CH3OH 9.53082e-05
+            volScalarFieldValue CH4 0.0157242
+            volScalarFieldValue CO 0.0355592
+            volScalarFieldValue CO2 0.056212
+            volScalarFieldValue H 2.91829e-06
+            volScalarFieldValue H2 0.00156386
+            volScalarFieldValue H2O 0.091615
+            volScalarFieldValue O 6.75963e-06
+            volScalarFieldValue O2 0.0763235
+            volScalarFieldValue OH 1.68641e-05
+            volScalarFieldValue N2 0.719881
+        );
+    }
+    boxToCell
+    {
+        box (0.000566406 -1 -1) (0.000574219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1269.33
+            volVectorFieldValue U (0.396748 0 0)
+            volScalarFieldValue C2H2 0.000169965
+            volScalarFieldValue C2H4 0.000775089
+            volScalarFieldValue C2H6 0.000895426
+            volScalarFieldValue CH2CO 0.000180411
+            volScalarFieldValue CH2O 0.00072814
+            volScalarFieldValue CH3 0.000256864
+            volScalarFieldValue CH3OH 9.32359e-05
+            volScalarFieldValue CH4 0.0152602
+            volScalarFieldValue CO 0.0359591
+            volScalarFieldValue CO2 0.0569869
+            volScalarFieldValue H 3.19997e-06
+            volScalarFieldValue H2 0.00157381
+            volScalarFieldValue H2O 0.0924848
+            volScalarFieldValue O 7.39869e-06
+            volScalarFieldValue O2 0.0746716
+            volScalarFieldValue OH 1.8527e-05
+            volScalarFieldValue N2 0.719935
+        );
+    }
+    boxToCell
+    {
+        box (0.000574219 -1 -1) (0.000582031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1281.96
+            volVectorFieldValue U (0.400777 0 0)
+            volScalarFieldValue C2H2 0.000173143
+            volScalarFieldValue C2H4 0.000779662
+            volScalarFieldValue C2H6 0.000885757
+            volScalarFieldValue CH2CO 0.000182981
+            volScalarFieldValue CH2O 0.000715599
+            volScalarFieldValue CH3 0.000272542
+            volScalarFieldValue CH3OH 9.11118e-05
+            volScalarFieldValue CH4 0.0147974
+            volScalarFieldValue CO 0.0363576
+            volScalarFieldValue CO2 0.0577663
+            volScalarFieldValue H 3.50804e-06
+            volScalarFieldValue H2 0.00158365
+            volScalarFieldValue H2O 0.0933522
+            volScalarFieldValue O 8.08957e-06
+            volScalarFieldValue O2 0.0730204
+            volScalarFieldValue OH 2.03548e-05
+            volScalarFieldValue N2 0.71999
+        );
+    }
+    boxToCell
+    {
+        box (0.000582031 -1 -1) (0.000589844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1294.53
+            volVectorFieldValue U (0.404786 0 0)
+            volScalarFieldValue C2H2 0.000176419
+            volScalarFieldValue C2H4 0.000783591
+            volScalarFieldValue C2H6 0.000874379
+            volScalarFieldValue CH2CO 0.000185435
+            volScalarFieldValue CH2O 0.000702508
+            volScalarFieldValue CH3 0.000288702
+            volScalarFieldValue CH3OH 8.8941e-05
+            volScalarFieldValue CH4 0.014336
+            volScalarFieldValue CO 0.0367543
+            volScalarFieldValue CO2 0.0585501
+            volScalarFieldValue H 3.84463e-06
+            volScalarFieldValue H2 0.00159335
+            volScalarFieldValue H2O 0.0942167
+            volScalarFieldValue O 8.83529e-06
+            volScalarFieldValue O2 0.0713702
+            volScalarFieldValue OH 2.23622e-05
+            volScalarFieldValue N2 0.720044
+        );
+    }
+    boxToCell
+    {
+        box (0.000589844 -1 -1) (0.000597656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1307.03
+            volVectorFieldValue U (0.408774 0 0)
+            volScalarFieldValue C2H2 0.000179799
+            volScalarFieldValue C2H4 0.000786812
+            volScalarFieldValue C2H6 0.000861269
+            volScalarFieldValue CH2CO 0.000187754
+            volScalarFieldValue CH2O 0.000688908
+            volScalarFieldValue CH3 0.000305299
+            volScalarFieldValue CH3OH 8.67285e-05
+            volScalarFieldValue CH4 0.0138765
+            volScalarFieldValue CO 0.0371488
+            volScalarFieldValue CO2 0.0593381
+            volScalarFieldValue H 4.212e-06
+            volScalarFieldValue H2 0.00160291
+            volScalarFieldValue H2O 0.095078
+            volScalarFieldValue O 9.63894e-06
+            volScalarFieldValue O2 0.0697219
+            volScalarFieldValue OH 2.45654e-05
+            volScalarFieldValue N2 0.720099
+        );
+    }
+    boxToCell
+    {
+        box (0.000597656 -1 -1) (0.000605469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1319.45
+            volVectorFieldValue U (0.412738 0 0)
+            volScalarFieldValue C2H2 0.000183285
+            volScalarFieldValue C2H4 0.000789256
+            volScalarFieldValue C2H6 0.000846416
+            volScalarFieldValue CH2CO 0.000189917
+            volScalarFieldValue CH2O 0.000674844
+            volScalarFieldValue CH3 0.000322279
+            volScalarFieldValue CH3OH 8.44799e-05
+            volScalarFieldValue CH4 0.013419
+            volScalarFieldValue CO 0.0375407
+            volScalarFieldValue CO2 0.0601302
+            volScalarFieldValue H 4.61251e-06
+            volScalarFieldValue H2 0.00161232
+            volScalarFieldValue H2O 0.0959356
+            volScalarFieldValue O 1.05036e-05
+            volScalarFieldValue O2 0.0680762
+            volScalarFieldValue OH 2.69814e-05
+            volScalarFieldValue N2 0.720153
+        );
+    }
+    boxToCell
+    {
+        box (0.000605469 -1 -1) (0.000613281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1331.78
+            volVectorFieldValue U (0.416676 0 0)
+            volScalarFieldValue C2H2 0.000186881
+            volScalarFieldValue C2H4 0.000790856
+            volScalarFieldValue C2H6 0.000829826
+            volScalarFieldValue CH2CO 0.000191902
+            volScalarFieldValue CH2O 0.000660363
+            volScalarFieldValue CH3 0.000339577
+            volScalarFieldValue CH3OH 8.22007e-05
+            volScalarFieldValue CH4 0.012964
+            volScalarFieldValue CO 0.0379297
+            volScalarFieldValue CO2 0.0609264
+            volScalarFieldValue H 5.04863e-06
+            volScalarFieldValue H2 0.00162156
+            volScalarFieldValue H2O 0.0967891
+            volScalarFieldValue O 1.14323e-05
+            volScalarFieldValue O2 0.0664336
+            volScalarFieldValue OH 2.96285e-05
+            volScalarFieldValue N2 0.720208
+        );
+    }
+    boxToCell
+    {
+        box (0.000613281 -1 -1) (0.000621094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1344.03
+            volVectorFieldValue U (0.420587 0 0)
+            volScalarFieldValue C2H2 0.00019059
+            volScalarFieldValue C2H4 0.000791539
+            volScalarFieldValue C2H6 0.000811519
+            volScalarFieldValue CH2CO 0.000193688
+            volScalarFieldValue CH2O 0.000645512
+            volScalarFieldValue CH3 0.000357119
+            volScalarFieldValue CH3OH 7.98968e-05
+            volScalarFieldValue CH4 0.0125119
+            volScalarFieldValue CO 0.0383153
+            volScalarFieldValue CO2 0.0617265
+            volScalarFieldValue H 5.52289e-06
+            volScalarFieldValue H2 0.00163063
+            volScalarFieldValue H2O 0.097638
+            volScalarFieldValue O 1.24281e-05
+            volScalarFieldValue O2 0.0647952
+            volScalarFieldValue OH 3.25263e-05
+            volScalarFieldValue N2 0.720262
+        );
+    }
+    boxToCell
+    {
+        box (0.000621094 -1 -1) (0.000628906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1356.18
+            volVectorFieldValue U (0.424467 0 0)
+            volScalarFieldValue C2H2 0.000194411
+            volScalarFieldValue C2H4 0.000791235
+            volScalarFieldValue C2H6 0.000791533
+            volScalarFieldValue CH2CO 0.00019525
+            volScalarFieldValue CH2O 0.000630342
+            volScalarFieldValue CH3 0.000374823
+            volScalarFieldValue CH3OH 7.7574e-05
+            volScalarFieldValue CH4 0.0120629
+            volScalarFieldValue CO 0.0386971
+            volScalarFieldValue CO2 0.0625304
+            volScalarFieldValue H 6.03792e-06
+            volScalarFieldValue H2 0.00163951
+            volScalarFieldValue H2O 0.0984819
+            volScalarFieldValue O 1.34939e-05
+            volScalarFieldValue O2 0.0631616
+            volScalarFieldValue OH 3.56955e-05
+            volScalarFieldValue N2 0.720316
+        );
+    }
+    boxToCell
+    {
+        box (0.000628906 -1 -1) (0.000636719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1368.23
+            volVectorFieldValue U (0.428315 0 0)
+            volScalarFieldValue C2H2 0.000198345
+            volScalarFieldValue C2H4 0.000789873
+            volScalarFieldValue C2H6 0.000769922
+            volScalarFieldValue CH2CO 0.000196565
+            volScalarFieldValue CH2O 0.000614904
+            volScalarFieldValue CH3 0.000392594
+            volScalarFieldValue CH3OH 7.52383e-05
+            volScalarFieldValue CH4 0.0116177
+            volScalarFieldValue CO 0.0390747
+            volScalarFieldValue CO2 0.0633378
+            volScalarFieldValue H 6.59641e-06
+            volScalarFieldValue H2 0.00164818
+            volScalarFieldValue H2O 0.0993202
+            volScalarFieldValue O 1.46328e-05
+            volScalarFieldValue O2 0.0615338
+            volScalarFieldValue OH 3.91582e-05
+            volScalarFieldValue N2 0.72037
+        );
+    }
+    boxToCell
+    {
+        box (0.000636719 -1 -1) (0.000644531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1380.17
+            volVectorFieldValue U (0.432129 0 0)
+            volScalarFieldValue C2H2 0.000202388
+            volScalarFieldValue C2H4 0.000787384
+            volScalarFieldValue C2H6 0.000746759
+            volScalarFieldValue CH2CO 0.000197606
+            volScalarFieldValue CH2O 0.00059925
+            volScalarFieldValue CH3 0.000410332
+            volScalarFieldValue CH3OH 7.28956e-05
+            volScalarFieldValue CH4 0.0111764
+            volScalarFieldValue CO 0.0394474
+            volScalarFieldValue CO2 0.0641486
+            volScalarFieldValue H 7.2011e-06
+            volScalarFieldValue H2 0.00165663
+            volScalarFieldValue H2O 0.100152
+            volScalarFieldValue O 1.58474e-05
+            volScalarFieldValue O2 0.0599128
+            volScalarFieldValue OH 4.29376e-05
+            volScalarFieldValue N2 0.720423
+        );
+    }
+    boxToCell
+    {
+        box (0.000644531 -1 -1) (0.000652344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1391.99
+            volVectorFieldValue U (0.435905 0 0)
+            volScalarFieldValue C2H2 0.000206536
+            volScalarFieldValue C2H4 0.000783702
+            volScalarFieldValue C2H6 0.000722135
+            volScalarFieldValue CH2CO 0.00019835
+            volScalarFieldValue CH2O 0.00058343
+            volScalarFieldValue CH3 0.000427923
+            volScalarFieldValue CH3OH 7.05518e-05
+            volScalarFieldValue CH4 0.0107397
+            volScalarFieldValue CO 0.0398149
+            volScalarFieldValue CO2 0.0649627
+            volScalarFieldValue H 7.85475e-06
+            volScalarFieldValue H2 0.00166485
+            volScalarFieldValue H2O 0.100978
+            volScalarFieldValue O 1.71404e-05
+            volScalarFieldValue O2 0.0582994
+            volScalarFieldValue OH 4.7058e-05
+            volScalarFieldValue N2 0.720476
+        );
+    }
+    boxToCell
+    {
+        box (0.000652344 -1 -1) (0.000660156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1403.68
+            volVectorFieldValue U (0.439642 0 0)
+            volScalarFieldValue C2H2 0.000210779
+            volScalarFieldValue C2H4 0.000778766
+            volScalarFieldValue C2H6 0.00069616
+            volScalarFieldValue CH2CO 0.000198773
+            volScalarFieldValue CH2O 0.000567495
+            volScalarFieldValue CH3 0.000445248
+            volScalarFieldValue CH3OH 6.82126e-05
+            volScalarFieldValue CH4 0.0103079
+            volScalarFieldValue CO 0.0401766
+            volScalarFieldValue CO2 0.0657797
+            volScalarFieldValue H 8.56013e-06
+            volScalarFieldValue H2 0.00167282
+            volScalarFieldValue H2O 0.101796
+            volScalarFieldValue O 1.85145e-05
+            volScalarFieldValue O2 0.0566947
+            volScalarFieldValue OH 5.1545e-05
+            volScalarFieldValue N2 0.720528
+        );
+    }
+    boxToCell
+    {
+        box (0.000660156 -1 -1) (0.000667969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1415.24
+            volVectorFieldValue U (0.443336 0 0)
+            volScalarFieldValue C2H2 0.000215108
+            volScalarFieldValue C2H4 0.00077252
+            volScalarFieldValue C2H6 0.000668961
+            volScalarFieldValue CH2CO 0.000198851
+            volScalarFieldValue CH2O 0.000551493
+            volScalarFieldValue CH3 0.000462179
+            volScalarFieldValue CH3OH 6.58836e-05
+            volScalarFieldValue CH4 0.00988143
+            volScalarFieldValue CO 0.0405318
+            volScalarFieldValue CO2 0.0665995
+            volScalarFieldValue H 9.31999e-06
+            volScalarFieldValue H2 0.00168052
+            volScalarFieldValue H2O 0.102607
+            volScalarFieldValue O 1.99719e-05
+            volScalarFieldValue O2 0.0550997
+            volScalarFieldValue OH 5.64248e-05
+            volScalarFieldValue N2 0.72058
+        );
+    }
+    boxToCell
+    {
+        box (0.000667969 -1 -1) (0.000675781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1426.65
+            volVectorFieldValue U (0.446984 0 0)
+            volScalarFieldValue C2H2 0.000219508
+            volScalarFieldValue C2H4 0.000764916
+            volScalarFieldValue C2H6 0.000640682
+            volScalarFieldValue CH2CO 0.000198562
+            volScalarFieldValue CH2O 0.000535471
+            volScalarFieldValue CH3 0.000478583
+            volScalarFieldValue CH3OH 6.35701e-05
+            volScalarFieldValue CH4 0.00946084
+            volScalarFieldValue CO 0.0408801
+            volScalarFieldValue CO2 0.0674218
+            volScalarFieldValue H 1.0137e-05
+            volScalarFieldValue H2 0.00168795
+            volScalarFieldValue H2O 0.103409
+            volScalarFieldValue O 2.15149e-05
+            volScalarFieldValue O2 0.0535156
+            volScalarFieldValue OH 6.17247e-05
+            volScalarFieldValue N2 0.72063
+        );
+    }
+    boxToCell
+    {
+        box (0.000675781 -1 -1) (0.000683594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1437.92
+            volVectorFieldValue U (0.450585 0 0)
+            volScalarFieldValue C2H2 0.00022396
+            volScalarFieldValue C2H4 0.000755916
+            volScalarFieldValue C2H6 0.000611482
+            volScalarFieldValue CH2CO 0.000197887
+            volScalarFieldValue CH2O 0.000519473
+            volScalarFieldValue CH3 0.000494321
+            volScalarFieldValue CH3OH 6.12771e-05
+            volScalarFieldValue CH4 0.00904655
+            volScalarFieldValue CO 0.0412207
+            volScalarFieldValue CO2 0.0682464
+            volScalarFieldValue H 1.10138e-05
+            volScalarFieldValue H2 0.00169507
+            volScalarFieldValue H2O 0.104202
+            volScalarFieldValue O 2.31453e-05
+            volScalarFieldValue O2 0.0519434
+            volScalarFieldValue OH 6.74725e-05
+            volScalarFieldValue N2 0.72068
+        );
+    }
+    boxToCell
+    {
+        box (0.000683594 -1 -1) (0.000691406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1449.03
+            volVectorFieldValue U (0.454135 0 0)
+            volScalarFieldValue C2H2 0.000228441
+            volScalarFieldValue C2H4 0.000745491
+            volScalarFieldValue C2H6 0.000581533
+            volScalarFieldValue CH2CO 0.000196809
+            volScalarFieldValue CH2O 0.000503539
+            volScalarFieldValue CH3 0.000509253
+            volScalarFieldValue CH3OH 5.90091e-05
+            volScalarFieldValue CH4 0.00863903
+            volScalarFieldValue CO 0.0415532
+            volScalarFieldValue CO2 0.069073
+            volScalarFieldValue H 1.19529e-05
+            volScalarFieldValue H2 0.00170188
+            volScalarFieldValue H2O 0.104985
+            volScalarFieldValue O 2.48648e-05
+            volScalarFieldValue O2 0.0503844
+            volScalarFieldValue OH 7.36965e-05
+            volScalarFieldValue N2 0.720729
+        );
+    }
+    boxToCell
+    {
+        box (0.000691406 -1 -1) (0.000699219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1459.97
+            volVectorFieldValue U (0.457632 0 0)
+            volScalarFieldValue C2H2 0.000232926
+            volScalarFieldValue C2H4 0.000733625
+            volScalarFieldValue C2H6 0.000551018
+            volScalarFieldValue CH2CO 0.000195313
+            volScalarFieldValue CH2O 0.000487708
+            volScalarFieldValue CH3 0.000523235
+            volScalarFieldValue CH3OH 5.67705e-05
+            volScalarFieldValue CH4 0.00823875
+            volScalarFieldValue CO 0.0418768
+            volScalarFieldValue CO2 0.0699013
+            volScalarFieldValue H 1.29567e-05
+            volScalarFieldValue H2 0.00170836
+            volScalarFieldValue H2O 0.105758
+            volScalarFieldValue O 2.66749e-05
+            volScalarFieldValue O2 0.0488397
+            volScalarFieldValue OH 8.04251e-05
+            volScalarFieldValue N2 0.720777
+        );
+    }
+    boxToCell
+    {
+        box (0.000699219 -1 -1) (0.000707031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1470.74
+            volVectorFieldValue U (0.461072 0 0)
+            volScalarFieldValue C2H2 0.000237382
+            volScalarFieldValue C2H4 0.000720316
+            volScalarFieldValue C2H6 0.00052013
+            volScalarFieldValue CH2CO 0.000193389
+            volScalarFieldValue CH2O 0.000472011
+            volScalarFieldValue CH3 0.000536128
+            volScalarFieldValue CH3OH 5.4565e-05
+            volScalarFieldValue CH4 0.00784617
+            volScalarFieldValue CO 0.0421909
+            volScalarFieldValue CO2 0.070731
+            volScalarFieldValue H 1.40272e-05
+            volScalarFieldValue H2 0.00171449
+            volScalarFieldValue H2O 0.106519
+            volScalarFieldValue O 2.85766e-05
+            volScalarFieldValue O2 0.0473106
+            volScalarFieldValue OH 8.76862e-05
+            volScalarFieldValue N2 0.720823
+        );
+    }
+    boxToCell
+    {
+        box (0.000707031 -1 -1) (0.000714844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1481.32
+            volVectorFieldValue U (0.464453 0 0)
+            volScalarFieldValue C2H2 0.000241776
+            volScalarFieldValue C2H4 0.000705577
+            volScalarFieldValue C2H6 0.000489066
+            volScalarFieldValue CH2CO 0.00019103
+            volScalarFieldValue CH2O 0.000456478
+            volScalarFieldValue CH3 0.000547794
+            volScalarFieldValue CH3OH 5.23959e-05
+            volScalarFieldValue CH4 0.00746175
+            volScalarFieldValue CO 0.0424949
+            volScalarFieldValue CO2 0.0715617
+            volScalarFieldValue H 1.51664e-05
+            volScalarFieldValue H2 0.00172026
+            volScalarFieldValue H2O 0.107269
+            volScalarFieldValue O 3.05706e-05
+            volScalarFieldValue O2 0.0457982
+            volScalarFieldValue OH 9.55078e-05
+            volScalarFieldValue N2 0.720869
+        );
+    }
+    boxToCell
+    {
+        box (0.000714844 -1 -1) (0.000722656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1491.72
+            volVectorFieldValue U (0.467772 0 0)
+            volScalarFieldValue C2H2 0.000246066
+            volScalarFieldValue C2H4 0.000689434
+            volScalarFieldValue C2H6 0.000458025
+            volScalarFieldValue CH2CO 0.000188235
+            volScalarFieldValue CH2O 0.000441135
+            volScalarFieldValue CH3 0.000558103
+            volScalarFieldValue CH3OH 5.0266e-05
+            volScalarFieldValue CH4 0.00708593
+            volScalarFieldValue CO 0.042788
+            volScalarFieldValue CO2 0.0723931
+            volScalarFieldValue H 1.63761e-05
+            volScalarFieldValue H2 0.00172565
+            volScalarFieldValue H2O 0.108007
+            volScalarFieldValue O 3.26572e-05
+            volScalarFieldValue O2 0.0443038
+            volScalarFieldValue OH 0.000103916
+            volScalarFieldValue N2 0.720912
+        );
+    }
+    boxToCell
+    {
+        box (0.000722656 -1 -1) (0.000730469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1501.91
+            volVectorFieldValue U (0.471027 0 0)
+            volScalarFieldValue C2H2 0.000250211
+            volScalarFieldValue C2H4 0.00067193
+            volScalarFieldValue C2H6 0.000427206
+            volScalarFieldValue CH2CO 0.000185007
+            volScalarFieldValue CH2O 0.000426002
+            volScalarFieldValue CH3 0.000566932
+            volScalarFieldValue CH3OH 4.81779e-05
+            volScalarFieldValue CH4 0.00671913
+            volScalarFieldValue CO 0.0430697
+            volScalarFieldValue CO2 0.073225
+            volScalarFieldValue H 1.76574e-05
+            volScalarFieldValue H2 0.00173064
+            volScalarFieldValue H2O 0.108732
+            volScalarFieldValue O 3.48364e-05
+            volScalarFieldValue O2 0.0428287
+            volScalarFieldValue OH 0.000112938
+            volScalarFieldValue N2 0.720954
+        );
+    }
+    boxToCell
+    {
+        box (0.000730469 -1 -1) (0.000738281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1511.9
+            volVectorFieldValue U (0.474214 0 0)
+            volScalarFieldValue C2H2 0.000254162
+            volScalarFieldValue C2H4 0.000653127
+            volScalarFieldValue C2H6 0.000396803
+            volScalarFieldValue CH2CO 0.000181354
+            volScalarFieldValue CH2O 0.000411096
+            volScalarFieldValue CH3 0.000574172
+            volScalarFieldValue CH3OH 4.61334e-05
+            volScalarFieldValue CH4 0.00636177
+            volScalarFieldValue CO 0.0433393
+            volScalarFieldValue CO2 0.0740568
+            volScalarFieldValue H 1.90115e-05
+            volScalarFieldValue H2 0.00173523
+            volScalarFieldValue H2O 0.109443
+            volScalarFieldValue O 3.71075e-05
+            volScalarFieldValue O2 0.0413741
+            volScalarFieldValue OH 0.000122595
+            volScalarFieldValue N2 0.720995
+        );
+    }
+    boxToCell
+    {
+        box (0.000738281 -1 -1) (0.000746094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1521.67
+            volVectorFieldValue U (0.477331 0 0)
+            volScalarFieldValue C2H2 0.000257872
+            volScalarFieldValue C2H4 0.000633099
+            volScalarFieldValue C2H6 0.000366999
+            volScalarFieldValue CH2CO 0.000177288
+            volScalarFieldValue CH2O 0.00039643
+            volScalarFieldValue CH3 0.000579726
+            volScalarFieldValue CH3OH 4.41341e-05
+            volScalarFieldValue CH4 0.00601423
+            volScalarFieldValue CO 0.0435961
+            volScalarFieldValue CO2 0.0748882
+            volScalarFieldValue H 2.0439e-05
+            volScalarFieldValue H2 0.0017394
+            volScalarFieldValue H2O 0.110139
+            volScalarFieldValue O 3.94694e-05
+            volScalarFieldValue O2 0.0399412
+            volScalarFieldValue OH 0.000132911
+            volScalarFieldValue N2 0.721033
+        );
+    }
+    boxToCell
+    {
+        box (0.000746094 -1 -1) (0.000753906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1531.22
+            volVectorFieldValue U (0.480375 0 0)
+            volScalarFieldValue C2H2 0.000261288
+            volScalarFieldValue C2H4 0.000611938
+            volScalarFieldValue C2H6 0.000337971
+            volScalarFieldValue CH2CO 0.000172829
+            volScalarFieldValue CH2O 0.000382014
+            volScalarFieldValue CH3 0.000583514
+            volScalarFieldValue CH3OH 4.21812e-05
+            volScalarFieldValue CH4 0.00567687
+            volScalarFieldValue CO 0.0438395
+            volScalarFieldValue CO2 0.0757189
+            volScalarFieldValue H 2.19401e-05
+            volScalarFieldValue H2 0.00174314
+            volScalarFieldValue H2O 0.110821
+            volScalarFieldValue O 4.19205e-05
+            volScalarFieldValue O2 0.0385313
+            volScalarFieldValue OH 0.000143903
+            volScalarFieldValue N2 0.72107
+        );
+    }
+    boxToCell
+    {
+        box (0.000753906 -1 -1) (0.000761719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1540.55
+            volVectorFieldValue U (0.483345 0 0)
+            volScalarFieldValue C2H2 0.000264358
+            volScalarFieldValue C2H4 0.000589751
+            volScalarFieldValue C2H6 0.000309878
+            volScalarFieldValue CH2CO 0.000167998
+            volScalarFieldValue CH2O 0.000367854
+            volScalarFieldValue CH3 0.000585474
+            volScalarFieldValue CH3OH 4.02755e-05
+            volScalarFieldValue CH4 0.00535002
+            volScalarFieldValue CO 0.044069
+            volScalarFieldValue CO2 0.0765485
+            volScalarFieldValue H 2.35145e-05
+            volScalarFieldValue H2 0.00174644
+            volScalarFieldValue H2O 0.111487
+            volScalarFieldValue O 4.44585e-05
+            volScalarFieldValue O2 0.0371455
+            volScalarFieldValue OH 0.000155588
+            volScalarFieldValue N2 0.721104
+        );
+    }
+    boxToCell
+    {
+        box (0.000761719 -1 -1) (0.000769531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1549.63
+            volVectorFieldValue U (0.486238 0 0)
+            volScalarFieldValue C2H2 0.00026703
+            volScalarFieldValue C2H4 0.000566658
+            volScalarFieldValue C2H6 0.000282862
+            volScalarFieldValue CH2CO 0.000162825
+            volScalarFieldValue CH2O 0.000353953
+            volScalarFieldValue CH3 0.000585566
+            volScalarFieldValue CH3OH 3.84176e-05
+            volScalarFieldValue CH4 0.00503399
+            volScalarFieldValue CO 0.0442838
+            volScalarFieldValue CO2 0.0773764
+            volScalarFieldValue H 2.51616e-05
+            volScalarFieldValue H2 0.0017493
+            volScalarFieldValue H2O 0.112138
+            volScalarFieldValue O 4.70806e-05
+            volScalarFieldValue O2 0.0357849
+            volScalarFieldValue OH 0.000167979
+            volScalarFieldValue N2 0.721136
+        );
+    }
+    boxToCell
+    {
+        box (0.000769531 -1 -1) (0.000777344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1558.48
+            volVectorFieldValue U (0.489052 0 0)
+            volScalarFieldValue C2H2 0.000269253
+            volScalarFieldValue C2H4 0.00054279
+            volScalarFieldValue C2H6 0.000257047
+            volScalarFieldValue CH2CO 0.00015734
+            volScalarFieldValue CH2O 0.000340313
+            volScalarFieldValue CH3 0.000583767
+            volScalarFieldValue CH3OH 3.66077e-05
+            volScalarFieldValue CH4 0.00472901
+            volScalarFieldValue CO 0.0444836
+            volScalarFieldValue CO2 0.0782024
+            volScalarFieldValue H 2.68803e-05
+            volScalarFieldValue H2 0.0017517
+            volScalarFieldValue H2O 0.112772
+            volScalarFieldValue O 4.97833e-05
+            volScalarFieldValue O2 0.0344507
+            volScalarFieldValue OH 0.000181083
+            volScalarFieldValue N2 0.721166
+        );
+    }
+    boxToCell
+    {
+        box (0.000777344 -1 -1) (0.000785156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1567.08
+            volVectorFieldValue U (0.491786 0 0)
+            volScalarFieldValue C2H2 0.000270977
+            volScalarFieldValue C2H4 0.000518288
+            volScalarFieldValue C2H6 0.000232536
+            volScalarFieldValue CH2CO 0.000151579
+            volScalarFieldValue CH2O 0.000326934
+            volScalarFieldValue CH3 0.000580081
+            volScalarFieldValue CH3OH 3.48461e-05
+            volScalarFieldValue CH4 0.00443533
+            volScalarFieldValue CO 0.0446678
+            volScalarFieldValue CO2 0.0790261
+            volScalarFieldValue H 2.86689e-05
+            volScalarFieldValue H2 0.00175365
+            volScalarFieldValue H2O 0.113388
+            volScalarFieldValue O 5.25622e-05
+            volScalarFieldValue O2 0.0331438
+            volScalarFieldValue OH 0.000194905
+            volScalarFieldValue N2 0.721194
+        );
+    }
+    boxToCell
+    {
+        box (0.000785156 -1 -1) (0.000792969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1575.43
+            volVectorFieldValue U (0.494436 0 0)
+            volScalarFieldValue C2H2 0.000272157
+            volScalarFieldValue C2H4 0.000493303
+            volScalarFieldValue C2H6 0.000209411
+            volScalarFieldValue CH2CO 0.000145582
+            volScalarFieldValue CH2O 0.000313815
+            volScalarFieldValue CH3 0.000574532
+            volScalarFieldValue CH3OH 3.31328e-05
+            volScalarFieldValue CH4 0.0041531
+            volScalarFieldValue CO 0.0448359
+            volScalarFieldValue CO2 0.0798469
+            volScalarFieldValue H 3.05252e-05
+            volScalarFieldValue H2 0.00175513
+            volScalarFieldValue H2O 0.113988
+            volScalarFieldValue O 5.54127e-05
+            volScalarFieldValue O2 0.0318654
+            volScalarFieldValue OH 0.000209444
+            volScalarFieldValue N2 0.721219
+        );
+    }
+    boxToCell
+    {
+        box (0.000792969 -1 -1) (0.000800781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1583.53
+            volVectorFieldValue U (0.497003 0 0)
+            volScalarFieldValue C2H2 0.000272753
+            volScalarFieldValue C2H4 0.000467987
+            volScalarFieldValue C2H6 0.00018773
+            volScalarFieldValue CH2CO 0.00013939
+            volScalarFieldValue CH2O 0.000300952
+            volScalarFieldValue CH3 0.000567165
+            volScalarFieldValue CH3OH 3.14678e-05
+            volScalarFieldValue CH4 0.00388247
+            volScalarFieldValue CO 0.0449875
+            volScalarFieldValue CO2 0.0806645
+            volScalarFieldValue H 3.24466e-05
+            volScalarFieldValue H2 0.00175616
+            volScalarFieldValue H2O 0.114569
+            volScalarFieldValue O 5.83289e-05
+            volScalarFieldValue O2 0.0306162
+            volScalarFieldValue OH 0.000224694
+            volScalarFieldValue N2 0.721241
+        );
+    }
+    boxToCell
+    {
+        box (0.000800781 -1 -1) (0.000808594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1591.36
+            volVectorFieldValue U (0.499485 0 0)
+            volScalarFieldValue C2H2 0.000272729
+            volScalarFieldValue C2H4 0.000442498
+            volScalarFieldValue C2H6 0.00016753
+            volScalarFieldValue CH2CO 0.000133045
+            volScalarFieldValue CH2O 0.000288343
+            volScalarFieldValue CH3 0.00055805
+            volScalarFieldValue CH3OH 2.9851e-05
+            volScalarFieldValue CH4 0.00362352
+            volScalarFieldValue CO 0.0451224
+            volScalarFieldValue CO2 0.0814785
+            volScalarFieldValue H 3.443e-05
+            volScalarFieldValue H2 0.00175674
+            volScalarFieldValue H2O 0.115132
+            volScalarFieldValue O 6.13045e-05
+            volScalarFieldValue O2 0.029397
+            volScalarFieldValue OH 0.000240644
+            volScalarFieldValue N2 0.721261
+        );
+    }
+    boxToCell
+    {
+        box (0.000808594 -1 -1) (0.000816406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1598.94
+            volVectorFieldValue U (0.501881 0 0)
+            volScalarFieldValue C2H2 0.000272056
+            volScalarFieldValue C2H4 0.000416993
+            volScalarFieldValue C2H6 0.000148828
+            volScalarFieldValue CH2CO 0.000126592
+            volScalarFieldValue CH2O 0.000275985
+            volScalarFieldValue CH3 0.000547275
+            volScalarFieldValue CH3OH 2.82824e-05
+            volScalarFieldValue CH4 0.00337629
+            volScalarFieldValue CO 0.0452401
+            volScalarFieldValue CO2 0.0822885
+            volScalarFieldValue H 3.64717e-05
+            volScalarFieldValue H2 0.00175686
+            volScalarFieldValue H2O 0.115677
+            volScalarFieldValue O 6.43325e-05
+            volScalarFieldValue O2 0.0282087
+            volScalarFieldValue OH 0.000257278
+            volScalarFieldValue N2 0.721278
+        );
+    }
+    boxToCell
+    {
+        box (0.000816406 -1 -1) (0.000824219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1606.26
+            volVectorFieldValue U (0.50419 0 0)
+            volScalarFieldValue C2H2 0.000270716
+            volScalarFieldValue C2H4 0.000391626
+            volScalarFieldValue C2H6 0.000131619
+            volScalarFieldValue CH2CO 0.000120074
+            volScalarFieldValue CH2O 0.000263878
+            volScalarFieldValue CH3 0.000534947
+            volScalarFieldValue CH3OH 2.67619e-05
+            volScalarFieldValue CH4 0.00314078
+            volScalarFieldValue CO 0.0453405
+            volScalarFieldValue CO2 0.083094
+            volScalarFieldValue H 3.85678e-05
+            volScalarFieldValue H2 0.00175655
+            volScalarFieldValue H2O 0.116203
+            volScalarFieldValue O 6.74052e-05
+            volScalarFieldValue O2 0.0270519
+            volScalarFieldValue OH 0.000274574
+            volScalarFieldValue N2 0.721293
+        );
+    }
+    boxToCell
+    {
+        box (0.000824219 -1 -1) (0.000832031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1613.31
+            volVectorFieldValue U (0.506413 0 0)
+            volScalarFieldValue C2H2 0.000268693
+            volScalarFieldValue C2H4 0.000366544
+            volScalarFieldValue C2H6 0.000115879
+            volScalarFieldValue CH2CO 0.000113535
+            volScalarFieldValue CH2O 0.000252018
+            volScalarFieldValue CH3 0.000521188
+            volScalarFieldValue CH3OH 2.52896e-05
+            volScalarFieldValue CH4 0.00291692
+            volScalarFieldValue CO 0.0454235
+            volScalarFieldValue CO2 0.0838946
+            volScalarFieldValue H 4.07138e-05
+            volScalarFieldValue H2 0.0017558
+            volScalarFieldValue H2O 0.116711
+            volScalarFieldValue O 7.05142e-05
+            volScalarFieldValue O2 0.0259271
+            volScalarFieldValue OH 0.000292504
+            volScalarFieldValue N2 0.721305
+        );
+    }
+    boxToCell
+    {
+        box (0.000832031 -1 -1) (0.000839844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1620.1
+            volVectorFieldValue U (0.508548 0 0)
+            volScalarFieldValue C2H2 0.000265987
+            volScalarFieldValue C2H4 0.00034189
+            volScalarFieldValue C2H6 0.000101572
+            volScalarFieldValue CH2CO 0.000107018
+            volScalarFieldValue CH2O 0.000240407
+            volScalarFieldValue CH3 0.000506136
+            volScalarFieldValue CH3OH 2.38655e-05
+            volScalarFieldValue CH4 0.00270463
+            volScalarFieldValue CO 0.045489
+            volScalarFieldValue CO2 0.0846899
+            volScalarFieldValue H 4.29048e-05
+            volScalarFieldValue H2 0.00175463
+            volScalarFieldValue H2O 0.117199
+            volScalarFieldValue O 7.36504e-05
+            volScalarFieldValue O2 0.0248347
+            volScalarFieldValue OH 0.000311034
+            volScalarFieldValue N2 0.721314
+        );
+    }
+    boxToCell
+    {
+        box (0.000839844 -1 -1) (0.000847656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1626.62
+            volVectorFieldValue U (0.510597 0 0)
+            volScalarFieldValue C2H2 0.000262601
+            volScalarFieldValue C2H4 0.000317795
+            volScalarFieldValue C2H6 8.86423e-05
+            volScalarFieldValue CH2CO 0.000100562
+            volScalarFieldValue CH2O 0.000229043
+            volScalarFieldValue CH3 0.00048994
+            volScalarFieldValue CH3OH 2.24897e-05
+            volScalarFieldValue CH4 0.00250375
+            volScalarFieldValue CO 0.045537
+            volScalarFieldValue CO2 0.0854795
+            volScalarFieldValue H 4.51357e-05
+            volScalarFieldValue H2 0.00175306
+            volScalarFieldValue H2O 0.117668
+            volScalarFieldValue O 7.68045e-05
+            volScalarFieldValue O2 0.0237752
+            volScalarFieldValue OH 0.000330127
+            volScalarFieldValue N2 0.72132
+        );
+    }
+    boxToCell
+    {
+        box (0.000847656 -1 -1) (0.000855469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1632.89
+            volVectorFieldValue U (0.512559 0 0)
+            volScalarFieldValue C2H2 0.000258549
+            volScalarFieldValue C2H4 0.000294378
+            volScalarFieldValue C2H6 7.70266e-05
+            volScalarFieldValue CH2CO 9.42045e-05
+            volScalarFieldValue CH2O 0.000217931
+            volScalarFieldValue CH3 0.000472755
+            volScalarFieldValue CH3OH 2.11625e-05
+            volScalarFieldValue CH4 0.0023141
+            volScalarFieldValue CO 0.0455675
+            volScalarFieldValue CO2 0.0862631
+            volScalarFieldValue H 4.7401e-05
+            volScalarFieldValue H2 0.0017511
+            volScalarFieldValue H2O 0.118119
+            volScalarFieldValue O 7.99664e-05
+            volScalarFieldValue O2 0.0227488
+            volScalarFieldValue OH 0.000349737
+            volScalarFieldValue N2 0.721324
+        );
+    }
+    boxToCell
+    {
+        box (0.000855469 -1 -1) (0.000863281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1638.89
+            volVectorFieldValue U (0.514435 0 0)
+            volScalarFieldValue C2H2 0.000253856
+            volScalarFieldValue C2H4 0.000271745
+            volScalarFieldValue C2H6 6.66511e-05
+            volScalarFieldValue CH2CO 8.79807e-05
+            volScalarFieldValue CH2O 0.000207073
+            volScalarFieldValue CH3 0.000454742
+            volScalarFieldValue CH3OH 1.98838e-05
+            volScalarFieldValue CH4 0.00213545
+            volScalarFieldValue CO 0.0455808
+            volScalarFieldValue CO2 0.0870401
+            volScalarFieldValue H 4.96951e-05
+            volScalarFieldValue H2 0.00174877
+            volScalarFieldValue H2O 0.11855
+            volScalarFieldValue O 8.31258e-05
+            volScalarFieldValue O2 0.0217556
+            volScalarFieldValue OH 0.000369816
+            volScalarFieldValue N2 0.721324
+        );
+    }
+    boxToCell
+    {
+        box (0.000863281 -1 -1) (0.000871094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1644.64
+            volVectorFieldValue U (0.516227 0 0)
+            volScalarFieldValue C2H2 0.000248552
+            volScalarFieldValue C2H4 0.00024999
+            volScalarFieldValue C2H6 5.74352e-05
+            volScalarFieldValue CH2CO 8.19216e-05
+            volScalarFieldValue CH2O 0.000196473
+            volScalarFieldValue CH3 0.000436066
+            volScalarFieldValue CH3OH 1.8654e-05
+            volScalarFieldValue CH4 0.00196755
+            volScalarFieldValue CO 0.0455771
+            volScalarFieldValue CO2 0.0878102
+            volScalarFieldValue H 5.20119e-05
+            volScalarFieldValue H2 0.0017461
+            volScalarFieldValue H2O 0.118963
+            volScalarFieldValue O 8.62722e-05
+            volScalarFieldValue O2 0.0207956
+            volScalarFieldValue OH 0.000390311
+            volScalarFieldValue N2 0.721323
+        );
+    }
+    boxToCell
+    {
+        box (0.000871094 -1 -1) (0.000878906 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1650.14
+            volVectorFieldValue U (0.517936 0 0)
+            volScalarFieldValue C2H2 0.000242676
+            volScalarFieldValue C2H4 0.00022919
+            volScalarFieldValue C2H6 4.92942e-05
+            volScalarFieldValue CH2CO 7.60546e-05
+            volScalarFieldValue CH2O 0.000186137
+            volScalarFieldValue CH3 0.000416889
+            volScalarFieldValue CH3OH 1.74731e-05
+            volScalarFieldValue CH4 0.00181009
+            volScalarFieldValue CO 0.0455567
+            volScalarFieldValue CO2 0.0885731
+            volScalarFieldValue H 5.43455e-05
+            volScalarFieldValue H2 0.0017431
+            volScalarFieldValue H2O 0.119357
+            volScalarFieldValue O 8.93947e-05
+            volScalarFieldValue O2 0.019869
+            volScalarFieldValue OH 0.000411165
+            volScalarFieldValue N2 0.721318
+        );
+    }
+    boxToCell
+    {
+        box (0.000878906 -1 -1) (0.000886719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1655.38
+            volVectorFieldValue U (0.519563 0 0)
+            volScalarFieldValue C2H2 0.000236274
+            volScalarFieldValue C2H4 0.000209406
+            volScalarFieldValue C2H6 4.21413e-05
+            volScalarFieldValue CH2CO 7.04031e-05
+            volScalarFieldValue CH2O 0.000176071
+            volScalarFieldValue CH3 0.000397371
+            volScalarFieldValue CH3OH 1.63412e-05
+            volScalarFieldValue CH4 0.00166275
+            volScalarFieldValue CO 0.0455201
+            volScalarFieldValue CO2 0.0893283
+            volScalarFieldValue H 5.66898e-05
+            volScalarFieldValue H2 0.00173981
+            volScalarFieldValue H2O 0.119733
+            volScalarFieldValue O 9.24825e-05
+            volScalarFieldValue O2 0.0189754
+            volScalarFieldValue OH 0.000432317
+            volScalarFieldValue N2 0.721311
+        );
+    }
+    boxToCell
+    {
+        box (0.000886719 -1 -1) (0.000894531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1660.39
+            volVectorFieldValue U (0.521109 0 0)
+            volScalarFieldValue C2H2 0.000229396
+            volScalarFieldValue C2H4 0.000190687
+            volScalarFieldValue C2H6 3.5889e-05
+            volScalarFieldValue CH2CO 6.49867e-05
+            volScalarFieldValue CH2O 0.000166284
+            volScalarFieldValue CH3 0.000377666
+            volScalarFieldValue CH3OH 1.52583e-05
+            volScalarFieldValue CH4 0.00152518
+            volScalarFieldValue CO 0.0454676
+            volScalarFieldValue CO2 0.0900754
+            volScalarFieldValue H 5.90385e-05
+            volScalarFieldValue H2 0.00173623
+            volScalarFieldValue H2O 0.120091
+            volScalarFieldValue O 9.55248e-05
+            volScalarFieldValue O2 0.0181147
+            volScalarFieldValue OH 0.000453704
+            volScalarFieldValue N2 0.721302
+        );
+    }
+    boxToCell
+    {
+        box (0.000894531 -1 -1) (0.000902344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1665.16
+            volVectorFieldValue U (0.522577 0 0)
+            volScalarFieldValue C2H2 0.0002221
+            volScalarFieldValue C2H4 0.000173063
+            volScalarFieldValue C2H6 3.04516e-05
+            volScalarFieldValue CH2CO 5.98208e-05
+            volScalarFieldValue CH2O 0.000156782
+            volScalarFieldValue CH3 0.000357919
+            volScalarFieldValue CH3OH 1.42244e-05
+            volScalarFieldValue CH4 0.001397
+            volScalarFieldValue CO 0.0453999
+            volScalarFieldValue CO2 0.0908141
+            volScalarFieldValue H 6.13855e-05
+            volScalarFieldValue H2 0.00173242
+            volScalarFieldValue H2O 0.120431
+            volScalarFieldValue O 9.8511e-05
+            volScalarFieldValue O2 0.0172865
+            volScalarFieldValue OH 0.00047526
+            volScalarFieldValue N2 0.72129
+        );
+    }
+    boxToCell
+    {
+        box (0.000902344 -1 -1) (0.000910156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1669.69
+            volVectorFieldValue U (0.523969 0 0)
+            volScalarFieldValue C2H2 0.000214443
+            volScalarFieldValue C2H4 0.000156552
+            volScalarFieldValue C2H6 2.5746e-05
+            volScalarFieldValue CH2CO 5.49172e-05
+            volScalarFieldValue CH2O 0.000147575
+            volScalarFieldValue CH3 0.000338267
+            volScalarFieldValue CH3OH 1.32393e-05
+            volScalarFieldValue CH4 0.00127782
+            volScalarFieldValue CO 0.0453176
+            volScalarFieldValue CO2 0.0915441
+            volScalarFieldValue H 6.37248e-05
+            volScalarFieldValue H2 0.00172838
+            volScalarFieldValue H2O 0.120753
+            volScalarFieldValue O 0.000101431
+            volScalarFieldValue O2 0.0164904
+            volScalarFieldValue OH 0.000496918
+            volScalarFieldValue N2 0.721275
+        );
+    }
+    boxToCell
+    {
+        box (0.000910156 -1 -1) (0.000917969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1674
+            volVectorFieldValue U (0.525287 0 0)
+            volScalarFieldValue C2H2 0.000206488
+            volScalarFieldValue C2H4 0.000141159
+            volScalarFieldValue C2H6 2.16928e-05
+            volScalarFieldValue CH2CO 5.02836e-05
+            volScalarFieldValue CH2O 0.00013867
+            volScalarFieldValue CH3 0.000318834
+            volScalarFieldValue CH3OH 1.23026e-05
+            volScalarFieldValue CH4 0.00116724
+            volScalarFieldValue CO 0.0452213
+            volScalarFieldValue CO2 0.0922649
+            volScalarFieldValue H 6.60504e-05
+            volScalarFieldValue H2 0.00172414
+            volScalarFieldValue H2O 0.121059
+            volScalarFieldValue O 0.000104274
+            volScalarFieldValue O2 0.0157261
+            volScalarFieldValue OH 0.000518612
+            volScalarFieldValue N2 0.721259
+        );
+    }
+    boxToCell
+    {
+        box (0.000917969 -1 -1) (0.000925781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1678.1
+            volVectorFieldValue U (0.526534 0 0)
+            volScalarFieldValue C2H2 0.000198297
+            volScalarFieldValue C2H4 0.000126875
+            volScalarFieldValue C2H6 1.82175e-05
+            volScalarFieldValue CH2CO 4.59244e-05
+            volScalarFieldValue CH2O 0.000130075
+            volScalarFieldValue CH3 0.000299734
+            volScalarFieldValue CH3OH 1.14139e-05
+            volScalarFieldValue CH4 0.00106484
+            volScalarFieldValue CO 0.0451117
+            volScalarFieldValue CO2 0.0929763
+            volScalarFieldValue H 6.83566e-05
+            volScalarFieldValue H2 0.00171975
+            volScalarFieldValue H2O 0.121348
+            volScalarFieldValue O 0.000107032
+            volScalarFieldValue O2 0.0149928
+            volScalarFieldValue OH 0.000540273
+            volScalarFieldValue N2 0.72124
+        );
+    }
+    boxToCell
+    {
+        box (0.000925781 -1 -1) (0.000933594 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1681.98
+            volVectorFieldValue U (0.527711 0 0)
+            volScalarFieldValue C2H2 0.000189932
+            volScalarFieldValue C2H4 0.000113681
+            volScalarFieldValue C2H6 1.52507e-05
+            volScalarFieldValue CH2CO 4.18407e-05
+            volScalarFieldValue CH2O 0.000121797
+            volScalarFieldValue CH3 0.000281067
+            volScalarFieldValue CH3OH 1.05727e-05
+            volScalarFieldValue CH4 0.000970202
+            volScalarFieldValue CO 0.0449897
+            volScalarFieldValue CO2 0.0936778
+            volScalarFieldValue H 7.06377e-05
+            volScalarFieldValue H2 0.00171521
+            volScalarFieldValue H2O 0.121621
+            volScalarFieldValue O 0.000109695
+            volScalarFieldValue O2 0.0142901
+            volScalarFieldValue OH 0.000561835
+            volScalarFieldValue N2 0.72122
+        );
+    }
+    boxToCell
+    {
+        box (0.000933594 -1 -1) (0.000941406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1685.66
+            volVectorFieldValue U (0.528823 0 0)
+            volScalarFieldValue C2H2 0.000181454
+            volScalarFieldValue C2H4 0.000101549
+            volScalarFieldValue C2H6 1.27286e-05
+            volScalarFieldValue CH2CO 3.80308e-05
+            volScalarFieldValue CH2O 0.000113843
+            volScalarFieldValue CH3 0.000262919
+            volScalarFieldValue CH3OH 9.77799e-06
+            volScalarFieldValue CH4 0.000882906
+            volScalarFieldValue CO 0.0448559
+            volScalarFieldValue CO2 0.0943693
+            volScalarFieldValue H 7.28883e-05
+            volScalarFieldValue H2 0.00171057
+            volScalarFieldValue H2O 0.121878
+            volScalarFieldValue O 0.000112255
+            volScalarFieldValue O2 0.0136172
+            volScalarFieldValue OH 0.000583231
+            volScalarFieldValue N2 0.721197
+        );
+    }
+    boxToCell
+    {
+        box (0.000941406 -1 -1) (0.000949219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1689.15
+            volVectorFieldValue U (0.52987 0 0)
+            volScalarFieldValue C2H2 0.000172923
+            volScalarFieldValue C2H4 9.04418e-05
+            volScalarFieldValue C2H6 1.05931e-05
+            volScalarFieldValue CH2CO 3.44901e-05
+            volScalarFieldValue CH2O 0.00010622
+            volScalarFieldValue CH3 0.000245364
+            volScalarFieldValue CH3OH 9.02905e-06
+            volScalarFieldValue CH4 0.000802531
+            volScalarFieldValue CO 0.0447112
+            volScalarFieldValue CO2 0.0950504
+            volScalarFieldValue H 7.51035e-05
+            volScalarFieldValue H2 0.00170585
+            volScalarFieldValue H2O 0.12212
+            volScalarFieldValue O 0.000114704
+            volScalarFieldValue O2 0.0129735
+            volScalarFieldValue OH 0.0006044
+            volScalarFieldValue N2 0.721173
+        );
+    }
+    boxToCell
+    {
+        box (0.000949219 -1 -1) (0.000957031 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1692.45
+            volVectorFieldValue U (0.530857 0 0)
+            volScalarFieldValue C2H2 0.000164394
+            volScalarFieldValue C2H4 8.03158e-05
+            volScalarFieldValue C2H6 8.79178e-06
+            volScalarFieldValue CH2CO 3.12121e-05
+            volScalarFieldValue CH2O 9.89297e-05
+            volScalarFieldValue CH3 0.000228463
+            volScalarFieldValue CH3OH 8.32479e-06
+            volScalarFieldValue CH4 0.000728659
+            volScalarFieldValue CO 0.0445565
+            volScalarFieldValue CO2 0.0957207
+            volScalarFieldValue H 7.72785e-05
+            volScalarFieldValue H2 0.00170108
+            volScalarFieldValue H2O 0.122348
+            volScalarFieldValue O 0.000117037
+            volScalarFieldValue O2 0.0123581
+            volScalarFieldValue OH 0.00062528
+            volScalarFieldValue N2 0.721147
+        );
+    }
+    boxToCell
+    {
+        box (0.000957031 -1 -1) (0.000964844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1695.57
+            volVectorFieldValue U (0.531785 0 0)
+            volScalarFieldValue C2H2 0.000155919
+            volScalarFieldValue C2H4 7.11224e-05
+            volScalarFieldValue C2H6 7.27796e-06
+            volScalarFieldValue CH2CO 2.81882e-05
+            volScalarFieldValue CH2O 9.19766e-05
+            volScalarFieldValue CH3 0.000212263
+            volScalarFieldValue CH3OH 7.66401e-06
+            volScalarFieldValue CH4 0.000660882
+            volScalarFieldValue CO 0.0443926
+            volScalarFieldValue CO2 0.0963801
+            volScalarFieldValue H 7.94088e-05
+            volScalarFieldValue H2 0.00169627
+            volScalarFieldValue H2O 0.122562
+            volScalarFieldValue O 0.000119247
+            volScalarFieldValue O2 0.0117704
+            volScalarFieldValue OH 0.000645813
+            volScalarFieldValue N2 0.721119
+        );
+    }
+    boxToCell
+    {
+        box (0.000964844 -1 -1) (0.000972656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1698.53
+            volVectorFieldValue U (0.532658 0 0)
+            volScalarFieldValue C2H2 0.000147546
+            volScalarFieldValue C2H4 6.28088e-05
+            volScalarFieldValue C2H6 6.01011e-06
+            volScalarFieldValue CH2CO 2.54084e-05
+            volScalarFieldValue CH2O 8.53619e-05
+            volScalarFieldValue CH3 0.0001968
+            volScalarFieldValue CH3OH 7.0454e-06
+            volScalarFieldValue CH4 0.000598801
+            volScalarFieldValue CO 0.0442204
+            volScalarFieldValue CO2 0.0970283
+            volScalarFieldValue H 8.14903e-05
+            volScalarFieldValue H2 0.00169146
+            volScalarFieldValue H2O 0.122762
+            volScalarFieldValue O 0.000121329
+            volScalarFieldValue O2 0.0112095
+            volScalarFieldValue OH 0.000665946
+            volScalarFieldValue N2 0.72109
+        );
+    }
+    boxToCell
+    {
+        box (0.000972656 -1 -1) (0.000980469 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1701.32
+            volVectorFieldValue U (0.533479 0 0)
+            volScalarFieldValue C2H2 0.000139319
+            volScalarFieldValue C2H4 5.53198e-05
+            volScalarFieldValue C2H6 4.95174e-06
+            volScalarFieldValue CH2CO 2.28615e-05
+            volScalarFieldValue CH2O 7.90854e-05
+            volScalarFieldValue CH3 0.0001821
+            volScalarFieldValue CH3OH 6.46754e-06
+            volScalarFieldValue CH4 0.000542027
+            volScalarFieldValue CO 0.0440407
+            volScalarFieldValue CO2 0.0976651
+            volScalarFieldValue H 8.35192e-05
+            volScalarFieldValue H2 0.00168668
+            volScalarFieldValue H2O 0.122949
+            volScalarFieldValue O 0.000123279
+            volScalarFieldValue O2 0.0106745
+            volScalarFieldValue OH 0.000685629
+            volScalarFieldValue N2 0.72106
+        );
+    }
+    boxToCell
+    {
+        box (0.000980469 -1 -1) (0.000988281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1703.96
+            volVectorFieldValue U (0.53425 0 0)
+            volScalarFieldValue C2H2 0.000131276
+            volScalarFieldValue C2H4 4.85988e-05
+            volScalarFieldValue C2H6 4.07096e-06
+            volScalarFieldValue CH2CO 2.05352e-05
+            volScalarFieldValue CH2O 7.31452e-05
+            volScalarFieldValue CH3 0.000168177
+            volScalarFieldValue CH3OH 5.9289e-06
+            volScalarFieldValue CH4 0.000490186
+            volScalarFieldValue CO 0.0438544
+            volScalarFieldValue CO2 0.0982902
+            volScalarFieldValue H 8.54923e-05
+            volScalarFieldValue H2 0.00168193
+            volScalarFieldValue H2O 0.123124
+            volScalarFieldValue O 0.000125096
+            volScalarFieldValue O2 0.0101646
+            volScalarFieldValue OH 0.000704817
+            volScalarFieldValue N2 0.721028
+        );
+    }
+    boxToCell
+    {
+        box (0.000988281 -1 -1) (0.000996094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1706.45
+            volVectorFieldValue U (0.534974 0 0)
+            volScalarFieldValue C2H2 0.000123449
+            volScalarFieldValue C2H4 4.25887e-05
+            volScalarFieldValue C2H6 3.3401e-06
+            volScalarFieldValue CH2CO 1.84167e-05
+            volScalarFieldValue CH2O 6.75379e-05
+            volScalarFieldValue CH3 0.000155037
+            volScalarFieldValue CH3OH 5.42787e-06
+            volScalarFieldValue CH4 0.000442919
+            volScalarFieldValue CO 0.0436623
+            volScalarFieldValue CO2 0.0989034
+            volScalarFieldValue H 8.74066e-05
+            volScalarFieldValue H2 0.00167724
+            volScalarFieldValue H2O 0.123287
+            volScalarFieldValue O 0.000126775
+            volScalarFieldValue O2 0.00967894
+            volScalarFieldValue OH 0.000723467
+            volScalarFieldValue N2 0.720995
+        );
+    }
+    boxToCell
+    {
+        box (0.000996094 -1 -1) (0.00100391 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1708.8
+            volVectorFieldValue U (0.535653 0 0)
+            volScalarFieldValue C2H2 0.000115867
+            volScalarFieldValue C2H4 3.72328e-05
+            volScalarFieldValue C2H6 2.73529e-06
+            volScalarFieldValue CH2CO 1.6493e-05
+            volScalarFieldValue CH2O 6.22586e-05
+            volScalarFieldValue CH3 0.000142676
+            volScalarFieldValue CH3OH 4.96281e-06
+            volScalarFieldValue CH4 0.000399883
+            volScalarFieldValue CO 0.0434652
+            volScalarFieldValue CO2 0.0995047
+            volScalarFieldValue H 8.92593e-05
+            volScalarFieldValue H2 0.00167264
+            volScalarFieldValue H2O 0.123438
+            volScalarFieldValue O 0.000128317
+            volScalarFieldValue O2 0.00921666
+            volScalarFieldValue OH 0.000741545
+            volScalarFieldValue N2 0.720961
+        );
+    }
+    boxToCell
+    {
+        box (0.00100391 -1 -1) (0.00101172 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1711.03
+            volVectorFieldValue U (0.536291 0 0)
+            volScalarFieldValue C2H2 0.000108554
+            volScalarFieldValue C2H4 3.24759e-05
+            volScalarFieldValue C2H6 2.23609e-06
+            volScalarFieldValue CH2CO 1.47508e-05
+            volScalarFieldValue CH2O 5.73006e-05
+            volScalarFieldValue CH3 0.000131086
+            volScalarFieldValue CH3OH 4.53198e-06
+            volScalarFieldValue CH4 0.000360752
+            volScalarFieldValue CO 0.043264
+            volScalarFieldValue CO2 0.100094
+            volScalarFieldValue H 9.10484e-05
+            volScalarFieldValue H2 0.00166813
+            volScalarFieldValue H2O 0.123579
+            volScalarFieldValue O 0.00012972
+            volScalarFieldValue O2 0.00877686
+            volScalarFieldValue OH 0.000759019
+            volScalarFieldValue N2 0.720927
+        );
+    }
+    boxToCell
+    {
+        box (0.00101172 -1 -1) (0.00101953 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1713.13
+            volVectorFieldValue U (0.536889 0 0)
+            volScalarFieldValue C2H2 0.000101526
+            volScalarFieldValue C2H4 2.82643e-05
+            volScalarFieldValue C2H6 1.82503e-06
+            volScalarFieldValue CH2CO 1.3177e-05
+            volScalarFieldValue CH2O 5.26563e-05
+            volScalarFieldValue CH3 0.000120251
+            volScalarFieldValue CH3OH 4.13365e-06
+            volScalarFieldValue CH4 0.000325215
+            volScalarFieldValue CO 0.0430594
+            volScalarFieldValue CO2 0.100671
+            volScalarFieldValue H 9.27719e-05
+            volScalarFieldValue H2 0.00166374
+            volScalarFieldValue H2O 0.123709
+            volScalarFieldValue O 0.000130986
+            volScalarFieldValue O2 0.00835868
+            volScalarFieldValue OH 0.000775862
+            volScalarFieldValue N2 0.720892
+        );
+    }
+    boxToCell
+    {
+        box (0.00101953 -1 -1) (0.00102734 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1715.12
+            volVectorFieldValue U (0.537451 0 0)
+            volScalarFieldValue C2H2 9.47995e-05
+            volScalarFieldValue C2H4 2.4547e-05
+            volScalarFieldValue C2H6 1.4873e-06
+            volScalarFieldValue CH2CO 1.17586e-05
+            volScalarFieldValue CH2O 4.83163e-05
+            volScalarFieldValue CH3 0.000110149
+            volScalarFieldValue CH3OH 3.76606e-06
+            volScalarFieldValue CH4 0.000292982
+            volScalarFieldValue CO 0.0428521
+            volScalarFieldValue CO2 0.101235
+            volScalarFieldValue H 9.44284e-05
+            volScalarFieldValue H2 0.00165947
+            volScalarFieldValue H2O 0.12383
+            volScalarFieldValue O 0.000132116
+            volScalarFieldValue O2 0.00796126
+            volScalarFieldValue OH 0.000792052
+            volScalarFieldValue N2 0.720856
+        );
+    }
+    boxToCell
+    {
+        box (0.00102734 -1 -1) (0.00103516 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1717
+            volVectorFieldValue U (0.537978 0 0)
+            volScalarFieldValue C2H2 8.83823e-05
+            volScalarFieldValue C2H4 2.12755e-05
+            volScalarFieldValue C2H6 1.2104e-06
+            volScalarFieldValue CH2CO 1.0483e-05
+            volScalarFieldValue CH2O 4.42706e-05
+            volScalarFieldValue CH3 0.000100756
+            volScalarFieldValue CH3OH 3.42746e-06
+            volScalarFieldValue CH4 0.000263778
+            volScalarFieldValue CO 0.0426428
+            volScalarFieldValue CO2 0.101787
+            volScalarFieldValue H 9.60166e-05
+            volScalarFieldValue H2 0.00165534
+            volScalarFieldValue H2O 0.123942
+            volScalarFieldValue O 0.000133112
+            volScalarFieldValue O2 0.00758373
+            volScalarFieldValue OH 0.000807573
+            volScalarFieldValue N2 0.720819
+        );
+    }
+    boxToCell
+    {
+        box (0.00103516 -1 -1) (0.00104297 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1718.78
+            volVectorFieldValue U (0.538473 0 0)
+            volScalarFieldValue C2H2 8.22807e-05
+            volScalarFieldValue C2H4 1.84044e-05
+            volScalarFieldValue C2H6 9.83797e-07
+            volScalarFieldValue CH2CO 9.3382e-06
+            volScalarFieldValue CH2O 4.05079e-05
+            volScalarFieldValue CH3 9.20445e-05
+            volScalarFieldValue CH3OH 3.1161e-06
+            volScalarFieldValue CH4 0.000237347
+            volScalarFieldValue CO 0.0424321
+            volScalarFieldValue CO2 0.102327
+            volScalarFieldValue H 9.75359e-05
+            volScalarFieldValue H2 0.00165137
+            volScalarFieldValue H2O 0.124045
+            volScalarFieldValue O 0.000133976
+            volScalarFieldValue O2 0.00722526
+            volScalarFieldValue OH 0.000822411
+            volScalarFieldValue N2 0.720782
+        );
+    }
+    boxToCell
+    {
+        box (0.00104297 -1 -1) (0.00105078 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1720.46
+            volVectorFieldValue U (0.538938 0 0)
+            volScalarFieldValue C2H2 7.64969e-05
+            volScalarFieldValue C2H4 1.58913e-05
+            volScalarFieldValue C2H6 7.98679e-07
+            volScalarFieldValue CH2CO 8.31269e-06
+            volScalarFieldValue CH2O 3.70164e-05
+            volScalarFieldValue CH3 8.3983e-05
+            volScalarFieldValue CH3OH 2.83027e-06
+            volScalarFieldValue CH4 0.000213449
+            volScalarFieldValue CO 0.0422208
+            volScalarFieldValue CO2 0.102854
+            volScalarFieldValue H 9.89856e-05
+            volScalarFieldValue H2 0.00164754
+            volScalarFieldValue H2O 0.124139
+            volScalarFieldValue O 0.000134712
+            volScalarFieldValue O2 0.00688501
+            volScalarFieldValue OH 0.000836558
+            volScalarFieldValue N2 0.720745
+        );
+    }
+    boxToCell
+    {
+        box (0.00105078 -1 -1) (0.00105859 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1722.06
+            volVectorFieldValue U (0.539375 0 0)
+            volScalarFieldValue C2H2 7.103e-05
+            volScalarFieldValue C2H4 1.36972e-05
+            volScalarFieldValue C2H6 6.4769e-07
+            volScalarFieldValue CH2CO 7.39561e-06
+            volScalarFieldValue CH2O 3.37836e-05
+            volScalarFieldValue CH3 7.65397e-05
+            volScalarFieldValue CH3OH 2.56831e-06
+            volScalarFieldValue CH4 0.000191863
+            volScalarFieldValue CO 0.0420093
+            volScalarFieldValue CO2 0.103368
+            volScalarFieldValue H 0.000100366
+            volScalarFieldValue H2 0.00164389
+            volScalarFieldValue H2O 0.124226
+            volScalarFieldValue O 0.000135324
+            volScalarFieldValue O2 0.00656219
+            volScalarFieldValue OH 0.00085001
+            volScalarFieldValue N2 0.720707
+        );
+    }
+    boxToCell
+    {
+        box (0.00105859 -1 -1) (0.00106641 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1723.57
+            volVectorFieldValue U (0.539786 0 0)
+            volScalarFieldValue C2H2 6.58767e-05
+            volScalarFieldValue C2H4 1.1786e-05
+            volScalarFieldValue C2H6 5.24708e-07
+            volScalarFieldValue CH2CO 6.57674e-06
+            volScalarFieldValue CH2O 3.07966e-05
+            volScalarFieldValue CH3 6.96813e-05
+            volScalarFieldValue CH3OH 2.32859e-06
+            volScalarFieldValue CH4 0.00017238
+            volScalarFieldValue CO 0.0417981
+            volScalarFieldValue CO2 0.103871
+            volScalarFieldValue H 0.000101676
+            volScalarFieldValue H2 0.0016404
+            volScalarFieldValue H2O 0.124305
+            volScalarFieldValue O 0.000135816
+            volScalarFieldValue O2 0.00625599
+            volScalarFieldValue OH 0.000862765
+            volScalarFieldValue N2 0.720669
+        );
+    }
+    boxToCell
+    {
+        box (0.00106641 -1 -1) (0.00107422 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1725
+            volVectorFieldValue U (0.540173 0 0)
+            volScalarFieldValue C2H2 6.1031e-05
+            volScalarFieldValue C2H4 1.01251e-05
+            volScalarFieldValue C2H6 4.24658e-07
+            volScalarFieldValue CH2CO 5.84657e-06
+            volScalarFieldValue CH2O 2.80423e-05
+            volScalarFieldValue CH3 6.33739e-05
+            volScalarFieldValue CH3OH 2.10953e-06
+            volScalarFieldValue CH4 0.00015481
+            volScalarFieldValue CO 0.0415878
+            volScalarFieldValue CO2 0.10436
+            volScalarFieldValue H 0.000102917
+            volScalarFieldValue H2 0.00163709
+            volScalarFieldValue H2O 0.124378
+            volScalarFieldValue O 0.000136193
+            volScalarFieldValue O2 0.00596566
+            volScalarFieldValue OH 0.000874826
+            volScalarFieldValue N2 0.720631
+        );
+    }
+    boxToCell
+    {
+        box (0.00107422 -1 -1) (0.00108203 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1726.37
+            volVectorFieldValue U (0.540538 0 0)
+            volScalarFieldValue C2H2 5.64855e-05
+            volScalarFieldValue C2H4 8.68466e-06
+            volScalarFieldValue C2H6 3.43338e-07
+            volScalarFieldValue CH2CO 5.19628e-06
+            volScalarFieldValue CH2O 2.55075e-05
+            volScalarFieldValue CH3 5.75838e-05
+            volScalarFieldValue CH3OH 1.90963e-06
+            volScalarFieldValue CH4 0.000138978
+            volScalarFieldValue CO 0.0413789
+            volScalarFieldValue CO2 0.104838
+            volScalarFieldValue H 0.00010409
+            volScalarFieldValue H2 0.00163395
+            volScalarFieldValue H2O 0.124444
+            volScalarFieldValue O 0.000136459
+            volScalarFieldValue O2 0.00569044
+            volScalarFieldValue OH 0.0008862
+            volScalarFieldValue N2 0.720593
+        );
+    }
+    boxToCell
+    {
+        box (0.00108203 -1 -1) (0.00108984 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1727.66
+            volVectorFieldValue U (0.540881 0 0)
+            volScalarFieldValue C2H2 5.22307e-05
+            volScalarFieldValue C2H4 7.43784e-06
+            volScalarFieldValue C2H6 2.7728e-07
+            volScalarFieldValue CH2CO 4.61773e-06
+            volScalarFieldValue CH2O 2.31789e-05
+            volScalarFieldValue CH3 5.22776e-05
+            volScalarFieldValue CH3OH 1.72746e-06
+            volScalarFieldValue CH4 0.00012472
+            volScalarFieldValue CO 0.0411717
+            volScalarFieldValue CO2 0.105303
+            volScalarFieldValue H 0.000105194
+            volScalarFieldValue H2 0.00163099
+            volScalarFieldValue H2O 0.124504
+            volScalarFieldValue O 0.00013662
+            volScalarFieldValue O2 0.00542962
+            volScalarFieldValue OH 0.000896894
+            volScalarFieldValue N2 0.720556
+        );
+    }
+    boxToCell
+    {
+        box (0.00108984 -1 -1) (0.00110156 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1728.89
+            volVectorFieldValue U (0.541206 0 0)
+            volScalarFieldValue C2H2 4.82563e-05
+            volScalarFieldValue C2H4 6.36052e-06
+            volScalarFieldValue C2H6 2.2362e-07
+            volScalarFieldValue CH2CO 4.10345e-06
+            volScalarFieldValue CH2O 2.10435e-05
+            volScalarFieldValue CH3 4.74226e-05
+            volScalarFieldValue CH3OH 1.56164e-06
+            volScalarFieldValue CH4 0.000111889
+            volScalarFieldValue CO 0.0409665
+            volScalarFieldValue CO2 0.105755
+            volScalarFieldValue H 0.000106232
+            volScalarFieldValue H2 0.00162821
+            volScalarFieldValue H2O 0.124559
+            volScalarFieldValue O 0.000136682
+            volScalarFieldValue O2 0.00518249
+            volScalarFieldValue OH 0.000906919
+            volScalarFieldValue N2 0.720518
+        );
+    }
+    boxToCell
+    {
+        box (0.00110156 -1 -1) (0.00111719 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1731.18
+            volVectorFieldValue U (0.541801 0 0)
+            volScalarFieldValue C2H2 4.1114e-05
+            volScalarFieldValue C2H4 4.64959e-06
+            volScalarFieldValue C2H6 1.46399e-07
+            volScalarFieldValue CH2CO 3.2472e-06
+            volScalarFieldValue CH2O 1.73131e-05
+            volScalarFieldValue CH3 3.89707e-05
+            volScalarFieldValue CH3OH 1.27513e-06
+            volScalarFieldValue CH4 9.00941e-05
+            volScalarFieldValue CO 0.0405635
+            volScalarFieldValue CO2 0.106625
+            volScalarFieldValue H 0.000108111
+            volScalarFieldValue H2 0.00162319
+            volScalarFieldValue H2O 0.124652
+            volScalarFieldValue O 0.000136522
+            volScalarFieldValue O2 0.00472728
+            volScalarFieldValue OH 0.000925003
+            volScalarFieldValue N2 0.720443
+        );
+    }
+    boxToCell
+    {
+        box (0.00111719 -1 -1) (0.00113281 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1733.26
+            volVectorFieldValue U (0.542334 0 0)
+            volScalarFieldValue C2H2 3.49425e-05
+            volScalarFieldValue C2H4 3.38487e-06
+            volScalarFieldValue C2H6 9.56768e-08
+            volScalarFieldValue CH2CO 2.57281e-06
+            volScalarFieldValue CH2O 1.42033e-05
+            volScalarFieldValue CH3 3.19493e-05
+            volScalarFieldValue CH3OH 1.03917e-06
+            volScalarFieldValue CH4 7.24927e-05
+            volScalarFieldValue CO 0.0401722
+            volScalarFieldValue CO2 0.107447
+            volScalarFieldValue H 0.000109738
+            volScalarFieldValue H2 0.00161885
+            volScalarFieldValue H2O 0.124726
+            volScalarFieldValue O 0.000136029
+            volScalarFieldValue O2 0.00431883
+            volScalarFieldValue OH 0.000940601
+            volScalarFieldValue N2 0.720369
+        );
+    }
+    boxToCell
+    {
+        box (0.00113281 -1 -1) (0.00114844 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1735.16
+            volVectorFieldValue U (0.542816 0 0)
+            volScalarFieldValue C2H2 2.96391e-05
+            volScalarFieldValue C2H4 2.45542e-06
+            volScalarFieldValue C2H6 6.24573e-08
+            volScalarFieldValue CH2CO 2.04237e-06
+            volScalarFieldValue CH2O 1.16241e-05
+            volScalarFieldValue CH3 2.61416e-05
+            volScalarFieldValue CH3OH 8.45544e-07
+            volScalarFieldValue CH4 5.83024e-05
+            volScalarFieldValue CO 0.0397944
+            volScalarFieldValue CO2 0.108224
+            volScalarFieldValue H 0.000111128
+            volScalarFieldValue H2 0.00161518
+            volScalarFieldValue H2O 0.124785
+            volScalarFieldValue O 0.000135245
+            volScalarFieldValue O2 0.00395249
+            volScalarFieldValue OH 0.000953863
+            volScalarFieldValue N2 0.720297
+        );
+    }
+    boxToCell
+    {
+        box (0.00114844 -1 -1) (0.00116406 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1736.91
+            volVectorFieldValue U (0.543253 0 0)
+            volScalarFieldValue C2H2 2.51028e-05
+            volScalarFieldValue C2H4 1.77583e-06
+            volScalarFieldValue C2H6 4.0748e-08
+            volScalarFieldValue CH2CO 1.62529e-06
+            volScalarFieldValue CH2O 9.49465e-06
+            volScalarFieldValue CH3 2.13555e-05
+            volScalarFieldValue CH3OH 6.8715e-07
+            volScalarFieldValue CH4 4.68779e-05
+            volScalarFieldValue CO 0.0394312
+            volScalarFieldValue CO2 0.108957
+            volScalarFieldValue H 0.000112295
+            volScalarFieldValue H2 0.00161214
+            volScalarFieldValue H2O 0.12483
+            volScalarFieldValue O 0.000134212
+            volScalarFieldValue O2 0.00362398
+            volScalarFieldValue OH 0.00096495
+            volScalarFieldValue N2 0.720227
+        );
+    }
+    boxToCell
+    {
+        box (0.00116406 -1 -1) (0.00117969 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1738.53
+            volVectorFieldValue U (0.543651 0 0)
+            volScalarFieldValue C2H2 2.12374e-05
+            volScalarFieldValue C2H4 1.2811e-06
+            volScalarFieldValue C2H6 2.65814e-08
+            volScalarFieldValue CH2CO 1.29716e-06
+            volScalarFieldValue CH2O 7.74307e-06
+            volScalarFieldValue CH3 1.74236e-05
+            volScalarFieldValue CH3OH 5.5791e-07
+            volScalarFieldValue CH4 3.76896e-05
+            volScalarFieldValue CO 0.0390835
+            volScalarFieldValue CO2 0.109648
+            volScalarFieldValue H 0.000113253
+            volScalarFieldValue H2 0.00160968
+            volScalarFieldValue H2O 0.124864
+            volScalarFieldValue O 0.000132967
+            volScalarFieldValue O2 0.0033294
+            volScalarFieldValue OH 0.00097403
+            volScalarFieldValue N2 0.720158
+        );
+    }
+    boxToCell
+    {
+        box (0.00117969 -1 -1) (0.00119531 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1740.03
+            volVectorFieldValue U (0.544016 0 0)
+            volScalarFieldValue C2H2 1.79539e-05
+            volScalarFieldValue C2H4 9.22303e-07
+            volScalarFieldValue C2H6 1.73448e-08
+            volScalarFieldValue CH2CO 1.03868e-06
+            volScalarFieldValue CH2O 6.30691e-06
+            volScalarFieldValue CH3 1.42018e-05
+            volScalarFieldValue CH3OH 4.52679e-07
+            volScalarFieldValue CH4 3.03054e-05
+            volScalarFieldValue CO 0.0387517
+            volScalarFieldValue CO2 0.110298
+            volScalarFieldValue H 0.000114018
+            volScalarFieldValue H2 0.00160776
+            volScalarFieldValue H2O 0.124888
+            volScalarFieldValue O 0.000131547
+            volScalarFieldValue O2 0.0030652
+            volScalarFieldValue OH 0.000981274
+            volScalarFieldValue N2 0.720092
+        );
+    }
+    boxToCell
+    {
+        box (0.00119531 -1 -1) (0.00121094 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1741.42
+            volVectorFieldValue U (0.544353 0 0)
+            volScalarFieldValue C2H2 1.51715e-05
+            volScalarFieldValue C2H4 6.62885e-07
+            volScalarFieldValue C2H6 1.13245e-08
+            volScalarFieldValue CH2CO 8.34649e-07
+            volScalarFieldValue CH2O 5.13241e-06
+            volScalarFieldValue CH3 1.15673e-05
+            volScalarFieldValue CH3OH 3.67138e-07
+            volScalarFieldValue CH4 2.43735e-05
+            volScalarFieldValue CO 0.0384361
+            volScalarFieldValue CO2 0.110909
+            volScalarFieldValue H 0.000114607
+            volScalarFieldValue H2 0.00160632
+            volScalarFieldValue H2O 0.124903
+            volScalarFieldValue O 0.000129983
+            volScalarFieldValue O2 0.00282817
+            volScalarFieldValue OH 0.000986848
+            volScalarFieldValue N2 0.720028
+        );
+    }
+    boxToCell
+    {
+        box (0.00121094 -1 -1) (0.00122656 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1742.72
+            volVectorFieldValue U (0.544666 0 0)
+            volScalarFieldValue C2H2 1.28182e-05
+            volScalarFieldValue C2H4 4.75786e-07
+            volScalarFieldValue C2H6 7.39969e-09
+            volScalarFieldValue CH2CO 6.73161e-07
+            volScalarFieldValue CH2O 4.17388e-06
+            volScalarFieldValue CH3 9.41659e-06
+            volScalarFieldValue CH3OH 2.9769e-07
+            volScalarFieldValue CH4 1.96093e-05
+            volScalarFieldValue CO 0.0381365
+            volScalarFieldValue CO2 0.111483
+            volScalarFieldValue H 0.000115033
+            volScalarFieldValue H2 0.00160533
+            volScalarFieldValue H2O 0.124912
+            volScalarFieldValue O 0.000128303
+            volScalarFieldValue O2 0.00261543
+            volScalarFieldValue OH 0.000990913
+            volScalarFieldValue N2 0.719967
+        );
+    }
+    boxToCell
+    {
+        box (0.00122656 -1 -1) (0.00124219 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1743.94
+            volVectorFieldValue U (0.544958 0 0)
+            volScalarFieldValue C2H2 1.08304e-05
+            volScalarFieldValue C2H4 3.41083e-07
+            volScalarFieldValue C2H6 4.83915e-09
+            volScalarFieldValue CH2CO 5.44939e-07
+            volScalarFieldValue CH2O 3.39284e-06
+            volScalarFieldValue CH3 7.66292e-06
+            volScalarFieldValue CH3OH 2.41354e-07
+            volScalarFieldValue CH4 1.57823e-05
+            volScalarFieldValue CO 0.0378528
+            volScalarFieldValue CO2 0.112021
+            volScalarFieldValue H 0.000115313
+            volScalarFieldValue H2 0.00160472
+            volScalarFieldValue H2O 0.124915
+            volScalarFieldValue O 0.000126533
+            volScalarFieldValue O2 0.00242438
+            volScalarFieldValue OH 0.000993622
+            volScalarFieldValue N2 0.719908
+        );
+    }
+    boxToCell
+    {
+        box (0.00124219 -1 -1) (0.00125781 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1745.09
+            volVectorFieldValue U (0.545231 0 0)
+            volScalarFieldValue C2H2 9.15302e-06
+            volScalarFieldValue C2H4 2.44193e-07
+            volScalarFieldValue C2H6 3.166e-09
+            volScalarFieldValue CH2CO 4.42755e-07
+            volScalarFieldValue CH2O 2.75709e-06
+            volScalarFieldValue CH3 6.23408e-06
+            volScalarFieldValue CH3OH 1.95676e-07
+            volScalarFieldValue CH4 1.2707e-05
+            volScalarFieldValue CO 0.0375848
+            volScalarFieldValue CO2 0.112526
+            volScalarFieldValue H 0.000115459
+            volScalarFieldValue H2 0.00160446
+            volScalarFieldValue H2O 0.124913
+            volScalarFieldValue O 0.000124693
+            volScalarFieldValue O2 0.00225266
+            volScalarFieldValue OH 0.000995119
+            volScalarFieldValue N2 0.719852
+        );
+    }
+    boxToCell
+    {
+        box (0.00125781 -1 -1) (0.00127344 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1746.18
+            volVectorFieldValue U (0.545488 0 0)
+            volScalarFieldValue C2H2 7.73816e-06
+            volScalarFieldValue C2H4 1.74479e-07
+            volScalarFieldValue C2H6 2.069e-09
+            volScalarFieldValue CH2CO 3.6098e-07
+            volScalarFieldValue CH2O 2.2399e-06
+            volScalarFieldValue CH3 5.07033e-06
+            volScalarFieldValue CH3OH 1.5864e-07
+            volScalarFieldValue CH4 1.02338e-05
+            volScalarFieldValue CO 0.0373318
+            volScalarFieldValue CO2 0.113
+            volScalarFieldValue H 0.000115485
+            volScalarFieldValue H2 0.0016045
+            volScalarFieldValue H2O 0.124908
+            volScalarFieldValue O 0.000122803
+            volScalarFieldValue O2 0.0020982
+            volScalarFieldValue OH 0.000995535
+            volScalarFieldValue N2 0.719798
+        );
+    }
+    boxToCell
+    {
+        box (0.00127344 -1 -1) (0.00129687 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1747.21
+            volVectorFieldValue U (0.545731 0 0)
+            volScalarFieldValue C2H2 6.54489e-06
+            volScalarFieldValue C2H4 1.24202e-07
+            volScalarFieldValue C2H6 1.34382e-09
+            volScalarFieldValue CH2CO 2.95229e-07
+            volScalarFieldValue CH2O 1.81918e-06
+            volScalarFieldValue CH3 4.12242e-06
+            volScalarFieldValue CH3OH 1.28596e-07
+            volScalarFieldValue CH4 8.24238e-06
+            volScalarFieldValue CO 0.0370935
+            volScalarFieldValue CO2 0.113443
+            volScalarFieldValue H 0.000115404
+            volScalarFieldValue H2 0.00160481
+            volScalarFieldValue H2O 0.1249
+            volScalarFieldValue O 0.000120879
+            volScalarFieldValue O2 0.00195911
+            volScalarFieldValue OH 0.000994994
+            volScalarFieldValue N2 0.719747
+        );
+    }
+    boxToCell
+    {
+        box (0.00129687 -1 -1) (0.00132812 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1749.11
+            volVectorFieldValue U (0.54618 0 0)
+            volScalarFieldValue C2H2 4.71815e-06
+            volScalarFieldValue C2H4 6.50561e-08
+            volScalarFieldValue C2H6 5.98679e-10
+            volScalarFieldValue CH2CO 2.015e-07
+            volScalarFieldValue CH2O 1.21221e-06
+            volScalarFieldValue CH3 2.75279e-06
+            volScalarFieldValue CH3OH 8.54342e-08
+            volScalarFieldValue CH4 5.41437e-06
+            volScalarFieldValue CO 0.0366589
+            volScalarFieldValue CO2 0.114245
+            volScalarFieldValue H 0.000114954
+            volScalarFieldValue H2 0.00160609
+            volScalarFieldValue H2O 0.124878
+            volScalarFieldValue O 0.000116969
+            volScalarFieldValue O2 0.00172204
+            volScalarFieldValue OH 0.000991373
+            volScalarFieldValue N2 0.719652
+        );
+    }
+    boxToCell
+    {
+        box (0.00132812 -1 -1) (0.00135937 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1750.84
+            volVectorFieldValue U (0.546589 0 0)
+            volScalarFieldValue C2H2 3.41533e-06
+            volScalarFieldValue C2H4 3.42971e-08
+            volScalarFieldValue C2H6 2.67928e-10
+            volScalarFieldValue CH2CO 1.39367e-07
+            volScalarFieldValue CH2O 8.10476e-07
+            volScalarFieldValue CH3 1.84391e-06
+            volScalarFieldValue CH3OH 5.69739e-08
+            volScalarFieldValue CH4 3.57274e-06
+            volScalarFieldValue CO 0.036275
+            volScalarFieldValue CO2 0.114948
+            volScalarFieldValue H 0.000114201
+            volScalarFieldValue H2 0.001608
+            volScalarFieldValue H2O 0.124852
+            volScalarFieldValue O 0.000113056
+            volScalarFieldValue O2 0.0015282
+            volScalarFieldValue OH 0.000985149
+            volScalarFieldValue N2 0.719566
+        );
+    }
+    boxToCell
+    {
+        box (0.00135937 -1 -1) (0.00139062 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1752.42
+            volVectorFieldValue U (0.546967 0 0)
+            volScalarFieldValue C2H2 2.48363e-06
+            volScalarFieldValue C2H4 1.82575e-08
+            volScalarFieldValue C2H6 1.20772e-10
+            volScalarFieldValue CH2CO 9.75826e-08
+            volScalarFieldValue CH2O 5.44172e-07
+            volScalarFieldValue CH3 1.23974e-06
+            volScalarFieldValue CH3OH 3.81654e-08
+            volScalarFieldValue CH4 2.36914e-06
+            volScalarFieldValue CO 0.0359369
+            volScalarFieldValue CO2 0.115564
+            volScalarFieldValue H 0.000113214
+            volScalarFieldValue H2 0.00161035
+            volScalarFieldValue H2O 0.124824
+            volScalarFieldValue O 0.000109193
+            volScalarFieldValue O2 0.00136877
+            volScalarFieldValue OH 0.000976942
+            volScalarFieldValue N2 0.71949
+        );
+    }
+    boxToCell
+    {
+        box (0.00139062 -1 -1) (0.00142187 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1753.88
+            volVectorFieldValue U (0.547318 0 0)
+            volScalarFieldValue C2H2 1.81489e-06
+            volScalarFieldValue C2H4 9.84902e-09
+            volScalarFieldValue C2H6 5.49275e-11
+            volScalarFieldValue CH2CO 6.90933e-08
+            volScalarFieldValue CH2O 3.67141e-07
+            volScalarFieldValue CH3 8.37056e-07
+            volScalarFieldValue CH3OH 2.56931e-08
+            volScalarFieldValue CH4 1.5792e-06
+            volScalarFieldValue CO 0.0356395
+            volScalarFieldValue CO2 0.116103
+            volScalarFieldValue H 0.000112049
+            volScalarFieldValue H2 0.00161296
+            volScalarFieldValue H2O 0.124797
+            volScalarFieldValue O 0.000105418
+            volScalarFieldValue O2 0.00123678
+            volScalarFieldValue OH 0.000967251
+            volScalarFieldValue N2 0.719421
+        );
+    }
+    boxToCell
+    {
+        box (0.00142187 -1 -1) (0.00145312 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1755.24
+            volVectorFieldValue U (0.547645 0 0)
+            volScalarFieldValue C2H2 1.33278e-06
+            volScalarFieldValue C2H4 5.4053e-09
+            volScalarFieldValue C2H6 2.52332e-11
+            volScalarFieldValue CH2CO 4.94172e-08
+            volScalarFieldValue CH2O 2.49002e-07
+            volScalarFieldValue CH3 5.67731e-07
+            volScalarFieldValue CH3OH 1.73872e-08
+            volScalarFieldValue CH4 1.05826e-06
+            volScalarFieldValue CO 0.0353785
+            volScalarFieldValue CO2 0.116574
+            volScalarFieldValue H 0.000110751
+            volScalarFieldValue H2 0.00161572
+            volScalarFieldValue H2O 0.124773
+            volScalarFieldValue O 0.000101755
+            volScalarFieldValue O2 0.00112673
+            volScalarFieldValue OH 0.00095647
+            volScalarFieldValue N2 0.71936
+        );
+    }
+    boxToCell
+    {
+        box (0.00145312 -1 -1) (0.00148438 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1756.49
+            volVectorFieldValue U (0.547953 0 0)
+            volScalarFieldValue C2H2 9.83479e-07
+            volScalarFieldValue C2H4 3.03015e-09
+            volScalarFieldValue C2H6 1.17145e-11
+            volScalarFieldValue CH2CO 3.56634e-08
+            volScalarFieldValue CH2O 1.69789e-07
+            volScalarFieldValue CH3 3.86824e-07
+            volScalarFieldValue CH3OH 1.1828e-08
+            volScalarFieldValue CH4 7.12862e-07
+            volScalarFieldValue CO 0.0351496
+            volScalarFieldValue CO2 0.116985
+            volScalarFieldValue H 0.000109355
+            volScalarFieldValue H2 0.00161852
+            volScalarFieldValue H2O 0.124752
+            volScalarFieldValue O 9.82181e-05
+            volScalarFieldValue O2 0.00103425
+            volScalarFieldValue OH 0.000944907
+            volScalarFieldValue N2 0.719306
+        );
+    }
+    boxToCell
+    {
+        box (0.00148438 -1 -1) (0.00151563 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1757.66
+            volVectorFieldValue U (0.548243 0 0)
+            volScalarFieldValue C2H2 7.29005e-07
+            volScalarFieldValue C2H4 1.74081e-09
+            volScalarFieldValue C2H6 5.49296e-12
+            volScalarFieldValue CH2CO 2.59392e-08
+            volScalarFieldValue CH2O 1.16368e-07
+            volScalarFieldValue CH3 2.64658e-07
+            volScalarFieldValue CH3OH 8.0848e-09
+            volScalarFieldValue CH4 4.82415e-07
+            volScalarFieldValue CO 0.034949
+            volScalarFieldValue CO2 0.117345
+            volScalarFieldValue H 0.000107892
+            volScalarFieldValue H2 0.0016213
+            volScalarFieldValue H2O 0.124734
+            volScalarFieldValue O 9.48133e-05
+            volScalarFieldValue O2 0.000955907
+            volScalarFieldValue OH 0.000932805
+            volScalarFieldValue N2 0.719258
+        );
+    }
+    boxToCell
+    {
+        box (0.00151563 -1 -1) (0.00154688 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1758.76
+            volVectorFieldValue U (0.548517 0 0)
+            volScalarFieldValue C2H2 5.42451e-07
+            volScalarFieldValue C2H4 1.02536e-09
+            volScalarFieldValue C2H6 2.59043e-12
+            volScalarFieldValue CH2CO 1.89866e-08
+            volScalarFieldValue CH2O 8.00769e-08
+            volScalarFieldValue CH3 1.81586e-07
+            volScalarFieldValue CH3OH 5.54536e-09
+            volScalarFieldValue CH4 3.27468e-07
+            volScalarFieldValue CO 0.0347733
+            volScalarFieldValue CO2 0.117659
+            volScalarFieldValue H 0.000106383
+            volScalarFieldValue H2 0.00162402
+            volScalarFieldValue H2O 0.12472
+            volScalarFieldValue O 9.15435e-05
+            volScalarFieldValue O2 0.000888958
+            volScalarFieldValue OH 0.000920353
+            volScalarFieldValue N2 0.719215
+        );
+    }
+    boxToCell
+    {
+        box (0.00154688 -1 -1) (0.00159375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1759.78
+            volVectorFieldValue U (0.548775 0 0)
+            volScalarFieldValue C2H2 4.04681e-07
+            volScalarFieldValue C2H4 6.14223e-10
+            volScalarFieldValue C2H6 1.19691e-12
+            volScalarFieldValue CH2CO 1.39566e-08
+            volScalarFieldValue CH2O 5.51686e-08
+            volScalarFieldValue CH3 1.24547e-07
+            volScalarFieldValue CH3OH 3.80469e-09
+            volScalarFieldValue CH4 2.22165e-07
+            volScalarFieldValue CO 0.0346195
+            volScalarFieldValue CO2 0.117933
+            volScalarFieldValue H 0.000104848
+            volScalarFieldValue H2 0.00162665
+            volScalarFieldValue H2O 0.12471
+            volScalarFieldValue O 8.84081e-05
+            volScalarFieldValue O2 0.000831239
+            volScalarFieldValue OH 0.000907694
+            volScalarFieldValue N2 0.719178
+        );
+    }
+    boxToCell
+    {
+        box (0.00159375 -1 -1) (0.00165625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1761.64
+            volVectorFieldValue U (0.549252 0 0)
+            volScalarFieldValue C2H2 2.34386e-07
+            volScalarFieldValue C2H4 2.68016e-10
+            volScalarFieldValue C2H6 3.15673e-13
+            volScalarFieldValue CH2CO 7.91534e-09
+            volScalarFieldValue CH2O 2.7919e-08
+            volScalarFieldValue CH3 6.23113e-08
+            volScalarFieldValue CH3OH 1.90653e-09
+            volScalarFieldValue CH4 1.09096e-07
+            volScalarFieldValue CO 0.0343697
+            volScalarFieldValue CO2 0.118377
+            volScalarFieldValue H 0.000101739
+            volScalarFieldValue H2 0.00163154
+            volScalarFieldValue H2O 0.124701
+            volScalarFieldValue O 8.25305e-05
+            volScalarFieldValue O2 0.000738315
+            volScalarFieldValue OH 0.000882097
+            volScalarFieldValue N2 0.719116
+        );
+    }
+    boxToCell
+    {
+        box (0.00165625 -1 -1) (0.00171875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1763.28
+            volVectorFieldValue U (0.549681 0 0)
+            volScalarFieldValue C2H2 1.38295e-07
+            volScalarFieldValue C2H4 1.30508e-10
+            volScalarFieldValue C2H6 8.66087e-14
+            volScalarFieldValue CH2CO 4.59217e-09
+            volScalarFieldValue CH2O 1.45723e-08
+            volScalarFieldValue CH3 3.19208e-08
+            volScalarFieldValue CH3OH 9.79366e-10
+            volScalarFieldValue CH4 5.48784e-08
+            volScalarFieldValue CO 0.0341781
+            volScalarFieldValue CO2 0.118716
+            volScalarFieldValue H 9.86543e-05
+            volScalarFieldValue H2 0.0016359
+            volScalarFieldValue H2O 0.124705
+            volScalarFieldValue O 7.71397e-05
+            volScalarFieldValue O2 0.000665427
+            volScalarFieldValue OH 0.000856708
+            volScalarFieldValue N2 0.719067
+        );
+    }
+    boxToCell
+    {
+        box (0.00171875 -1 -1) (0.00178125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1764.74
+            volVectorFieldValue U (0.550068 0 0)
+            volScalarFieldValue C2H2 8.30563e-08
+            volScalarFieldValue C2H4 6.94463e-11
+            volScalarFieldValue C2H6 2.53509e-14
+            volScalarFieldValue CH2CO 2.72028e-09
+            volScalarFieldValue CH2O 7.88334e-09
+            volScalarFieldValue CH3 1.6751e-08
+            volScalarFieldValue CH3OH 5.1596e-10
+            volScalarFieldValue CH4 2.82907e-08
+            volScalarFieldValue CO 0.0340315
+            volScalarFieldValue CO2 0.118974
+            volScalarFieldValue H 9.56394e-05
+            volScalarFieldValue H2 0.00163974
+            volScalarFieldValue H2O 0.12472
+            volScalarFieldValue O 7.21955e-05
+            volScalarFieldValue O2 0.000606478
+            volScalarFieldValue OH 0.000831858
+            volScalarFieldValue N2 0.719029
+        );
+    }
+    boxToCell
+    {
+        box (0.00178125 -1 -1) (0.00184375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1766.03
+            volVectorFieldValue U (0.550416 0 0)
+            volScalarFieldValue C2H2 5.07282e-08
+            volScalarFieldValue C2H4 3.94254e-11
+            volScalarFieldValue C2H6 8.12009e-15
+            volScalarFieldValue CH2CO 1.64266e-09
+            volScalarFieldValue CH2O 4.44984e-09
+            volScalarFieldValue CH3 9.00683e-09
+            volScalarFieldValue CH3OH 2.78777e-10
+            volScalarFieldValue CH4 1.49503e-08
+            volScalarFieldValue CO 0.0339196
+            volScalarFieldValue CO2 0.119169
+            volScalarFieldValue H 9.27194e-05
+            volScalarFieldValue H2 0.00164312
+            volScalarFieldValue H2O 0.124742
+            volScalarFieldValue O 6.76565e-05
+            volScalarFieldValue O2 0.000557482
+            volScalarFieldValue OH 0.00080773
+            volScalarFieldValue N2 0.719
+        );
+    }
+    boxToCell
+    {
+        box (0.00184375 -1 -1) (0.00190625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1767.18
+            volVectorFieldValue U (0.550728 0 0)
+            volScalarFieldValue C2H2 3.14802e-08
+            volScalarFieldValue C2H4 2.34185e-11
+            volScalarFieldValue C2H6 2.92118e-15
+            volScalarFieldValue CH2CO 1.00966e-09
+            volScalarFieldValue CH2O 2.64409e-09
+            volScalarFieldValue CH3 4.96182e-09
+            volScalarFieldValue CH3OH 1.54428e-10
+            volScalarFieldValue CH4 8.09924e-09
+            volScalarFieldValue CO 0.0338344
+            volScalarFieldValue CO2 0.119318
+            volScalarFieldValue H 8.99071e-05
+            volScalarFieldValue H2 0.00164607
+            volScalarFieldValue H2O 0.124772
+            volScalarFieldValue O 6.34837e-05
+            volScalarFieldValue O2 0.000515794
+            volScalarFieldValue OH 0.000784414
+            volScalarFieldValue N2 0.718977
+        );
+    }
+    boxToCell
+    {
+        box (0.00190625 -1 -1) (0.00196875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1768.21
+            volVectorFieldValue U (0.551008 0 0)
+            volScalarFieldValue C2H2 1.98272e-08
+            volScalarFieldValue C2H4 1.43606e-11
+            volScalarFieldValue C2H6 1.20205e-15
+            volScalarFieldValue CH2CO 6.30726e-10
+            volScalarFieldValue CH2O 1.67086e-09
+            volScalarFieldValue CH3 2.79907e-09
+            volScalarFieldValue CH3OH 8.76353e-11
+            volScalarFieldValue CH4 4.49641e-09
+            volScalarFieldValue CO 0.03377
+            volScalarFieldValue CO2 0.119429
+            volScalarFieldValue H 8.72081e-05
+            volScalarFieldValue H2 0.00164867
+            volScalarFieldValue H2O 0.124805
+            volScalarFieldValue O 5.96416e-05
+            volScalarFieldValue O2 0.000479627
+            volScalarFieldValue OH 0.000761947
+            volScalarFieldValue N2 0.718959
+        );
+    }
+    boxToCell
+    {
+        box (0.00196875 -1 -1) (0.00203125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1769.11
+            volVectorFieldValue U (0.551257 0 0)
+            volScalarFieldValue C2H2 1.26543e-08
+            volScalarFieldValue C2H4 9.01004e-12
+            volScalarFieldValue C2H6 5.6529e-16
+            volScalarFieldValue CH2CO 3.99683e-10
+            volScalarFieldValue CH2O 1.13301e-09
+            volScalarFieldValue CH3 1.61438e-09
+            volScalarFieldValue CH3OH 5.08562e-11
+            volScalarFieldValue CH4 2.55449e-09
+            volScalarFieldValue CO 0.0337216
+            volScalarFieldValue CO2 0.119512
+            volScalarFieldValue H 8.46232e-05
+            volScalarFieldValue H2 0.00165097
+            volScalarFieldValue H2O 0.124842
+            volScalarFieldValue O 5.60979e-05
+            volScalarFieldValue O2 0.000447748
+            volScalarFieldValue OH 0.000740332
+            volScalarFieldValue N2 0.718945
+        );
+    }
+    boxToCell
+    {
+        box (0.00203125 -1 -1) (0.00209375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1769.91
+            volVectorFieldValue U (0.551478 0 0)
+            volScalarFieldValue C2H2 8.16055e-09
+            volScalarFieldValue C2H4 5.74294e-12
+            volScalarFieldValue C2H6 2.96995e-16
+            volScalarFieldValue CH2CO 2.56105e-10
+            volScalarFieldValue CH2O 8.27583e-10
+            volScalarFieldValue CH3 9.47913e-10
+            volScalarFieldValue CH3OH 3.00502e-11
+            volScalarFieldValue CH4 1.47872e-09
+            volScalarFieldValue CO 0.0336855
+            volScalarFieldValue CO2 0.119572
+            volScalarFieldValue H 8.21506e-05
+            volScalarFieldValue H2 0.00165302
+            volScalarFieldValue H2O 0.124881
+            volScalarFieldValue O 5.28241e-05
+            volScalarFieldValue O2 0.000419291
+            volScalarFieldValue OH 0.000719554
+            volScalarFieldValue N2 0.718934
+        );
+    }
+    boxToCell
+    {
+        box (0.00209375 -1 -1) (0.0021875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1770.61
+            volVectorFieldValue U (0.551672 0 0)
+            volScalarFieldValue C2H2 5.28456e-09
+            volScalarFieldValue C2H4 3.68558e-12
+            volScalarFieldValue C2H6 1.67511e-16
+            volScalarFieldValue CH2CO 1.64829e-10
+            volScalarFieldValue CH2O 6.48107e-10
+            volScalarFieldValue CH3 5.59843e-10
+            volScalarFieldValue CH3OH 1.78702e-11
+            volScalarFieldValue CH4 8.60966e-10
+            volScalarFieldValue CO 0.033659
+            volScalarFieldValue CO2 0.119616
+            volScalarFieldValue H 7.97869e-05
+            volScalarFieldValue H2 0.00165487
+            volScalarFieldValue H2O 0.124921
+            volScalarFieldValue O 4.97946e-05
+            volScalarFieldValue O2 0.00039363
+            volScalarFieldValue OH 0.000699591
+            volScalarFieldValue N2 0.718926
+        );
+    }
+    boxToCell
+    {
+        box (0.0021875 -1 -1) (0.0023125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1771.75
+            volVectorFieldValue U (0.551989 0 0)
+            volScalarFieldValue C2H2 2.46481e-09
+            volScalarFieldValue C2H4 1.70133e-12
+            volScalarFieldValue C2H6 6.9274e-17
+            volScalarFieldValue CH2CO 7.6203e-11
+            volScalarFieldValue CH2O 4.9185e-10
+            volScalarFieldValue CH3 2.29975e-10
+            volScalarFieldValue CH3OH 7.41335e-12
+            volScalarFieldValue CH4 3.47721e-10
+            volScalarFieldValue CO 0.033628
+            volScalarFieldValue CO2 0.119665
+            volScalarFieldValue H 7.53728e-05
+            volScalarFieldValue H2 0.00165804
+            volScalarFieldValue H2O 0.125002
+            volScalarFieldValue O 4.43929e-05
+            volScalarFieldValue O2 0.000349309
+            volScalarFieldValue OH 0.000662026
+            volScalarFieldValue N2 0.718916
+        );
+    }
+    boxToCell
+    {
+        box (0.0023125 -1 -1) (0.0024375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1772.59
+            volVectorFieldValue U (0.552222 0 0)
+            volScalarFieldValue C2H2 1.19933e-09
+            volScalarFieldValue C2H4 8.21691e-13
+            volScalarFieldValue C2H6 3.17619e-17
+            volScalarFieldValue CH2CO 3.67662e-11
+            volScalarFieldValue CH2O 4.28973e-10
+            volScalarFieldValue CH3 1.01009e-10
+            volScalarFieldValue CH3OH 3.28278e-12
+            volScalarFieldValue CH4 1.5116e-10
+            volScalarFieldValue CO 0.033614
+            volScalarFieldValue CO2 0.119685
+            volScalarFieldValue H 7.13331e-05
+            volScalarFieldValue H2 0.00166075
+            volScalarFieldValue H2O 0.125081
+            volScalarFieldValue O 3.97216e-05
+            volScalarFieldValue O2 0.000311749
+            volScalarFieldValue OH 0.000627297
+            volScalarFieldValue N2 0.71891
+        );
+    }
+    boxToCell
+    {
+        box (0.0024375 -1 -1) (0.0025625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.19
+            volVectorFieldValue U (0.552384 0 0)
+            volScalarFieldValue C2H2 6.06849e-10
+            volScalarFieldValue C2H4 4.13588e-13
+            volScalarFieldValue C2H6 1.55579e-17
+            volScalarFieldValue CH2CO 1.84542e-11
+            volScalarFieldValue CH2O 4.01543e-10
+            volScalarFieldValue CH3 4.71176e-11
+            volScalarFieldValue CH3OH 1.54194e-12
+            volScalarFieldValue CH4 7.02474e-11
+            volScalarFieldValue CO 0.0336099
+            volScalarFieldValue CO2 0.119687
+            volScalarFieldValue H 6.76292e-05
+            volScalarFieldValue H2 0.00166314
+            volScalarFieldValue H2O 0.125156
+            volScalarFieldValue O 3.56625e-05
+            volScalarFieldValue O2 0.000279493
+            volScalarFieldValue OH 0.000595145
+            volScalarFieldValue N2 0.718906
+        );
+    }
+    boxToCell
+    {
+        box (0.0025625 -1 -1) (0.0026875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.58
+            volVectorFieldValue U (0.552482 0 0)
+            volScalarFieldValue C2H2 3.18386e-10
+            volScalarFieldValue C2H4 2.16236e-13
+            volScalarFieldValue C2H6 8.00049e-18
+            volScalarFieldValue CH2CO 9.60721e-12
+            volScalarFieldValue CH2O 3.88475e-10
+            volScalarFieldValue CH3 2.31878e-11
+            volScalarFieldValue CH3OH 7.63502e-13
+            volScalarFieldValue CH4 3.46464e-11
+            volScalarFieldValue CO 0.0336115
+            volScalarFieldValue CO2 0.119679
+            volScalarFieldValue H 6.42257e-05
+            volScalarFieldValue H2 0.00166531
+            volScalarFieldValue H2O 0.125226
+            volScalarFieldValue O 3.21194e-05
+            volScalarFieldValue O2 0.000251532
+            volScalarFieldValue OH 0.000565332
+            volScalarFieldValue N2 0.718905
+        );
+    }
+    boxToCell
+    {
+        box (0.0026875 -1 -1) (0.0028125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.77
+            volVectorFieldValue U (0.552525 0 0)
+            volScalarFieldValue C2H2 1.72739e-10
+            volScalarFieldValue C2H4 1.17087e-13
+            volScalarFieldValue C2H6 4.28281e-18
+            volScalarFieldValue CH2CO 5.17301e-12
+            volScalarFieldValue CH2O 3.8162e-10
+            volScalarFieldValue CH3 1.19665e-11
+            volScalarFieldValue CH3OH 3.96444e-13
+            volScalarFieldValue CH4 1.8009e-11
+            volScalarFieldValue CO 0.033616
+            volScalarFieldValue CO2 0.119667
+            volScalarFieldValue H 6.1091e-05
+            volScalarFieldValue H2 0.00166733
+            volScalarFieldValue H2O 0.12529
+            volScalarFieldValue O 2.90139e-05
+            volScalarFieldValue O2 0.000227125
+            volScalarFieldValue OH 0.000537644
+            volScalarFieldValue N2 0.718904
+        );
+    }
+    boxToCell
+    {
+        box (0.0028125 -1 -1) (0.0029375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.8
+            volVectorFieldValue U (0.552519 0 0)
+            volScalarFieldValue C2H2 9.66592e-11
+            volScalarFieldValue C2H4 6.54756e-14
+            volScalarFieldValue C2H6 2.37457e-18
+            volScalarFieldValue CH2CO 2.87313e-12
+            volScalarFieldValue CH2O 3.77632e-10
+            volScalarFieldValue CH3 6.44183e-12
+            volScalarFieldValue CH3OH 2.1496e-13
+            volScalarFieldValue CH4 9.80324e-12
+            volScalarFieldValue CO 0.0336217
+            volScalarFieldValue CO2 0.119653
+            volScalarFieldValue H 5.81974e-05
+            volScalarFieldValue H2 0.00166924
+            volScalarFieldValue H2O 0.12535
+            volScalarFieldValue O 2.62818e-05
+            volScalarFieldValue O2 0.000205703
+            volScalarFieldValue OH 0.00051189
+            volScalarFieldValue N2 0.718905
+        );
+    }
+    boxToCell
+    {
+        box (0.0029375 -1 -1) (0.0030625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.69
+            volVectorFieldValue U (0.552469 0 0)
+            volScalarFieldValue C2H2 5.56119e-11
+            volScalarFieldValue C2H4 3.76896e-14
+            volScalarFieldValue C2H6 1.35781e-18
+            volScalarFieldValue CH2CO 1.64088e-12
+            volScalarFieldValue CH2O 3.75061e-10
+            volScalarFieldValue CH3 3.5996e-12
+            volScalarFieldValue CH3OH 1.213e-13
+            volScalarFieldValue CH4 5.55554e-12
+            volScalarFieldValue CO 0.0336276
+            volScalarFieldValue CO2 0.119638
+            volScalarFieldValue H 5.55204e-05
+            volScalarFieldValue H2 0.00167106
+            volScalarFieldValue H2O 0.125404
+            volScalarFieldValue O 2.38696e-05
+            volScalarFieldValue O2 0.000186815
+            volScalarFieldValue OH 0.000487899
+            volScalarFieldValue N2 0.718905
+        );
+    }
+    boxToCell
+    {
+        box (0.0030625 -1 -1) (0.0031875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.45
+            volVectorFieldValue U (0.55238 0 0)
+            volScalarFieldValue C2H2 3.27307e-11
+            volScalarFieldValue C2H4 2.22162e-14
+            volScalarFieldValue C2H6 7.96176e-19
+            volScalarFieldValue CH2CO 9.5872e-13
+            volScalarFieldValue CH2O 3.7324e-10
+            volScalarFieldValue CH3 2.07512e-12
+            volScalarFieldValue CH3OH 7.09497e-14
+            volScalarFieldValue CH4 3.25443e-12
+            volScalarFieldValue CO 0.033633
+            volScalarFieldValue CO2 0.119625
+            volScalarFieldValue H 5.30387e-05
+            volScalarFieldValue H2 0.00167282
+            volScalarFieldValue H2O 0.125453
+            volScalarFieldValue O 2.1733e-05
+            volScalarFieldValue O2 0.000170097
+            volScalarFieldValue OH 0.00046552
+            volScalarFieldValue N2 0.718906
+        );
+    }
+    boxToCell
+    {
+        box (0.0031875 -1 -1) (0.003375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1773.1
+            volVectorFieldValue U (0.552257 0 0)
+            volScalarFieldValue C2H2 1.94743e-11
+            volScalarFieldValue C2H4 1.32508e-14
+            volScalarFieldValue C2H6 4.72906e-19
+            volScalarFieldValue CH2CO 5.66157e-13
+            volScalarFieldValue CH2O 3.71845e-10
+            volScalarFieldValue CH3 1.2186e-12
+            volScalarFieldValue CH3OH 4.26141e-14
+            volScalarFieldValue CH4 1.94469e-12
+            volScalarFieldValue CO 0.0336376
+            volScalarFieldValue CO2 0.119613
+            volScalarFieldValue H 5.07334e-05
+            volScalarFieldValue H2 0.00167453
+            volScalarFieldValue H2O 0.125498
+            volScalarFieldValue O 1.98344e-05
+            volScalarFieldValue O2 0.000155248
+            volScalarFieldValue OH 0.000444614
+            volScalarFieldValue N2 0.718907
+        );
+    }
+    boxToCell
+    {
+        box (0.003375 -1 -1) (0.003625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1772.08
+            volVectorFieldValue U (0.551918 0 0)
+            volScalarFieldValue C2H2 8.26984e-12
+            volScalarFieldValue C2H4 5.66799e-15
+            volScalarFieldValue C2H6 2.01242e-19
+            volScalarFieldValue CH2CO 2.37326e-13
+            volScalarFieldValue CH2O 3.69822e-10
+            volScalarFieldValue CH3 5.19669e-13
+            volScalarFieldValue CH3OH 1.94705e-14
+            volScalarFieldValue CH4 8.59609e-13
+            volScalarFieldValue CO 0.0336436
+            volScalarFieldValue CO2 0.119596
+            volScalarFieldValue H 4.66025e-05
+            volScalarFieldValue H2 0.00167783
+            volScalarFieldValue H2O 0.125574
+            volScalarFieldValue O 1.66434e-05
+            volScalarFieldValue O2 0.00013041
+            volScalarFieldValue OH 0.00040687
+            volScalarFieldValue N2 0.718908
+        );
+    }
+    boxToCell
+    {
+        box (0.003625 -1 -1) (0.003875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1770.75
+            volVectorFieldValue U (0.551484 0 0)
+            volScalarFieldValue C2H2 3.77364e-12
+            volScalarFieldValue C2H4 2.61168e-15
+            volScalarFieldValue C2H6 9.24825e-20
+            volScalarFieldValue CH2CO 1.06932e-13
+            volScalarFieldValue CH2O 3.68306e-10
+            volScalarFieldValue CH3 2.4997e-13
+            volScalarFieldValue CH3OH 1.05318e-14
+            volScalarFieldValue CH4 4.28801e-13
+            volScalarFieldValue CO 0.0336454
+            volScalarFieldValue CO2 0.119586
+            volScalarFieldValue H 4.29901e-05
+            volScalarFieldValue H2 0.00168103
+            volScalarFieldValue H2O 0.125637
+            volScalarFieldValue O 1.40752e-05
+            volScalarFieldValue O2 0.000110347
+            volScalarFieldValue OH 0.000373611
+            volScalarFieldValue N2 0.718909
+        );
+    }
+    boxToCell
+    {
+        box (0.003875 -1 -1) (0.004125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1769.17
+            volVectorFieldValue U (0.550973 0 0)
+            volScalarFieldValue C2H2 1.83622e-12
+            volScalarFieldValue C2H4 1.28588e-15
+            volScalarFieldValue C2H6 4.55159e-20
+            volScalarFieldValue CH2CO 5.15007e-14
+            volScalarFieldValue CH2O 3.67107e-10
+            volScalarFieldValue CH3 1.37217e-13
+            volScalarFieldValue CH3OH 6.80571e-15
+            volScalarFieldValue CH4 2.43726e-13
+            volScalarFieldValue CO 0.033643
+            volScalarFieldValue CO2 0.119584
+            volScalarFieldValue H 3.98103e-05
+            volScalarFieldValue H2 0.00168417
+            volScalarFieldValue H2O 0.125688
+            volScalarFieldValue O 1.19887e-05
+            volScalarFieldValue O2 9.40154e-05
+            volScalarFieldValue OH 0.000344163
+            volScalarFieldValue N2 0.718911
+        );
+    }
+    boxToCell
+    {
+        box (0.004125 -1 -1) (0.004375 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1767.38
+            volVectorFieldValue U (0.550399 0 0)
+            volScalarFieldValue C2H2 9.46292e-13
+            volScalarFieldValue C2H4 6.71663e-16
+            volScalarFieldValue C2H6 2.38098e-20
+            volScalarFieldValue CH2CO 2.63914e-14
+            volScalarFieldValue CH2O 3.66134e-10
+            volScalarFieldValue CH3 8.65413e-14
+            volScalarFieldValue CH3OH 5.14641e-15
+            volScalarFieldValue CH4 1.5904e-13
+            volScalarFieldValue CO 0.0336369
+            volScalarFieldValue CO2 0.119589
+            volScalarFieldValue H 3.69951e-05
+            volScalarFieldValue H2 0.00168725
+            volScalarFieldValue H2O 0.12573
+            volScalarFieldValue O 1.02788e-05
+            volScalarFieldValue O2 8.06174e-05
+            volScalarFieldValue OH 0.000317973
+            volScalarFieldValue N2 0.718912
+        );
+    }
+    boxToCell
+    {
+        box (0.004375 -1 -1) (0.004625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1765.41
+            volVectorFieldValue U (0.549773 0 0)
+            volScalarFieldValue C2H2 5.1314e-13
+            volScalarFieldValue C2H4 3.69677e-16
+            volScalarFieldValue C2H6 1.31452e-20
+            volScalarFieldValue CH2CO 1.43411e-14
+            volScalarFieldValue CH2O 3.65334e-10
+            volScalarFieldValue CH3 6.21874e-14
+            volScalarFieldValue CH3OH 4.36573e-15
+            volScalarFieldValue CH4 1.18412e-13
+            volScalarFieldValue CO 0.0336274
+            volScalarFieldValue CO2 0.119599
+            volScalarFieldValue H 3.44896e-05
+            volScalarFieldValue H2 0.00169028
+            volScalarFieldValue H2O 0.125763
+            volScalarFieldValue O 8.86651e-06
+            volScalarFieldValue O2 6.95424e-05
+            volScalarFieldValue OH 0.000294588
+            volScalarFieldValue N2 0.718913
+        );
+    }
+    boxToCell
+    {
+        box (0.004625 -1 -1) (0.004875 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1763.31
+            volVectorFieldValue U (0.549103 0 0)
+            volScalarFieldValue C2H2 2.90487e-13
+            volScalarFieldValue C2H4 2.1266e-16
+            volScalarFieldValue C2H6 7.59584e-21
+            volScalarFieldValue CH2CO 8.23521e-15
+            volScalarFieldValue CH2O 3.64673e-10
+            volScalarFieldValue CH3 4.96914e-14
+            volScalarFieldValue CH3OH 3.98221e-15
+            volScalarFieldValue CH4 9.83375e-14
+            volScalarFieldValue CO 0.0336149
+            volScalarFieldValue CO2 0.119615
+            volScalarFieldValue H 3.22492e-05
+            volScalarFieldValue H2 0.00169327
+            volScalarFieldValue H2O 0.125789
+            volScalarFieldValue O 7.69142e-06
+            volScalarFieldValue O2 6.03217e-05
+            volScalarFieldValue OH 0.000273627
+            volScalarFieldValue N2 0.718914
+        );
+    }
+    boxToCell
+    {
+        box (0.004875 -1 -1) (0.00525 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1761.08
+            volVectorFieldValue U (0.548396 0 0)
+            volScalarFieldValue C2H2 1.69065e-13
+            volScalarFieldValue C2H4 1.25941e-16
+            volScalarFieldValue C2H6 4.52474e-21
+            volScalarFieldValue CH2CO 4.95393e-15
+            volScalarFieldValue CH2O 3.64126e-10
+            volScalarFieldValue CH3 4.28037e-14
+            volScalarFieldValue CH3OH 3.78735e-15
+            volScalarFieldValue CH4 8.83181e-14
+            volScalarFieldValue CO 0.0335998
+            volScalarFieldValue CO2 0.119636
+            volScalarFieldValue H 3.02375e-05
+            volScalarFieldValue H2 0.00169621
+            volScalarFieldValue H2O 0.12581
+            volScalarFieldValue O 6.70713e-06
+            volScalarFieldValue O2 5.25913e-05
+            volScalarFieldValue OH 0.000254774
+            volScalarFieldValue N2 0.718914
+        );
+    }
+    boxToCell
+    {
+        box (0.00525 -1 -1) (0.00575 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1756.31
+            volVectorFieldValue U (0.546888 0 0)
+            volScalarFieldValue C2H2 7.34318e-14
+            volScalarFieldValue C2H4 5.67009e-17
+            volScalarFieldValue C2H6 2.0676e-21
+            volScalarFieldValue CH2CO 2.4147e-15
+            volScalarFieldValue CH2O 3.63324e-10
+            volScalarFieldValue CH3 3.69896e-14
+            volScalarFieldValue CH3OH 3.66841e-15
+            volScalarFieldValue CH4 8.34507e-14
+            volScalarFieldValue CO 0.0335623
+            volScalarFieldValue CO2 0.11969
+            volScalarFieldValue H 2.68101e-05
+            volScalarFieldValue H2 0.00170199
+            volScalarFieldValue H2O 0.125835
+            volScalarFieldValue O 5.18539e-06
+            volScalarFieldValue O2 4.07384e-05
+            volScalarFieldValue OH 0.000222579
+            volScalarFieldValue N2 0.718915
+        );
+    }
+    boxToCell
+    {
+        box (0.00575 -1 -1) (0.00625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1751.26
+            volVectorFieldValue U (0.545296 0 0)
+            volScalarFieldValue C2H2 3.538e-14
+            volScalarFieldValue C2H4 2.84059e-17
+            volScalarFieldValue C2H6 1.05497e-21
+            volScalarFieldValue CH2CO 1.43455e-15
+            volScalarFieldValue CH2O 3.62791e-10
+            volScalarFieldValue CH3 3.43577e-14
+            volScalarFieldValue CH3OH 3.65967e-15
+            volScalarFieldValue CH4 8.48647e-14
+            volScalarFieldValue CO 0.0335183
+            volScalarFieldValue CO2 0.119755
+            volScalarFieldValue H 2.39683e-05
+            volScalarFieldValue H2 0.00170767
+            volScalarFieldValue H2O 0.125847
+            volScalarFieldValue O 4.07283e-06
+            volScalarFieldValue O2 3.20107e-05
+            volScalarFieldValue OH 0.000195908
+            volScalarFieldValue N2 0.718916
+        );
+    }
+    boxToCell
+    {
+        box (0.00625 -1 -1) (0.00675 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1746
+            volVectorFieldValue U (0.543644 0 0)
+            volScalarFieldValue C2H2 1.85796e-14
+            volScalarFieldValue C2H4 1.55404e-17
+            volScalarFieldValue C2H6 5.89508e-22
+            volScalarFieldValue CH2CO 1.01829e-15
+            volScalarFieldValue CH2O 3.6246e-10
+            volScalarFieldValue CH3 3.29256e-14
+            volScalarFieldValue CH3OH 3.6946e-15
+            volScalarFieldValue CH4 8.88654e-14
+            volScalarFieldValue CO 0.033469
+            volScalarFieldValue CO2 0.11983
+            volScalarFieldValue H 2.15831e-05
+            volScalarFieldValue H2 0.00171328
+            volScalarFieldValue H2O 0.125847
+            volScalarFieldValue O 3.24405e-06
+            volScalarFieldValue O2 2.54918e-05
+            volScalarFieldValue OH 0.000173578
+            volScalarFieldValue N2 0.718917
+        );
+    }
+    boxToCell
+    {
+        box (0.00675 -1 -1) (0.0075 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1740.6
+            volVectorFieldValue U (0.541945 0 0)
+            volScalarFieldValue C2H2 1.0372e-14
+            volScalarFieldValue C2H4 9.05487e-18
+            volScalarFieldValue C2H6 3.51788e-22
+            volScalarFieldValue CH2CO 8.25332e-16
+            volScalarFieldValue CH2O 3.62284e-10
+            volScalarFieldValue CH3 3.20192e-14
+            volScalarFieldValue CH3OH 3.75039e-15
+            volScalarFieldValue CH4 9.41381e-14
+            volScalarFieldValue CO 0.0334153
+            volScalarFieldValue CO2 0.119912
+            volScalarFieldValue H 1.95606e-05
+            volScalarFieldValue H2 0.00171881
+            volScalarFieldValue H2O 0.125839
+            volScalarFieldValue O 2.61638e-06
+            volScalarFieldValue O2 2.05428e-05
+            volScalarFieldValue OH 0.00015471
+            volScalarFieldValue N2 0.718918
+        );
+    }
+    boxToCell
+    {
+        box (0.0075 -1 -1) (0.0085 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1729.43
+            volVectorFieldValue U (0.538443 0 0)
+            volScalarFieldValue C2H2 4.62867e-15
+            volScalarFieldValue C2H4 4.40731e-18
+            volScalarFieldValue C2H6 1.80862e-22
+            volScalarFieldValue CH2CO 7.08189e-16
+            volScalarFieldValue CH2O 3.62332e-10
+            volScalarFieldValue CH3 3.1035e-14
+            volScalarFieldValue CH3OH 3.89987e-15
+            volScalarFieldValue CH4 1.06893e-13
+            volScalarFieldValue CO 0.033297
+            volScalarFieldValue CO2 0.120095
+            volScalarFieldValue H 1.63963e-05
+            volScalarFieldValue H2 0.00172964
+            volScalarFieldValue H2O 0.125802
+            volScalarFieldValue O 1.77143e-06
+            volScalarFieldValue O2 1.3967e-05
+            volScalarFieldValue OH 0.000125288
+            volScalarFieldValue N2 0.718919
+        );
+    }
+    boxToCell
+    {
+        box (0.0085 -1 -1) (0.0095 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1718.04
+            volVectorFieldValue U (0.534875 0 0)
+            volScalarFieldValue C2H2 2.40638e-15
+            volScalarFieldValue C2H4 2.50976e-18
+            volScalarFieldValue C2H6 1.09589e-22
+            volScalarFieldValue CH2CO 6.79481e-16
+            volScalarFieldValue CH2O 3.62667e-10
+            volScalarFieldValue CH3 3.04268e-14
+            volScalarFieldValue CH3OH 4.07396e-15
+            volScalarFieldValue CH4 1.21391e-13
+            volScalarFieldValue CO 0.0331697
+            volScalarFieldValue CO2 0.120294
+            volScalarFieldValue H 1.39756e-05
+            volScalarFieldValue H2 0.00174027
+            volScalarFieldValue H2O 0.125749
+            volScalarFieldValue O 1.23922e-06
+            volScalarFieldValue O2 9.77651e-06
+            volScalarFieldValue OH 0.000103073
+            volScalarFieldValue N2 0.71892
+        );
+    }
+    boxToCell
+    {
+        box (0.0095 -1 -1) (0.0105 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1706.53
+            volVectorFieldValue U (0.531271 0 0)
+            volScalarFieldValue C2H2 1.41191e-15
+            volScalarFieldValue C2H4 1.61625e-18
+            volScalarFieldValue C2H6 7.55532e-23
+            volScalarFieldValue CH2CO 6.8152e-16
+            volScalarFieldValue CH2O 3.63183e-10
+            volScalarFieldValue CH3 3.00334e-14
+            volScalarFieldValue CH3OH 4.26744e-15
+            volScalarFieldValue CH4 1.37391e-13
+            volScalarFieldValue CO 0.0330356
+            volScalarFieldValue CO2 0.120503
+            volScalarFieldValue H 1.20799e-05
+            volScalarFieldValue H2 0.00175066
+            volScalarFieldValue H2O 0.125683
+            volScalarFieldValue O 8.91155e-07
+            volScalarFieldValue O2 7.02874e-06
+            volScalarFieldValue OH 8.59361e-05
+            volScalarFieldValue N2 0.718921
+        );
+    }
+    boxToCell
+    {
+        box (0.0105 -1 -1) (0.0115 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1694.99
+            volVectorFieldValue U (0.527656 0 0)
+            volScalarFieldValue C2H2 9.12035e-16
+            volScalarFieldValue C2H4 1.14738e-18
+            volScalarFieldValue C2H6 5.77265e-23
+            volScalarFieldValue CH2CO 6.9647e-16
+            volScalarFieldValue CH2O 3.63804e-10
+            volScalarFieldValue CH3 2.9787e-14
+            volScalarFieldValue CH3OH 4.47814e-15
+            volScalarFieldValue CH4 1.54799e-13
+            volScalarFieldValue CO 0.0328958
+            volScalarFieldValue CO2 0.120723
+            volScalarFieldValue H 1.05682e-05
+            volScalarFieldValue H2 0.00176072
+            volScalarFieldValue H2O 0.125608
+            volScalarFieldValue O 6.56454e-07
+            volScalarFieldValue O2 5.17496e-06
+            volScalarFieldValue OH 7.24901e-05
+            volScalarFieldValue N2 0.718923
+        );
+    }
+    boxToCell
+    {
+        box (0.0115 -1 -1) (0.0125 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1683.48
+            volVectorFieldValue U (0.52405 0 0)
+            volScalarFieldValue C2H2 6.36006e-16
+            volScalarFieldValue C2H4 8.79926e-19
+            volScalarFieldValue C2H6 4.78633e-23
+            volScalarFieldValue CH2CO 7.17976e-16
+            volScalarFieldValue CH2O 3.64465e-10
+            volScalarFieldValue CH3 2.96535e-14
+            volScalarFieldValue CH3OH 4.70462e-15
+            volScalarFieldValue CH4 1.73534e-13
+            volScalarFieldValue CO 0.032751
+            volScalarFieldValue CO2 0.120952
+            volScalarFieldValue H 9.34689e-06
+            volScalarFieldValue H2 0.00177033
+            volScalarFieldValue H2O 0.125526
+            volScalarFieldValue O 4.9432e-07
+            volScalarFieldValue O2 3.89369e-06
+            volScalarFieldValue OH 6.18097e-05
+            volScalarFieldValue N2 0.718925
+        );
+    }
+    boxToCell
+    {
+        box (0.0125 -1 -1) (0.0135 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1672.08
+            volVectorFieldValue U (0.520478 0 0)
+            volScalarFieldValue C2H2 4.7134e-16
+            volScalarFieldValue C2H4 7.17055e-19
+            volScalarFieldValue C2H6 4.23186e-23
+            volScalarFieldValue CH2CO 7.4347e-16
+            volScalarFieldValue CH2O 3.65107e-10
+            volScalarFieldValue CH3 2.96158e-14
+            volScalarFieldValue CH3OH 4.94505e-15
+            volScalarFieldValue CH4 1.9344e-13
+            volScalarFieldValue CO 0.0326022
+            volScalarFieldValue CO2 0.12119
+            volScalarFieldValue H 8.3538e-06
+            volScalarFieldValue H2 0.00177931
+            volScalarFieldValue H2O 0.125437
+            volScalarFieldValue O 3.8034e-07
+            volScalarFieldValue O2 2.99133e-06
+            volScalarFieldValue OH 5.32688e-05
+            volScalarFieldValue N2 0.718927
+        );
+    }
+    boxToCell
+    {
+        box (0.0135 -1 -1) (0.01475 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1660.97
+            volVectorFieldValue U (0.516986 0 0)
+            volScalarFieldValue C2H2 3.66598e-16
+            volScalarFieldValue C2H4 6.12436e-19
+            volScalarFieldValue C2H6 3.92971e-23
+            volScalarFieldValue CH2CO 7.71708e-16
+            volScalarFieldValue CH2O 3.65675e-10
+            volScalarFieldValue CH3 2.96678e-14
+            volScalarFieldValue CH3OH 5.19593e-15
+            volScalarFieldValue CH4 2.1419e-13
+            volScalarFieldValue CO 0.0324509
+            volScalarFieldValue CO2 0.121436
+            volScalarFieldValue H 7.5485e-06
+            volScalarFieldValue H2 0.00178741
+            volScalarFieldValue H2O 0.125342
+            volScalarFieldValue O 2.99493e-07
+            volScalarFieldValue O2 2.34803e-06
+            volScalarFieldValue OH 4.64494e-05
+            volScalarFieldValue N2 0.718927
+        );
+    }
+    boxToCell
+    {
+        box (0.01475 -1 -1) (0.01625 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1645.36
+            volVectorFieldValue U (0.51207 0 0)
+            volScalarFieldValue C2H2 2.74707e-16
+            volScalarFieldValue C2H4 5.23626e-19
+            volScalarFieldValue C2H6 3.80257e-23
+            volScalarFieldValue CH2CO 8.18164e-16
+            volScalarFieldValue CH2O 3.6631e-10
+            volScalarFieldValue CH3 2.99575e-14
+            volScalarFieldValue CH3OH 5.57896e-15
+            volScalarFieldValue CH4 2.45552e-13
+            volScalarFieldValue CO 0.0322265
+            volScalarFieldValue CO2 0.121812
+            volScalarFieldValue H 6.64976e-06
+            volScalarFieldValue H2 0.00179731
+            volScalarFieldValue H2O 0.125193
+            volScalarFieldValue O 2.211e-07
+            volScalarFieldValue O2 1.725e-06
+            volScalarFieldValue OH 3.89226e-05
+            volScalarFieldValue N2 0.718923
+        );
+    }
+    boxToCell
+    {
+        box (0.01625 -1 -1) (0.0185 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1632.82
+            volVectorFieldValue U (0.508099 0 0)
+            volScalarFieldValue C2H2 2.20094e-16
+            volScalarFieldValue C2H4 4.67448e-19
+            volScalarFieldValue C2H6 3.77363e-23
+            volScalarFieldValue CH2CO 8.60863e-16
+            volScalarFieldValue CH2O 3.66588e-10
+            volScalarFieldValue CH3 3.0345e-14
+            volScalarFieldValue CH3OH 5.91206e-15
+            volScalarFieldValue CH4 2.72344e-13
+            volScalarFieldValue CO 0.0320357
+            volScalarFieldValue CO2 0.122152
+            volScalarFieldValue H 6.08013e-06
+            volScalarFieldValue H2 0.00180354
+            volScalarFieldValue H2O 0.125057
+            volScalarFieldValue O 1.77766e-07
+            volScalarFieldValue O2 1.36339e-06
+            volScalarFieldValue OH 3.41913e-05
+            volScalarFieldValue N2 0.718909
+        );
+    }
+    boxToCell
+    {
+        box (0.0185 -1 -1) (1 0.00748 1);
+        fieldValues
+        (
+            volScalarFieldValue T 1632.82
+            volVectorFieldValue U (0.508099 0 0)
+            volScalarFieldValue C2H2 2.20094e-16
+            volScalarFieldValue C2H4 4.67448e-19
+            volScalarFieldValue C2H6 3.77363e-23
+            volScalarFieldValue CH2CO 8.60863e-16
+            volScalarFieldValue CH2O 3.66588e-10
+            volScalarFieldValue CH3 3.0345e-14
+            volScalarFieldValue CH3OH 5.91206e-15
+            volScalarFieldValue CH4 2.72344e-13
+            volScalarFieldValue CO 0.0320357
+            volScalarFieldValue CO2 0.122152
+            volScalarFieldValue H 6.08013e-06
+            volScalarFieldValue H2 0.00180354
+            volScalarFieldValue H2O 0.125057
+            volScalarFieldValue O 1.77766e-07
+            volScalarFieldValue O2 1.36339e-06
+            volScalarFieldValue OH 3.41913e-05
+            volScalarFieldValue N2 0.718909
+        );
+    }
+);
+
+
+// ************************************************************************* //
