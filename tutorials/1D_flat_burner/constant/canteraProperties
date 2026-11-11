@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Molecular transport of reactingCanteraFoam; see canteraTransport.H.
+// Molecular transport of reactingCanteraLMFoam; see canteraTransport.H.
 // The mechanism follows the one the case is set up for (utilities/kodesCase.py).
 
 mechanism       "<constant>/grimech/grimech.yaml";

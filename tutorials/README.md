@@ -1,6 +1,6 @@
 # Tutorials
 
-Six `reactingFoam` cases and two `reactingCanteraFoam` cases, each runnable with every mechanism it has initial conditions
+Six `reactingFoam` cases and two `reactingCanteraLMFoam` cases, each runnable with every mechanism it has initial conditions
 for and with either chemistry model. The point is to be able to time
 [`kodesChemistryModel`](../src/kodesChemistryModel), the GPU chemistry model, against the
 chemistry model OpenFOAM ships, on the same flame, the same mesh and the same tolerances, so that a difference in wall clock is a difference in
@@ -50,11 +50,11 @@ Each mechanism's README says where it comes from and how to regenerate it.
 hydrogen cases the carbon species of the larger mechanisms start at zero, through
 `Ydefault`, and stay there.
 
-`1D_premixed_flame` checks the molecular transport of `reactingCanteraFoam` against
+`1D_premixed_flame` checks the molecular transport of `reactingCanteraLMFoam` against
 Cantera, by the laminar flame speed ([its README](1D_premixed_flame/README.md)).
 
 `2D_flat_burner` is the odd one out: a real experiment, the flat burner of the Lebedev
-Physical Institute, run with `reactingCanteraFoam` for the molecular transport, radiation
+Physical Institute, run with `reactingCanteraLMFoam` for the molecular transport, radiation
 and boundary conditions it needs. [Its README](2D_flat_burner/README.md) has the set-up
 and what it is taken from.
 
@@ -104,7 +104,7 @@ cannot disagree:
 | `constant/thermophysicalProperties` | `foamChemistryFile` and `foamChemistryThermoFile` under `<constant>/<mechanism>/` |
 | `constant/chemistryProperties` | `chemistryType/method`; `kodesSetting/mechanism` |
 | `system/controlDict` | `libkodesChemistryModel.so` in `libs` for kodes, out of it for standard |
-| `constant/canteraProperties` | `mechanism` under `<constant>/<mechanism>/`, in a `reactingCanteraFoam` case |
+| `constant/canteraProperties` | `mechanism` under `<constant>/<mechanism>/`, in a `reactingCanteraLMFoam` case |
 
 `kodesCase.py setup <case> <mechanism> <variant>` makes just those edits, without
 running; `kodesCase.py list <case>` says what a case has and what it is set up for now.

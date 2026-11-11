@@ -13,5 +13,5 @@ jupyterlab
 ipykernel
 cantera
 
-# Builds the Cantera of external/reactingCanteraLMFoam, for reactingCanteraFoam
+# Builds the Cantera of external/reactingCanteraLMFoam, for reactingCanteraLMFoam
 scons

@@ -9,7 +9,7 @@ It is also the mechanism of `counterFlowFlame2D`, which burns methane.
 |---|---|
 | `reactions` | `foamChemistryReader`, via a case's `constant/thermophysicalProperties` |
 | `thermo.compressibleGas` | the same, for JANAF and Sutherland coefficients |
-| `grimech.yaml` | `reactingCanteraFoam`, for the transport coefficients; Cantera's `gri30.yaml` as it is |
+| `grimech.yaml` | `reactingCanteraLMFoam`, for the transport coefficients; Cantera's `gri30.yaml` as it is |
 | `mechanism.cuh` | symlink to `pyJacSource/grimech/out/mechanism.cuh`, for [checkKodesMechanism.py](../../../utilities/checkKodesMechanism.py) |
 
 ## The mechanism

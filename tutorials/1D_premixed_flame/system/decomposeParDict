@@ -16,7 +16,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Not used by the serial runs these cases ship configured for -- it is here so
-// that `decomposePar && mpirun -np 8 reactingCanteraFoam -parallel` needs no edit.
+// that `decomposePar && mpirun -np 8 reactingCanteraLMFoam -parallel` needs no edit.
 //
 // 600 cells.
 

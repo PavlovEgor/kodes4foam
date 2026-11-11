@@ -34,7 +34,7 @@ utilities/
 requirements.txt                the Python side, for .venv
 external/
   KODES/                        the KODES submodule, 1.0.1 (branch kodes-v1)
-  reactingCanteraLMFoam/        the plugin with reactingCanteraFoam, for the flat burners
+  reactingCanteraLMFoam/        the solver of the flat burners, a plugin
   pyJac/, Kinetic-Mechanisms/   only to regenerate a mechanism
 doc/                            papers the cases and the solver follow
 ```
@@ -63,7 +63,7 @@ the libraries go, the model and the KODES libraries alike:
 | `./Allwmake -prefix=openfoam` | `$FOAM_LIBBIN` |
 | `./Allwmake -prefix=/some/pathname` | `/some/pathname/lib` |
 
-The flat-burner tutorials run `reactingCanteraFoam`, which is a plugin of its own,
+The flat-burner tutorials run `reactingCanteraLMFoam`, the solver of a plugin of its own,
 [external/reactingCanteraLMFoam](external/reactingCanteraLMFoam/README.md), with the
 Cantera it is built against as its own submodule. `./Allwmake` builds it too, with SCons
 from `.venv`:
@@ -151,7 +151,7 @@ The full list of `kodesSetting` entries is in the header of
 the library are matched by name against the case's species table when the case starts;
 a library built for another mechanism stops the run there, naming the specie it lacks.
 
-## reactingCanteraFoam
+## reactingCanteraLMFoam
 
 The solver of the flat-burner tutorials, laminar flames with Cantera's molecular
 transport, with the boundary conditions of a porous burner and an optically thin

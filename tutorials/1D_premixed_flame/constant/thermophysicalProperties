@@ -19,7 +19,7 @@ thermoType
 {
     type            heRhoThermo;
     mixture         reactingMixture;
-    transport       sutherland;     // not used: reactingCanteraFoam has Cantera's
+    transport       sutherland;     // not used: reactingCanteraLMFoam has Cantera's
     thermo          janaf;
     energy          sensibleEnthalpy;
     equationOfState perfectGas;

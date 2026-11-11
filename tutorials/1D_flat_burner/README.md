@@ -7,7 +7,7 @@ it. Its 1D runs oscillate in the relaxational regime at 65 Hz, without buoyancy:
 front comes to 0.68 mm from the plug, dies down and is blown to 2.73 mm, lights again
 and runs back.
 
-Everything but the geometry is the 2D case's: `reactingCanteraFoam`, GRI-Mech 3.0,
+Everything but the geometry is the 2D case's: `reactingCanteraLMFoam`, GRI-Mech 3.0,
 mixture-averaged diffusion with Soret, optically thin radiation, `burnerSpecieFlux` and
 `massFluxInletVelocity` on `mainInlet`. g is zero, as in the paper's 1D runs.
 

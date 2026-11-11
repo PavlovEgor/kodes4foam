@@ -29,7 +29,7 @@ echo
 
 src/Allwmake $targetType $*
 
-# reactingCanteraFoam, its boundary conditions and radiation model: the
+# reactingCanteraLMFoam, its boundary conditions and radiation model: the
 # external/reactingCanteraLMFoam plugin, which the flat-burner tutorials need.
 # SCons for its Cantera build from this repository's .venv
 if [ -x external/reactingCanteraLMFoam/Allwmake ]

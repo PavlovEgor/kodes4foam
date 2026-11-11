@@ -51,4 +51,4 @@ for that unit; the units it defaults to are the same ones, so the keyword is lef
 in the checked-in `.CKI`.
 
 `h2o2.yaml` is Cantera's file of the same name, the same ten species, for the transport
-coefficients of `reactingCanteraFoam`.
+coefficients of `reactingCanteraLMFoam`.

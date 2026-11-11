@@ -137,7 +137,7 @@ def configure(case, mechanism, variant):
         libs.append(KODES_LIBRARY)
     _set(case.control_dict, "libs", libs)
 
-    # reactingCanteraFoam cases: the transport data of the same mechanism
+    # reactingCanteraLMFoam cases: the transport data of the same mechanism
     if (case.path / "constant" / "canteraProperties").is_file():
         if not (case.path / "constant" / mechanism / f"{mechanism}.yaml").is_file():
             raise FileNotFoundError(

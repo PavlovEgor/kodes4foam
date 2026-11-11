@@ -6,7 +6,7 @@ of relaxational diffusive-thermal oscillations of a rich methane-air flame, set 
 the computation in [Li et al., Combust. Flame 276 (2025) 114115](../../doc/) - every
 number below is from its Sections 2 and 3 unless it says otherwise.
 
-It runs with `reactingCanteraFoam`, as that computation needs what `reactingFoam` lacks:
+It runs with `reactingCanteraLMFoam`, as that computation needs what `reactingFoam` lacks:
 a diffusion coefficient for each specie, thermal diffusion, radiation, buoyancy, and the
 flux boundary condition on the surface of the burner.
 

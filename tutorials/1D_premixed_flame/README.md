@@ -1,7 +1,7 @@
 # 1D_premixed_flame
 
 A freely propagating stoichiometric H2/air flame, 320 K, 1 atm, in a 12 mm duct of 600
-cells, with `reactingCanteraFoam`. It is the check of the solver's molecular transport:
+cells, with `reactingCanteraLMFoam`. It is the check of the solver's molecular transport:
 the laminar flame speed depends on it and on little else, and Cantera computes the same
 flame with the same mechanism and the same transport coefficients.
 
