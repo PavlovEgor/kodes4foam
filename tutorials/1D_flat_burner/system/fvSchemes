@@ -17,7 +17,11 @@ FoamFile
 
 ddtSchemes
 {
-    default         backward;
+    // Not backward: with one outer corrector it lets the acoustic modes of the
+    // domain grow, and the run blows up within a millisecond (1D_flat_burner:
+    // 300 m/s at 0.35 ms). Euler damps them; at the time steps a flame needs
+    // its first-order error is small next to the 15 ms of a period
+    default         Euler;
 }
 
 gradSchemes

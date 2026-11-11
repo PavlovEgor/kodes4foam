@@ -53,7 +53,7 @@ kept at 20 C by a thermostat, so its surface and the gases leaving it are at 293
 | Species on `mainInlet` | `burnerSpecieFlux`: convection + diffusion = M Y0 | the same (its Eq. 2) |
 | Velocity on `mainInlet` | `massFluxInletVelocity`: u = M/rho | the same (its Eq. 3) |
 | Cells in the flame zone | 0.05 mm, 86 688 cells | 0.025 mm |
-| Schemes | second order, `backward` | fourth order in space, second in time |
+| Schemes | second order in space, `Euler` in time | fourth order in space, second in time |
 | Time step | Co < 0.3, at most 1 us | Co < 0.2 |
 
 The mesh is the one difference that matters: the thermal thickness of this flame is
