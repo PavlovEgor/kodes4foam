@@ -6,8 +6,4 @@ targetType=libso
 
 kodesChemistryModel/Allwmake $*
 
-# What reactingCanteraFoam cases need: boundary conditions, radiation
-wmake $targetType boundaryConditions
-wmake $targetType radiationModels
-
 #------------------------------------------------------------------------------

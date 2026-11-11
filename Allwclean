@@ -3,6 +3,6 @@ cd "${0%/*}" || exit                            # Run from this directory
 #------------------------------------------------------------------------------
 
 src/Allwclean
-applications/Allwclean
+[ -x external/reactingCanteraLMFoam/Allwclean ] && external/reactingCanteraLMFoam/Allwclean
 
 #------------------------------------------------------------------------------

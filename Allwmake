@@ -28,7 +28,18 @@ echo "  prefix = ${FOAM_MODULE_PREFIX:-default (user)}"
 echo
 
 src/Allwmake $targetType $*
-applications/Allwmake $*
+
+# reactingCanteraFoam, its boundary conditions and radiation model: the
+# external/reactingCanteraLMFoam plugin, which the flat-burner tutorials need.
+# SCons for its Cantera build from this repository's .venv
+if [ -x external/reactingCanteraLMFoam/Allwmake ]
+then
+    [ -x .venv/bin/scons ] && export SCONS="${SCONS:-$PWD/.venv/bin/scons}"
+    external/reactingCanteraLMFoam/Allwmake $*
+else
+    echo "external/reactingCanteraLMFoam is empty, run" \
+         "'git submodule update --init --recursive external/reactingCanteraLMFoam'"
+fi
 
 # Some summary information
 echo

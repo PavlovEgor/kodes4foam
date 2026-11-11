@@ -7,6 +7,6 @@
 [submodule "external/Kinetic-Mechanisms"]
 	path = external/Kinetic-Mechanisms
 	url = https://github.com/CRECKMODELING/Kinetic-Mechanisms.git
-[submodule "external/cantera"]
-	path = external/cantera
-	url = https://github.com/Cantera/cantera.git
+[submodule "external/reactingCanteraLMFoam"]
+	path = external/reactingCanteraLMFoam
+	url = https://github.com/PavlovEgor/reactingCanteraLMFoam.git
